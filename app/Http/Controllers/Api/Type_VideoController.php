@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use App\Models\Category_product;
+use App\Models\Type_Video;
 
-class Category_ProductController extends Controller
+class Type_VideoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,10 +19,10 @@ class Category_ProductController extends Controller
     {
         //
         // return response()->json([
-        //     'messege' => 'day list loại sản phẩm!',
-        //     'data' => Category_product::all(),
+        //     'messege' => 'day la bản test db!',
+        //     'data' => Type_Video::all(),
         // ], 200);
-        return Category_product::all();
+        return Type_Video::all();
     }
 
     /**
@@ -51,13 +51,14 @@ class Category_ProductController extends Controller
         );
         $messages = array(
             'name.required' => 'Tên  không được phép trống!',
+
         );
         $validator = Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 404);
         }
-        $data = $request->only('name', 'product_supplier_id','warehouse_id','status');
-        $status = Category_product::create($data);
+        $data = $request->only('name', 'status');
+        $status = Type_Video::create($data);
 
         if ($status)
         {
@@ -80,7 +81,7 @@ class Category_ProductController extends Controller
      */
     public function show($id)
     {
-        return Category_product::findOrFail($id);
+        return Type_Video::findOrFail($id);
     }
 
     /**
@@ -116,10 +117,10 @@ class Category_ProductController extends Controller
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 404);
         }
-        $data = $request->only('name', 'product_supplier_id','warehouse_id','status');
-        $user = Category_product::findOrFail($id);
+        $data = $request->only('name', 'status');
+        $user = Type_Video::findOrFail($id);
         $status = $user->update($data);
-        // $status = Category_product::create($data);
+        // $status = Type_Video::create($data);
 
         if ($status)
         {
@@ -141,8 +142,8 @@ class Category_ProductController extends Controller
      */
     public function destroy($id)
     {
-        $Category_product = Category_product::findOrFail($id);
-        $Category_product->delete();
+        $Type_Video = Type_Video::findOrFail($id);
+        $Type_Video->delete();
         return response()->json([
             'messege' => 'Xóa thành công!',
         ], 200);

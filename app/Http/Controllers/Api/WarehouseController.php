@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use App\Models\Category_product;
+use App\Models\Warehouse;
 
-class Category_ProductController extends Controller
+class WarehouseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,10 +19,10 @@ class Category_ProductController extends Controller
     {
         //
         // return response()->json([
-        //     'messege' => 'day list loại sản phẩm!',
-        //     'data' => Category_product::all(),
+        //     'messege' => 'day la bản test db!',
+        //     'data' => Warehouse::all(),
         // ], 200);
-        return Category_product::all();
+        return Warehouse::all();
     }
 
     /**
@@ -46,18 +46,18 @@ class Category_ProductController extends Controller
     {  
         $input = $request->all();
         $rules = array(
-            'name' => 'required',
-
+            'amount' => 'required',
         );
         $messages = array(
-            'name.required' => 'Tên  không được phép trống!',
+            'amount.required' => 'Số lượng không được phép trống!',
+
         );
         $validator = Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 404);
         }
-        $data = $request->only('name', 'product_supplier_id','warehouse_id','status');
-        $status = Category_product::create($data);
+        $data = $request->only('product_supplier_id', 'product_id', 'amount','status');
+        $status = Warehouse::create($data);
 
         if ($status)
         {
@@ -80,7 +80,7 @@ class Category_ProductController extends Controller
      */
     public function show($id)
     {
-        return Category_product::findOrFail($id);
+        return Warehouse::findOrFail($id);
     }
 
     /**
@@ -107,19 +107,20 @@ class Category_ProductController extends Controller
         //
         $input = $request->all();
         $rules = array(
-            'name' => 'required',
+            'amount' => 'required',
         );
         $messages = array(
-            'name.required' => 'Tên  không được phép trống!',
+            'amount.required' => 'Số lượng không được phép trống!',
+
         );
         $validator = Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 404);
         }
-        $data = $request->only('name', 'product_supplier_id','warehouse_id','status');
-        $user = Category_product::findOrFail($id);
+        $data = $request->only('product_supplier_id', 'product_id', 'amount','status');
+        $user = Warehouse::findOrFail($id);
         $status = $user->update($data);
-        // $status = Category_product::create($data);
+        // $status = Warehouse::create($data);
 
         if ($status)
         {
@@ -141,8 +142,8 @@ class Category_ProductController extends Controller
      */
     public function destroy($id)
     {
-        $Category_product = Category_product::findOrFail($id);
-        $Category_product->delete();
+        $Warehouse = Warehouse::findOrFail($id);
+        $Warehouse->delete();
         return response()->json([
             'messege' => 'Xóa thành công!',
         ], 200);

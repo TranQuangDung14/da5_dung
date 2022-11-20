@@ -5,6 +5,16 @@ use App\Http\Controllers\Api\testdbController;
 use App\Http\Controllers\Api\Category_ProductController;
 use App\Http\Controllers\Api\Info_SupplierController;
 use App\Http\Controllers\Api\StaffController;
+use App\Http\Controllers\Api\Order_HistoryController;
+use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\PostsController;
+use App\Http\Controllers\Api\Product_SupplierController;
+use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\TransportController;
+use App\Http\Controllers\Api\Type_PostsController;
+use App\Http\Controllers\Api\Type_VideoController;
+use App\Http\Controllers\Api\VideoController;
+use App\Http\Controllers\Api\WarehouseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -39,13 +49,12 @@ Route::group(['middleware'=>'auth:sanctum'],function(){
     Route::get('/user', [AuthController::class, 'user']);
     Route::get('/logout', [AuthController::class, 'logout']);
 
-    // // test api
+    // test api
     Route::get('/testdb', [testdbController::class, 'index']);
     Route::get('/testdb/{id}', [testdbController::class, 'show']);
     Route::post('/testdb', [testdbController::class, 'store']);
     Route::put('/testdb/{id}', [testdbController::class, 'update']);
     Route::delete('/testdb/{id}', [testdbController::class, 'destroy']);
-    // Route::resource('testdb', [testdbController::class]);
 
 
     //customer
@@ -76,6 +85,85 @@ Route::group(['middleware'=>'auth:sanctum'],function(){
     Route::post('/staff', [StaffController::class, 'store']);
     Route::put('/staff/{id}', [StaffController::class, 'update']);
     Route::delete('/staff/{id}', [StaffController::class, 'destroy']);
+
+
+    //order_history
+    Route::get('/order_history', [Order_HistoryController::class, 'index']);
+    Route::get('/order_history/{id}', [Order_HistoryController::class, 'show']);
+    Route::post('/order_history', [Order_HistoryController::class, 'store']);
+    Route::put('/order_history/{id}', [Order_HistoryController::class, 'update']);
+    Route::delete('/order_history/{id}', [Order_HistoryController::class, 'destroy']);
+
+    //Order
+    Route::get('/order', [OrderController::class, 'index']);
+    Route::get('/order/{id}', [OrderController::class, 'show']);
+    Route::post('/order', [OrderController::class, 'store']);
+    Route::put('/order/{id}', [OrderController::class, 'update']);
+    Route::delete('/order/{id}', [OrderController::class, 'destroy']);
+
+
+    //Posts
+    Route::get('/posts', [PostsController::class, 'index']);
+    Route::get('/posts/{id}', [PostsController::class, 'show']);
+    Route::post('/posts', [PostsController::class, 'store']);
+    Route::put('/posts/{id}', [PostsController::class, 'update']);
+    Route::delete('/posts/{id}', [PostsController::class, 'destroy']);
+
+
+    //Product_Supplier
+    Route::get('/product_supplier', [Product_SupplierController::class, 'index']);
+    Route::get('/product_supplier/{id}', [Product_SupplierController::class, 'show']);
+    Route::post('/product_supplier', [Product_SupplierController::class, 'store']);
+    Route::put('/product_supplier/{id}', [Product_SupplierController::class, 'update']);
+    Route::delete('/product_supplier/{id}', [Product_SupplierController::class, 'destroy']);
+
+
+    //product
+    Route::get('/product', [ProductController::class, 'index']);
+    Route::get('/product/{id}', [ProductController::class, 'show']);
+    Route::post('/product', [ProductController::class, 'store']);
+    Route::put('/product/{id}', [ProductController::class, 'update']);
+    Route::delete('/product/{id}', [ProductController::class, 'destroy']);
+
+
+    //Transport
+    Route::get('/transport', [TransportController::class, 'index']);
+    Route::get('/transport/{id}', [TransportController::class, 'show']);
+    Route::post('/transport', [TransportController::class, 'store']);
+    Route::put('/transport/{id}', [TransportController::class, 'update']);
+    Route::delete('/transport/{id}', [TransportController::class, 'destroy']);
+
+
+    //Type_Posts 
+    Route::get('/type_posts', [Type_PostsController::class, 'index']);
+    Route::get('/type_posts/{id}', [Type_PostsController::class, 'show']);
+    Route::post('/type_posts', [Type_PostsController::class, 'store']);
+    Route::put('/type_posts/{id}', [Type_PostsController::class, 'update']);
+    Route::delete('/type_posts/{id}', [Type_PostsController::class, 'destroy']);
+
+
+    //Type_Video
+    Route::get('/type_video', [Type_VideoController::class, 'index']);
+    Route::get('/type_video/{id}', [Type_VideoController::class, 'show']);
+    Route::post('/type_video', [Type_VideoController::class, 'store']);
+    Route::put('/type_video/{id}', [Type_VideoController::class, 'update']);
+    Route::delete('/type_video/{id}', [Type_VideoController::class, 'destroy']);
+
+
+    //Video
+    Route::get('/video', [VideoController::class, 'index']);
+    Route::get('/video/{id}', [VideoController::class, 'show']);
+    Route::post('/video', [VideoController::class, 'store']);
+    Route::put('/video/{id}', [VideoController::class, 'update']);
+    Route::delete('/video/{id}', [VideoController::class, 'destroy']);
+
+
+    //Warehouse
+    Route::get('/warehouse', [WarehouseController::class, 'index']);
+    Route::get('/warehouse/{id}', [WarehouseController::class, 'show']);
+    Route::post('/warehouse', [WarehouseController::class, 'store']);
+    Route::put('/warehouse/{id}', [WarehouseController::class, 'update']);
+    Route::delete('/warehouse/{id}', [WarehouseController::class, 'destroy']);
 
 
     
