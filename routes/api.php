@@ -3,6 +3,8 @@
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\testdbController;
 use App\Http\Controllers\Api\Category_ProductController;
+use App\Http\Controllers\Api\Info_SupplierController;
+use App\Http\Controllers\Api\StaffController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -61,6 +63,20 @@ Route::group(['middleware'=>'auth:sanctum'],function(){
     Route::put('/category_product/{id}', [Category_ProductController::class, 'update']);
     Route::delete('/category_product/{id}', [Category_ProductController::class, 'destroy']);
 
+    //Info_Supplier
+    Route::get('/info_supplier', [Info_SupplierController::class, 'index']);
+    Route::get('/info_supplier/{id}', [Info_SupplierController::class, 'show']);
+    Route::post('/info_supplier', [Info_SupplierController::class, 'store']);
+    Route::put('/info_supplier/{id}', [Info_SupplierController::class, 'update']);
+    Route::delete('/info_supplier/{id}', [Info_SupplierController::class, 'destroy']);
+
+    //staff
+    Route::get('/staff', [StaffController::class, 'index']);
+    Route::get('/staff/{id}', [StaffController::class, 'show']);
+    Route::post('/staff', [StaffController::class, 'store']);
+    Route::put('/staff/{id}', [StaffController::class, 'update']);
+    Route::delete('/staff/{id}', [StaffController::class, 'destroy']);
+
 
     
 });
@@ -73,6 +89,6 @@ Route::group(['middleware'=>'auth:sanctum'],function(){
     // });
 Route::group(['namespace' => 'App\Http\Controllers\Api'], function() {
     Route::resource('users', 'UserController');
-    Route::resource('staff', 'StaffController');
+    // Route::resource('staff', 'StaffController');
     // Route::resource('testdb', 'testdbController');
 });

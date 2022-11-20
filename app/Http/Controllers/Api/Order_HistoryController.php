@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use App\Models\Customer;
+use App\Models\Order_History;
 
-class CustomerController extends Controller
+class Order_HistoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,12 +17,12 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        
+        //
         // return response()->json([
-        //     'messege' => 'day !',
-        //     'data' => Customer::all(),
+        //     'messege' => 'day la bản test db!',
+        //     'data' => Order_History::all(),
         // ], 200);
-        return Customer::all();
+        return Order_History::all();
     }
 
     /**
@@ -44,31 +44,14 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {  
-        $input = $request->all();
-        $rules = array(
-            'name' => 'required',
-            'date_of_birth' => 'required',
-            'sex' => 'required',
-        );
-        $messages = array(
-            'name.required' => 'Tên  không được phép trống!',
-            'date_of_birth.required' => 'ngày sinh không được phép trống!',
-            'sex.required' => 'giới tính không được phép trống!',
-        );
-        $validator = Validator::make($input, $rules, $messages);
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 404);
-        }
-        $data = $request->only('id_user', 'name', 'date_of_birth','sex','number_phone','email','adress');
-        $status = Customer::create($data);
-
+        $data = $request->only('product_id', 'customer_id', 'order_id');
+        $status = Order_History::create($data);
         if ($status)
         {
-            return response()->json([
-                'messege' => 'Thêm thành công!',
-                'data'=> Customer::all()
-            ], 201);
-            // return $data;
+            // return response()->json([
+            //     'messege' => 'Thêm thành công!',
+            // ], 201);
+            return $data;
         } else {
             return response()->json([
                 'messege' => 'Thêm thất bại!',
@@ -84,7 +67,7 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        return Customer::findOrFail($id);
+        return Order_History::findOrFail($id);
     }
 
     /**
@@ -108,32 +91,16 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        $input = $request->all();
-        $rules = array(
-            'name' => 'required',
-            'date_of_birth' => 'required',
-            'sex' => 'required',
-        );
-        $messages = array(
-            'name.required' => 'Tên  không được phép trống!',
-            'date_of_birth.required' => 'ngày sinh không được phép trống!',
-            'sex.required' => 'giới tính không được phép trống!',
-        );
-        $validator = Validator::make($input, $rules, $messages);
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 404);
-        }
-        $data = $request->only('id_user', 'name', 'date_of_birth','sex','number_phone','email','adress');
-        $user = Customer::findOrFail($id);
+
+        $data = $request->only('product_id', 'customer_id', 'order_id');
+        $user = Order_History::findOrFail($id);
         $status = $user->update($data);
-        // $status = testdb::create($data);
+        // $status = Order_History::create($data);
 
         if ($status)
         {
             return response()->json([
                 'messege' => 'Sửa thành công !',
-                Customer::all()
             ], 201);
         } else {
             return response()->json([
@@ -150,8 +117,8 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        $Customer = Customer::findOrFail($id);
-        $Customer->delete();
+        $Order_History = Order_History::findOrFail($id);
+        $Order_History->delete();
         return response()->json([
             'messege' => 'Xóa thành công!',
         ], 200);

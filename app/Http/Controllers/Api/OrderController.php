@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use App\Models\testdb;
+use App\Models\Order;
 
-class testdbController extends Controller
+class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,9 +20,9 @@ class testdbController extends Controller
         //
         // return response()->json([
         //     'messege' => 'day la bản test db!',
-        //     'data' => testdb::all(),
+        //     'data' => Order::all(),
         // ], 200);
-        return testdb::all();
+        return Order::all();
     }
 
     /**
@@ -44,23 +44,9 @@ class testdbController extends Controller
      */
     public function store(Request $request)
     {  
-        $input = $request->all();
-        $rules = array(
-            'name' => 'required',
-            'age' => 'required',
-            'sex' => 'required',
-        );
-        $messages = array(
-            'name.required' => 'Tên  không được phép trống!',
-            'age.required' => 'tuổi không được phép trống!',
-            'sex.required' => 'giới tính không được phép trống!',
-        );
-        $validator = Validator::make($input, $rules, $messages);
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 404);
-        }
-        $data = $request->only('name', 'sex', 'age','phone');
-        $status = testdb::create($data);
+       
+        $data = $request->only('product_id', 'customer_id', 'warehouse_id','status');
+        $status = Order::create($data);
 
         if ($status)
         {
@@ -83,7 +69,7 @@ class testdbController extends Controller
      */
     public function show($id)
     {
-        return testdb::findOrFail($id);
+        return Order::findOrFail($id);
     }
 
     /**
@@ -107,26 +93,10 @@ class testdbController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        $input = $request->all();
-        $rules = array(
-            'name' => 'required',
-            'age' => 'required',
-            'sex' => 'required',
-        );
-        $messages = array(
-            'name.required' => 'Tên  không được phép trống!',
-            'age.required' => 'tuổi không được phép trống!',
-            'sex.required' => 'giới tính không được phép trống!',
-        );
-        $validator = Validator::make($input, $rules, $messages);
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 404);
-        }
-        $data = $request->only('name', 'sex', 'age','phone');
-        $user = testdb::findOrFail($id);
+        $data = $request->only('product_id', 'customer_id', 'warehouse_id','status');
+        $user = Order::findOrFail($id);
         $status = $user->update($data);
-        // $status = testdb::create($data);
+        // $status = Order::create($data);
 
         if ($status)
         {
@@ -148,8 +118,8 @@ class testdbController extends Controller
      */
     public function destroy($id)
     {
-        $testdb = testdb::findOrFail($id);
-        $testdb->delete();
+        $Order = Order::findOrFail($id);
+        $Order->delete();
         return response()->json([
             'messege' => 'Xóa thành công!',
         ], 200);

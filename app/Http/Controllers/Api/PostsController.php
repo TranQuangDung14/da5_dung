@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use App\Models\testdb;
+use App\Models\Posts;
 
-class testdbController extends Controller
+class PostsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,9 +20,9 @@ class testdbController extends Controller
         //
         // return response()->json([
         //     'messege' => 'day la bản test db!',
-        //     'data' => testdb::all(),
+        //     'data' => Posts::all(),
         // ], 200);
-        return testdb::all();
+        return Posts::all();
     }
 
     /**
@@ -46,21 +46,20 @@ class testdbController extends Controller
     {  
         $input = $request->all();
         $rules = array(
-            'name' => 'required',
-            'age' => 'required',
-            'sex' => 'required',
+            'title' => 'required',
+            'content' => 'required',
+          
         );
         $messages = array(
-            'name.required' => 'Tên  không được phép trống!',
-            'age.required' => 'tuổi không được phép trống!',
-            'sex.required' => 'giới tính không được phép trống!',
+            'title.required' => 'Tiêu đề không được phép trống!',
+            'content.required' => 'Nội dung không được phép trống!',
         );
         $validator = Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 404);
         }
-        $data = $request->only('name', 'sex', 'age','phone');
-        $status = testdb::create($data);
+        $data = $request->only('type_post_id', 'title', 'staff_id','content','status');
+        $status = Posts::create($data);
 
         if ($status)
         {
@@ -83,7 +82,7 @@ class testdbController extends Controller
      */
     public function show($id)
     {
-        return testdb::findOrFail($id);
+        return Posts::findOrFail($id);
     }
 
     /**
@@ -110,23 +109,22 @@ class testdbController extends Controller
         //
         $input = $request->all();
         $rules = array(
-            'name' => 'required',
-            'age' => 'required',
-            'sex' => 'required',
+            'title' => 'required',
+            'content' => 'required',
+          
         );
         $messages = array(
-            'name.required' => 'Tên  không được phép trống!',
-            'age.required' => 'tuổi không được phép trống!',
-            'sex.required' => 'giới tính không được phép trống!',
+            'title.required' => 'Tiêu đề không được phép trống!',
+            'content.required' => 'Nội dung không được phép trống!',
         );
         $validator = Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 404);
         }
-        $data = $request->only('name', 'sex', 'age','phone');
-        $user = testdb::findOrFail($id);
+        $data = $request->only('type_post_id', 'title', 'staff_id','content','status');
+        $user = Posts::findOrFail($id);
         $status = $user->update($data);
-        // $status = testdb::create($data);
+        // $status = Posts::create($data);
 
         if ($status)
         {
@@ -148,8 +146,8 @@ class testdbController extends Controller
      */
     public function destroy($id)
     {
-        $testdb = testdb::findOrFail($id);
-        $testdb->delete();
+        $Posts = Posts::findOrFail($id);
+        $Posts->delete();
         return response()->json([
             'messege' => 'Xóa thành công!',
         ], 200);

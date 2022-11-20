@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use App\Models\testdb;
+use App\Models\Info_Supplier;
 
-class testdbController extends Controller
+class Info_SupplierController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,9 +20,9 @@ class testdbController extends Controller
         //
         // return response()->json([
         //     'messege' => 'day la bản test db!',
-        //     'data' => testdb::all(),
+        //     'data' => Info_Supplier::all(),
         // ], 200);
-        return testdb::all();
+        return Info_Supplier::all();
     }
 
     /**
@@ -47,27 +47,27 @@ class testdbController extends Controller
         $input = $request->all();
         $rules = array(
             'name' => 'required',
-            'age' => 'required',
-            'sex' => 'required',
+            'email'=>'email'
         );
         $messages = array(
-            'name.required' => 'Tên  không được phép trống!',
-            'age.required' => 'tuổi không được phép trống!',
-            'sex.required' => 'giới tính không được phép trống!',
+            'name.required' => 'Tên không được phép trống!',
+            'email.email' => 'email không đúng định dạng!',
+
         );
         $validator = Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 404);
         }
-        $data = $request->only('name', 'sex', 'age','phone');
-        $status = testdb::create($data);
+        $data = $request->only('name', 'email', 'adress','number_phone','sectors','status');
+        $status = Info_Supplier::create($data);
 
         if ($status)
         {
-            // return response()->json([
-            //     'messege' => 'Thêm thành công!',
-            // ], 201);
-            return $data;
+            return response()->json([
+                'messege' => 'Thêm thành công!',
+                'data'=>Info_Supplier::all()
+            ], 201);
+            // return $data;
         } else {
             return response()->json([
                 'messege' => 'Thêm thất bại!',
@@ -83,7 +83,7 @@ class testdbController extends Controller
      */
     public function show($id)
     {
-        return testdb::findOrFail($id);
+        return Info_Supplier::findOrFail($id);
     }
 
     /**
@@ -111,27 +111,26 @@ class testdbController extends Controller
         $input = $request->all();
         $rules = array(
             'name' => 'required',
-            'age' => 'required',
-            'sex' => 'required',
+            'email'=>'email'
         );
         $messages = array(
             'name.required' => 'Tên  không được phép trống!',
-            'age.required' => 'tuổi không được phép trống!',
-            'sex.required' => 'giới tính không được phép trống!',
+            'email.email' => 'email không đúng định dạng!',
         );
         $validator = Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 404);
         }
-        $data = $request->only('name', 'sex', 'age','phone');
-        $user = testdb::findOrFail($id);
+        $data = $request->only('name', 'email','adress','number_phone','sectors','status');
+        $user = Info_Supplier::findOrFail($id);
         $status = $user->update($data);
-        // $status = testdb::create($data);
+        // $status = Info_Supplier::create($data);
 
         if ($status)
         {
             return response()->json([
                 'messege' => 'Sửa thành công !',
+                'info_supplier'=>$data
             ], 201);
         } else {
             return response()->json([
@@ -148,8 +147,8 @@ class testdbController extends Controller
      */
     public function destroy($id)
     {
-        $testdb = testdb::findOrFail($id);
-        $testdb->delete();
+        $info_Supplier = Info_Supplier::findOrFail($id);
+        $info_Supplier->delete();
         return response()->json([
             'messege' => 'Xóa thành công!',
         ], 200);

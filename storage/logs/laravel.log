@@ -11136,3 +11136,395 @@
 [stacktrace]
 #0 {main}
 "} 
+[2022-11-20 14:53:42] local.ERROR: Cannot declare class App\Models\Category_product, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Category_product, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Category_product.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 14:53:58] local.ERROR: Cannot declare class App\Models\Category_product, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Category_product, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Info_Supplier.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 14:54:44] local.ERROR: Cannot declare class App\Models\Category_product, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Category_product, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Info_Supplier.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 14:55:07] local.ERROR: Cannot declare class App\Models\Category_product, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Category_product, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Info_Supplier.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 14:55:23] local.ERROR: Cannot declare class App\Models\Info_Supplier, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Info_Supplier, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Info_Supplier copy 3.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 14:55:44] local.ERROR: Cannot declare class App\Models\Info_Supplier, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Info_Supplier, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Product_Supplier.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 14:55:49] local.ERROR: Cannot declare class App\Models\Info_Supplier, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Info_Supplier, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Info_Supplier copy 4.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 14:56:25] local.ERROR: Cannot declare class App\Models\Info_Supplier, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Info_Supplier, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Info_Supplier copy 4.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 14:57:03] local.ERROR: Cannot declare class App\Models\Info_Supplier, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Info_Supplier, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Info_Supplier copy 4.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 14:57:22] local.ERROR: Cannot declare class App\Models\Info_Supplier, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Info_Supplier, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Info_Supplier copy 4.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 14:57:39] local.ERROR: Cannot declare class App\Models\Info_Supplier, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Info_Supplier, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Info_Supplier copy 4.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 14:57:47] local.ERROR: Cannot declare class App\Models\Info_Supplier, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Info_Supplier, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Info_Supplier copy 4.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 14:58:13] local.ERROR: Cannot declare class App\Models\Info_Supplier, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Info_Supplier, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Info_Supplier copy 4.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 14:58:35] local.ERROR: Cannot declare class App\Models\Info_Supplier, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Info_Supplier, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Info_Supplier.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 14:58:44] local.ERROR: Cannot declare class App\Models\Info_Supplier, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Info_Supplier, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Warehouse.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 14:59:08] local.ERROR: Cannot declare class App\Models\Info_Supplier, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Info_Supplier, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Info_Supplier.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 14:59:58] local.ERROR: Cannot declare class App\Models\Info_Supplier, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Info_Supplier, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Posts.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:00:13] local.ERROR: Cannot declare class App\Models\Info_Supplier, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Info_Supplier, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Posts.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:00:21] local.ERROR: Cannot declare class App\Models\Info_Supplier, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Info_Supplier, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Posts.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:00:33] local.ERROR: Cannot declare class App\Models\Info_Supplier, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Info_Supplier, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Posts.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:00:44] local.ERROR: Cannot declare class App\Models\Info_Supplier, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Info_Supplier, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Posts.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:01:07] local.ERROR: Cannot declare class App\Models\Info_Supplier, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Info_Supplier, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Posts.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:01:25] local.ERROR: Cannot declare class App\Models\Info_Supplier, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Info_Supplier, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Posts.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:01:44] local.ERROR: Cannot declare class App\Models\Info_Supplier, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Info_Supplier, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Posts.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:02:26] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Warehouse copy 2.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:02:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Warehouse.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:02:49] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Warehouse copy 2.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:03:24] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Warehouse copy 2.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:03:36] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Warehouse copy 2.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:04:13] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Warehouse copy 2.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:04:38] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:04:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:04:59] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:05:30] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:05:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:06:09] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:06:22] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:06:37] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:06:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:06:52] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:07:00] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:07:11] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:07:33] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:07:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:07:54] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:08:06] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:08:18] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:08:34] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:08:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:08:48] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:08:54] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:09:04] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:09:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:10:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:11:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:12:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:13:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:14:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:15:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:16:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:17:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:18:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:19:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:20:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:21:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:22:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:23:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:24:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:25:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:26:03] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:26:08] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:26:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:26:49] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:26:54] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:27:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:28:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:29:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:30:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:31:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:32:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:33:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:34:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:35:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:36:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:37:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:38:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:39:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:40:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:41:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:42:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:43:45] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:44:45] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:45:45] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:46:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:47:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:48:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:49:15] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 
+[2022-11-20 15:49:44] local.ERROR: Cannot declare class App\Models\Type_Posts, because the name is already in use {"exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Cannot declare class App\\Models\\Type_Posts, because the name is already in use at C:\\xampp\\htdocs\\git_desktop\\da5_dung\\app\\Models\\Type_Video.php:8)
+[stacktrace]
+#0 {main}
+"} 

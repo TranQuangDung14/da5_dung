@@ -18,10 +18,10 @@ class Category_ProductController extends Controller
     public function index()
     {
         //
-        return response()->json([
-            'messege' => 'day list loại sản phẩm!',
-            'data' => Category_product::all(),
-        ], 200);
+        // return response()->json([
+        //     'messege' => 'day list loại sản phẩm!',
+        //     'data' => Category_product::all(),
+        // ], 200);
         // return Category_product::all();
     }
 

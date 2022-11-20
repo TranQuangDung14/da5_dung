@@ -6,10 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use App\Models\Staff;
+use App\Models\Product;
 
-
-class StaffController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,10 +19,10 @@ class StaffController extends Controller
     {
         //
         // return response()->json([
-        //     'messege' => 'day la bang nhan vien!',
-        //     'data' => Staff::all(),
+        //     'messege' => 'day la bản test db!',
+        //     'data' => Product::all(),
         // ], 200);
-        return Staff::get();
+        return Product::all();
     }
 
     /**
@@ -34,6 +33,7 @@ class StaffController extends Controller
     public function create()
     {
         //
+
     }
 
     /**
@@ -43,31 +43,31 @@ class StaffController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-
+    {  
         $input = $request->all();
         $rules = array(
             'name' => 'required',
-            'date_of_birth' => 'required',
-            'sex' => 'required',
+            'default_price' => 'required',
+            'price' => 'required',
         );
         $messages = array(
             'name.required' => 'Tên  không được phép trống!',
-            'date_of_birth.required' => 'icon không được phép trống!',
-            'sex.required' => 'status không được phép trống!',
+            'default_price.required' => 'Giá tiền mặc định không được phép trống!',
+            'price.required' => 'Giá tiền không được phép trống!',
         );
         $validator = Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 404);
         }
-        $data = $request->only('name','date_of_birth','sex','number_phone','email','adress','possion','department');
-        $status = Staff::create($data);
+        $data = $request->only('category_id', 'name', 'default_price','price','image','description','status');
+        $status = Product::create($data);
 
         if ($status)
         {
-            return response()->json([
-                'messege' => 'Thêm thành công nhân viên!',
-            ], 201);
+            // return response()->json([
+            //     'messege' => 'Thêm thành công!',
+            // ], 201);
+            return $data;
         } else {
             return response()->json([
                 'messege' => 'Thêm thất bại!',
@@ -83,8 +83,7 @@ class StaffController extends Controller
      */
     public function show($id)
     {
-        return Staff::findOrFail($id);
-        //
+        return Product::findOrFail($id);
     }
 
     /**
@@ -96,6 +95,7 @@ class StaffController extends Controller
     public function edit($id)
     {
         //
+        
     }
 
     /**
@@ -107,37 +107,35 @@ class StaffController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        //
         $input = $request->all();
-        // return response()->json([
-        //     'messege' => $input
-        // ], 200);
         $rules = array(
             'name' => 'required',
-            'date_of_birth' => 'required',
-            'sex' => 'required',
+            'default_price' => 'required',
+            'price' => 'required',
         );
         $messages = array(
             'name.required' => 'Tên  không được phép trống!',
-            'date_of_birth.required' => 'icon không được phép trống!',
-            'sex.required' => 'status không được phép trống!',
+            'default_price.required' => 'Giá tiền mặc định không được phép trống!',
+            'price.required' => 'Giá tiền không được phép trống!',
         );
         $validator = Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 404);
         }
-        $data = $request->only('name','date_of_birth','sex','number_phone','email','adress','possion','department');
-        $user = Staff::findOrFail($id);
+        $data = $request->only('category_id', 'name', 'default_price','price','image','description','status');
+        $user = Product::findOrFail($id);
         $status = $user->update($data);
+        // $status = Product::create($data);
 
         if ($status)
         {
             return response()->json([
-                'messege' => 'Cập nhật thành công!',
-            ], 200);
+                'messege' => 'Sửa thành công !',
+            ], 201);
         } else {
             return response()->json([
-                'messege' => 'Cập nhật thất bại!',
+                'messege' => 'Sửa thất bại!',
             ], 400);
         }
     }
@@ -150,8 +148,8 @@ class StaffController extends Controller
      */
     public function destroy($id)
     {
-        $Staff = Staff::findOrFail($id);
-        $Staff->delete();
+        $Product = Product::findOrFail($id);
+        $Product->delete();
         return response()->json([
             'messege' => 'Xóa thành công!',
         ], 200);

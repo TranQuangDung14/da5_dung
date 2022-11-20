@@ -15,8 +15,7 @@ class CreateDa5ProductTable extends Migration
     {
         Schema::create('da5_product', function (Blueprint $table) {
             $table->id();
-            $table->integer("product_supplier_id")->unsigned()->nullable();
-            $table->integer("product_id")->unsigned()->nullable();
+            $table->integer("category_id")->unsigned()->nullable();
             // $table->integer("amount")->unsigned();
             $table->string("name",100);
             $table->integer("default_price")->unsigned();
