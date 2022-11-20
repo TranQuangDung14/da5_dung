@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\testdbController;
+use App\Http\Controllers\Api\Category_ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Models\Customer;
 use PhpParser\Node\Stmt\Return_;
 
 // use App\Http\Controllers\Api;
@@ -34,13 +37,32 @@ Route::group(['middleware'=>'auth:sanctum'],function(){
     Route::get('/user', [AuthController::class, 'user']);
     Route::get('/logout', [AuthController::class, 'logout']);
 
-
+    // // test api
     Route::get('/testdb', [testdbController::class, 'index']);
-    // Route::get('/testdb/{id}', [testdbController::class, 'show']);
-    // Route::post('/testdb', [testdbController::class, 'store']);
-    // Route::put('/testdb/{id}', [testdbController::class, 'update']);
-    // Route::delete('/testdb/{id}', [testdbController::class, 'destroy']);
+    Route::get('/testdb/{id}', [testdbController::class, 'show']);
+    Route::post('/testdb', [testdbController::class, 'store']);
+    Route::put('/testdb/{id}', [testdbController::class, 'update']);
+    Route::delete('/testdb/{id}', [testdbController::class, 'destroy']);
     // Route::resource('testdb', [testdbController::class]);
+
+
+    //customer
+    Route::get('/customer', [CustomerController::class, 'index']);
+    Route::get('/customer/{id}', [CustomerController::class, 'show']);
+    Route::post('/customer', [CustomerController::class, 'store']);
+    Route::put('/customer/{id}', [CustomerController::class, 'update']);
+    Route::delete('/customer/{id}', [CustomerController::class, 'destroy']);
+
+
+    //category_product
+    Route::get('/category_product', [Category_ProductController::class, 'index']);
+    Route::get('/category_product/{id}', [Category_ProductController::class, 'show']);
+    Route::post('/category_product', [Category_ProductController::class, 'store']);
+    Route::put('/category_product/{id}', [Category_ProductController::class, 'update']);
+    Route::delete('/category_product/{id}', [Category_ProductController::class, 'destroy']);
+
+
+    
 });
     Route::post('/login',[AuthController::class,'login']);
     Route::post('/register',[AuthController::class,'register']);
