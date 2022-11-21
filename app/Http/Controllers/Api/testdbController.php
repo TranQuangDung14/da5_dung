@@ -18,11 +18,11 @@ class testdbController extends Controller
     public function index()
     {
         //
-        return response()->json([
-            'messege' => 'day la bản test db!',
-            'data' => testdb::all(),
-        ], 200);
-        // return testdb::all();
+        // return response()->json([
+        //     'messege' => 'day la bản test db!',
+        //     'data' => testdb::all(),
+        // ], 200);
+        return testdb::all();
     }
 
     /**
