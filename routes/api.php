@@ -49,7 +49,7 @@ Route::group(['middleware'=>'auth:sanctum'],function(){
     Route::get('/user', [AuthController::class, 'user']);
     Route::get('/logout', [AuthController::class, 'logout']);
 
-    // test api
+    // test api /oke
     Route::get('/testdb', [testdbController::class, 'index']);
     Route::get('/testdb/{id}', [testdbController::class, 'show']);
     Route::post('/testdb', [testdbController::class, 'store']);
@@ -57,7 +57,7 @@ Route::group(['middleware'=>'auth:sanctum'],function(){
     Route::delete('/testdb/{id}', [testdbController::class, 'destroy']);
 
 
-    //customer
+    //customer / oke
     Route::get('/customer', [CustomerController::class, 'index']);
     Route::get('/customer/{id}', [CustomerController::class, 'show']);
     Route::post('/customer', [CustomerController::class, 'store']);
@@ -65,14 +65,14 @@ Route::group(['middleware'=>'auth:sanctum'],function(){
     Route::delete('/customer/{id}', [CustomerController::class, 'destroy']);
 
 
-    //category_product
+    //category_product / oke
     Route::get('/category_product', [Category_ProductController::class, 'index']);
     Route::get('/category_product/{id}', [Category_ProductController::class, 'show']);
     Route::post('/category_product', [Category_ProductController::class, 'store']);
     Route::put('/category_product/{id}', [Category_ProductController::class, 'update']);
     Route::delete('/category_product/{id}', [Category_ProductController::class, 'destroy']);
 
-    //Info_Supplier
+    //Info_Supplier / oke
     Route::get('/info_supplier', [Info_SupplierController::class, 'index']);
     Route::get('/info_supplier/{id}', [Info_SupplierController::class, 'show']);
     Route::post('/info_supplier', [Info_SupplierController::class, 'store']);
