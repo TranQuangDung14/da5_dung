@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Warehouse;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -18,11 +20,17 @@ class ProductController extends Controller
     public function index()
     {
         //
-        // return response()->json([
-        //     'messege' => 'day la bản test db!',
-        //     'data' => Product::all(),
-        // ], 200);
-        return Product::all();
+        return response()->json([
+            // 'messege' => 'day la bản test db!',
+            // 'product' => Product::all(),
+            // 'warehouse'=>Warehouse::where('product_id','=','product.id')->select('amount','product_id')->get(),
+            'product' =>  DB::table('da5_product')
+                                ->Join('da5_warehouse','da5_product.id','=','da5_warehouse.product_id')
+                                ->select('da5_product.*','da5_warehouse.amount')
+                                ->where('da5_product.status',1)
+                                ->get(),
+        ], 200);
+        // return Product::all();
     }
 
     /**

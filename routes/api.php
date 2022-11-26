@@ -15,6 +15,8 @@ use App\Http\Controllers\Api\Type_PostsController;
 use App\Http\Controllers\Api\Type_VideoController;
 use App\Http\Controllers\Api\VideoController;
 use App\Http\Controllers\Api\WarehouseController;
+use App\Http\Controllers\Api\Test_db_projectController;
+use App\Http\Controllers\Api\DashboardController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -49,13 +51,16 @@ Route::group(['middleware'=>'auth:sanctum'],function(){
     Route::get('/user', [AuthController::class, 'user']);
     Route::get('/logout', [AuthController::class, 'logout']);
 
-    // test api /oke
+    // test api 
     Route::get('/testdb', [testdbController::class, 'index']);
     Route::get('/testdb/{id}', [testdbController::class, 'show']);
     Route::post('/testdb', [testdbController::class, 'store']);
     Route::put('/testdb/{id}', [testdbController::class, 'update']);
     Route::delete('/testdb/{id}', [testdbController::class, 'destroy']);
 
+
+    //dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index']);
 
     //customer / oke
     Route::get('/customer', [CustomerController::class, 'index']);
@@ -180,3 +185,15 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function() {
     // Route::resource('staff', 'StaffController');
     // Route::resource('testdb', 'testdbController');
 });
+    // Route::get('/testdb', [testdbController::class, 'index']);
+    // Route::get('/testdb/{id}', [testdbController::class, 'show']);
+    // Route::post('/testdb', [testdbController::class, 'store']);
+    // Route::put('/testdb/{id}', [testdbController::class, 'update']);
+    // Route::delete('/testdb/{id}', [testdbController::class, 'destroy']);
+
+
+    Route::get('test_db_project',[Test_db_projectController::class,'index']);
+    Route::post('test_db_project',[Test_db_projectController::class,'store']);
+    Route::put('test_db_project/{id}',[Test_db_projectController::class,'update']);
+    Route::get('test_db_project/{id}',[Test_db_projectController::class,'show']);
+    Route::delete('test_db_project/{id}',[Test_db_projectController::class,'destroy']);

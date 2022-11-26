@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\Category_product;
+use App\Models\Product_Supplier;
+use App\Models\Info_Supplier;
+use Illuminate\Support\Facades\DB;
 
 class Category_ProductController extends Controller
 {
@@ -17,12 +20,15 @@ class Category_ProductController extends Controller
      */
     public function index()
     {
-        //
-        // return response()->json([
-        //     'messege' => 'day list loại sản phẩm!',
-        //     'data' => Category_product::all(),
-        // ], 200);
-        return Category_product::all();
+
+        return response()->json([
+            'supplier'=>Info_Supplier::where('status',1)->select('id','name')->get(),
+            'category_product' => DB::table('da5_category_product')
+                                ->Join('da5_info_supplier','da5_category_product.product_supplier_id','=','da5_info_supplier.id')
+                                ->select('da5_category_product.*','da5_info_supplier.name as name_supplier')
+                                ->get(),
+
+        ], 200);
     }
 
     /**
