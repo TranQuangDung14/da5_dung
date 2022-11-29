@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\Warehouse;
+use Illuminate\Support\Facades\DB;
 
 class WarehouseController extends Controller
 {
@@ -18,11 +19,16 @@ class WarehouseController extends Controller
     public function index()
     {
         //
-        // return response()->json([
-        //     'messege' => 'day la bản test db!',
-        //     'data' => Warehouse::all(),
-        // ], 200);
-        return Warehouse::all();
+        return response()->json([
+            // 'messege' => 'day la bản test db!',
+            'warehouse' =>  DB::table('da5_warehouse')
+            ->Join('da5_product','da5_product.id','=','da5_warehouse.product_id')
+            ->select('da5_warehouse.*','da5_product.name')
+            ->where('da5_product.status',1)
+            ->get(),
+            // 'warehouse' => Warehouse::all(),
+        ], 200);
+        // return Warehouse::all();
     }
 
     /**

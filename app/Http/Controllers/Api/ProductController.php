@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Warehouse;
+use App\Models\Category_product;
+use App\Models\Info_Supplier;
+use App\Models\Product_Supplier;
 use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
@@ -21,14 +24,15 @@ class ProductController extends Controller
     {
         //
         return response()->json([
-            // 'messege' => 'day la bản test db!',
-            // 'product' => Product::all(),
-            // 'warehouse'=>Warehouse::where('product_id','=','product.id')->select('amount','product_id')->get(),
+            'category_product'=>Category_product::where('status',1)->select('id','name')->get(),
+            // 'supplier'=>Info_Supplier::where('status',1)->select('id','name')->get(),
             'product' =>  DB::table('da5_product')
                                 ->Join('da5_warehouse','da5_product.id','=','da5_warehouse.product_id')
                                 ->select('da5_product.*','da5_warehouse.amount')
                                 ->where('da5_product.status',1)
                                 ->get(),
+
+            'product_all' =>Product::all(),
         ], 200);
         // return Product::all();
     }
@@ -57,30 +61,58 @@ class ProductController extends Controller
             'name' => 'required',
             'default_price' => 'required',
             'price' => 'required',
+            'amount'=>'required'
         );
         $messages = array(
             'name.required' => 'Tên  không được phép trống!',
             'default_price.required' => 'Giá tiền mặc định không được phép trống!',
             'price.required' => 'Giá tiền không được phép trống!',
+            'amount.required' => 'Số lượng không được phép trống!',
         );
         $validator = Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 404);
         }
-        $data = $request->only('category_id', 'name', 'default_price','price','image','description','status');
-        $status = Product::create($data);
+        
+        DB::beginTransaction();
+        try{  
 
-        if ($status)
-        {
-            // return response()->json([
-            //     'messege' => 'Thêm thành công!',
-            // ], 201);
-            return $data;
-        } else {
-            return response()->json([
-                'messege' => 'Thêm thất bại!',
-            ], 400);
+            $product = new Product();
+            $product->category_id =  (!empty($request->category_id)) ? $request->category_id : null;
+            $product->name = $request->name;
+            $product->default_price = $request->default_price;
+            $product->price = $request->price;
+            $product->image =  (!empty($request->image)) ? $request->image : null;
+            $product->description =  (!empty($request->description)) ? $request->description : null;
+            $product->save();
+
+            $warehouse = new Warehouse();
+            $warehouse->product_id = $product->id;
+            // $warehouse->product_supplier_id = $request->product_supplier_id;
+            $warehouse->amount = $request->amount;
+            $warehouse->save();
+            DB::commit();
+            // return 'thành công!';
+        } 
+        catch (\Exception $e) {
+            DB::rollback();
+            // dd($e);
+            return 'thất bại';
+            // return redirect()->back();
         }
+
+
+        // if ($status)
+        // {
+        //     // return response()->json([
+        //     //     'messege' => 'Thêm thành công!',
+        //     // ], 201);
+        //     return $data;
+        // } else {
+        //     return response()->json([
+        //         'messege' => 'Thêm thất bại!',
+        //     ], 400);
+        // }
     }
 
     /**
