@@ -25,6 +25,8 @@ class testdbController extends Controller
         // return testdb::all();
     }
 
+    
+
     /**
      * Show the form for creating a new resource.
      *

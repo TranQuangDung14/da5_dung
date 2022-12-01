@@ -12,6 +12,8 @@ use App\Models\Category_product;
 use App\Models\Info_Supplier;
 use App\Models\Product_Supplier;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -26,6 +28,8 @@ class ProductController extends Controller
         return response()->json([
             'category_product'=>Category_product::where('status',1)->select('id','name')->get(),
             // 'supplier'=>Info_Supplier::where('status',1)->select('id','name')->get(),
+
+            //use to test post
             'product' =>  DB::table('da5_product')
                                 ->Join('da5_warehouse','da5_product.id','=','da5_warehouse.product_id')
                                 ->select('da5_product.*','da5_warehouse.amount')
@@ -48,6 +52,12 @@ class ProductController extends Controller
 
     }
 
+
+    // public function upload(Request $request){
+    //     $result =$request->file('file')->store('image');
+    //     return ["result"=>$result];
+    // }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -61,13 +71,15 @@ class ProductController extends Controller
             'name' => 'required',
             'default_price' => 'required',
             'price' => 'required',
-            'amount'=>'required'
+            'amount'=>'required',
+            // 'image'=>'required'
         );
         $messages = array(
             'name.required' => 'Tên  không được phép trống!',
             'default_price.required' => 'Giá tiền mặc định không được phép trống!',
             'price.required' => 'Giá tiền không được phép trống!',
             'amount.required' => 'Số lượng không được phép trống!',
+            // 'image.required'=>'ảnh không được để trống'
         );
         $validator = Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
@@ -76,13 +88,15 @@ class ProductController extends Controller
         
         DB::beginTransaction();
         try{  
-
+            // return $result;
+            $result =($request->file('image')->store('image'));
             $product = new Product();
             $product->category_id =  (!empty($request->category_id)) ? $request->category_id : null;
             $product->name = $request->name;
             $product->default_price = $request->default_price;
             $product->price = $request->price;
-            $product->image =  (!empty($request->image)) ? $request->image : null;
+            $product->image=  (!empty($request->image=$result)) ? $request->image : null;
+            // $product->image=  (!empty($request->image)) ? $request->image : null;
             $product->description =  (!empty($request->description)) ? $request->description : null;
             $product->save();
 
@@ -92,13 +106,12 @@ class ProductController extends Controller
             $warehouse->amount = $request->amount;
             $warehouse->save();
             DB::commit();
-            // return 'thành công!';
+            return 'thành công!';
         } 
         catch (\Exception $e) {
             DB::rollback();
             // dd($e);
             return 'thất bại';
-            // return redirect()->back();
         }
 
 
@@ -163,12 +176,17 @@ class ProductController extends Controller
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 404);
         }
-        $data = $request->only('category_id', 'name', 'default_price','price','image','description','status');
-        $user = Product::findOrFail($id);
-        $status = $user->update($data);
-        // $status = Product::create($data);
-
-        if ($status)
+            $result =($request->file('image')->store('image'));
+            $product = Product::findOrFail($id);
+            $product->category_id =  (!empty($request->category_id)) ? $request->category_id : null;
+            $product->name = $request->name;
+            $product->default_price = $request->default_price;
+            $product->price = $request->price;
+            Storage::delete($product->image);
+            $product->image=  (!empty($request->image=$result)) ? $request->image : null;
+            $product->description =  (!empty($request->description)) ? $request->description : null;
+            $product ->update();
+        if ($product)
         {
             return response()->json([
                 'messege' => 'Sửa thành công !',
@@ -189,6 +207,8 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $Product = Product::findOrFail($id);
+        // File::delete($Product->image);
+        Storage::delete($Product->image);
         $Product->delete();
         return response()->json([
             'messege' => 'Xóa thành công!',

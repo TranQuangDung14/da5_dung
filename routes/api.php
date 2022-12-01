@@ -197,3 +197,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function() {
     Route::put('test_db_project/{id}',[Test_db_projectController::class,'update']);
     Route::get('test_db_project/{id}',[Test_db_projectController::class,'show']);
     Route::delete('test_db_project/{id}',[Test_db_projectController::class,'destroy']);
+
+    Route::post('test_db_project',[Test_db_projectController::class,'upload']);
+
+

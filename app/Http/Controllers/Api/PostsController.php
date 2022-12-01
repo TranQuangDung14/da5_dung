@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\Posts;
+use App\Models\Type_Posts;
+use Illuminate\Support\Facades\DB;
 
 class PostsController extends Controller
 {
@@ -18,11 +20,18 @@ class PostsController extends Controller
     public function index()
     {
         //
-        // return response()->json([
-        //     'messege' => 'day la bản test db!',
-        //     'data' => Posts::all(),
-        // ], 200);
-        return Posts::all();
+        return response()->json([
+            // 'messege' => 'day la bản test db!',
+            'posts_all' => Posts::all(),
+            'type_post' =>Type_Posts::all(),
+            'posts'=> DB::table('da5_posts')
+            ->Join('da5_type_posts','da5_posts.type_post_id','=','da5_type_posts.id')
+            ->select('da5_posts.*','da5_type_posts.name')
+            ->where('da5_type_posts.status',1)
+            ->get(),
+        ], 200);
+        // return Posts::all();
+
     }
 
     /**
@@ -123,6 +132,7 @@ class PostsController extends Controller
         }
         $data = $request->only('type_post_id', 'title', 'staff_id','content','status');
         $user = Posts::findOrFail($id);
+        // $status = Posts::create($data);
         $status = $user->update($data);
         // $status = Posts::create($data);
 

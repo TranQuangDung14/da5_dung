@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Type_Video;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\Video;
+use Illuminate\Support\Facades\DB;
 
 class VideoController extends Controller
 {
@@ -18,11 +20,18 @@ class VideoController extends Controller
     public function index()
     {
         //
-        // return response()->json([
-        //     'messege' => 'day la bản test db!',
-        //     'data' => Video::all(),
-        // ], 200);
-        return Video::all();
+        return response()->json([
+            // 'messege' => 'day la bản test db!',
+            // 'data' => Video::all(),
+            'video_all' => Video::all(),
+            'type_video' =>Type_Video::all(),
+            'video'=> DB::table('da5_video')
+            ->Join('da5_type_video','da5_video.type_video_id','=','da5_type_video.id')
+            ->select('da5_video.*','da5_type_video.name')
+            ->where('da5_type_video.status',1)
+            ->get(),
+        ], 200);
+        // return Video::all();
     }
 
     /**

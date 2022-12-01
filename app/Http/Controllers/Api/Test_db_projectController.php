@@ -32,6 +32,12 @@ class Test_db_projectController extends Controller
         //
     }
 
+
+    public function upload(Request $request){
+        $result =$request->file('file')->store('image');
+        return ["result"=>$result];
+    }
+
     /**
      * Store a newly created resource in storage.
      *
