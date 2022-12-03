@@ -24,16 +24,20 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        // 'supplier'=>Info_Supplier::where('status',1)->select('id','name')->get(),
+        $baseUrl = env('APP_URL') . '/';
         return response()->json([
             'category_product'=>Category_product::where('status',1)->select('id','name as name_cate')->get(),
-            // 'supplier'=>Info_Supplier::where('status',1)->select('id','name')->get(),
-
             //use to test post
             'product' =>  DB::table('da5_product')
                                 ->Join('da5_warehouse','da5_product.id','=','da5_warehouse.product_id')
                                 ->Join('da5_category_product','da5_category_product.id','=','da5_product.category_id')
-                                ->select('da5_product.*','da5_warehouse.amount','da5_category_product.name as name_cate')
+                                ->select([
+                                    'da5_product.*',
+                                    'da5_warehouse.amount',
+                                    'da5_category_product.name as name_cate',
+                                    DB::raw("CONCAT('$baseUrl', 'da5_product.image') as img_src")
+                                ])
                                 ->where('da5_product.status',1)
                                 ->get(),
 
@@ -66,7 +70,7 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {  
+    {
         $input = $request->all();
         $rules = array(
             'name' => 'required',
@@ -86,9 +90,9 @@ class ProductController extends Controller
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 404);
         }
-        
+
         DB::beginTransaction();
-        try{  
+        try{
             // return $result;
             $result =($request->file('image')->store('image'));
             $product = new Product();
@@ -108,7 +112,7 @@ class ProductController extends Controller
             $warehouse->save();
             DB::commit();
             return 'thành công!';
-        } 
+        }
         catch (\Exception $e) {
             DB::rollback();
             // dd($e);
@@ -149,7 +153,7 @@ class ProductController extends Controller
     public function edit($id)
     {
         //
-        
+
     }
 
     /**
