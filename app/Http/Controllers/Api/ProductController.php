@@ -26,13 +26,14 @@ class ProductController extends Controller
     {
         //
         return response()->json([
-            'category_product'=>Category_product::where('status',1)->select('id','name')->get(),
+            'category_product'=>Category_product::where('status',1)->select('id','name as name_cate')->get(),
             // 'supplier'=>Info_Supplier::where('status',1)->select('id','name')->get(),
 
             //use to test post
             'product' =>  DB::table('da5_product')
                                 ->Join('da5_warehouse','da5_product.id','=','da5_warehouse.product_id')
-                                ->select('da5_product.*','da5_warehouse.amount')
+                                ->Join('da5_category_product','da5_category_product.id','=','da5_product.category_id')
+                                ->select('da5_product.*','da5_warehouse.amount','da5_category_product.name as name_cate')
                                 ->where('da5_product.status',1)
                                 ->get(),
 
