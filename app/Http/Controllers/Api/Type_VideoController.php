@@ -111,7 +111,7 @@ class Type_VideoController extends Controller
             'name' => 'required',
         );
         $messages = array(
-            'name.required' => 'Tên  không được phép trống!',
+            'name.required' => 'Tên không được phép trống!',
         );
         $validator = Validator::make($input, $rules, $messages);
         if ($validator->fails()) {

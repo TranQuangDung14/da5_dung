@@ -27,21 +27,21 @@ class ProductController extends Controller
         // 'supplier'=>Info_Supplier::where('status',1)->select('id','name')->get(),
         $baseUrl = env('APP_URL') . '/';
         return response()->json([
-            'category_product'=>Category_product::where('status',1)->select('id','name as name_cate')->get(),
+            'category_product' => Category_product::where('status', 1)->select('id', 'name as name_cate')->get(),
             //use to test post
             'product' =>  DB::table('da5_product')
-                                ->Join('da5_warehouse','da5_product.id','=','da5_warehouse.product_id')
-                                ->Join('da5_category_product','da5_category_product.id','=','da5_product.category_id')
-                                ->select([
-                                    'da5_product.*',
-                                    'da5_warehouse.amount',
-                                    'da5_category_product.name as name_cate',
-                                    DB::raw("CONCAT('$baseUrl', 'da5_product.image') as img_src")
-                                ])
-                                ->where('da5_product.status',1)
-                                ->get(),
+                ->Join('da5_warehouse', 'da5_product.id', '=', 'da5_warehouse.product_id')
+                ->Join('da5_category_product', 'da5_category_product.id', '=', 'da5_product.category_id')
+                ->select([
+                    'da5_product.*',
+                    'da5_warehouse.amount',
+                    'da5_category_product.name as name_cate',
+                    DB::raw("CONCAT('$baseUrl','storage/', da5_product.image) as img_src")
+                ])
+                ->where('da5_product.status', 1)
+                ->get(),
 
-            'product_all' =>Product::all(),
+            'product_all' => Product::all(),
         ], 200);
         // return Product::all();
     }
@@ -76,7 +76,7 @@ class ProductController extends Controller
             'name' => 'required',
             'default_price' => 'required',
             'price' => 'required',
-            'amount'=>'required',
+            'amount' => 'required',
             // 'image'=>'required'
         );
         $messages = array(
@@ -92,28 +92,27 @@ class ProductController extends Controller
         }
 
         DB::beginTransaction();
-        try{
+        try {
             // return $result;
-            $result =($request->file('image')->store('image'));
             $product = new Product();
             $product->category_id =  (!empty($request->category_id)) ? $request->category_id : null;
             $product->name = $request->name;
             $product->default_price = $request->default_price;
             $product->price = $request->price;
-            $product->image=  (!empty($request->image=$result)) ? $request->image : null;
-            // $product->image=  (!empty($request->image)) ? $request->image : null;
             $product->description =  (!empty($request->description)) ? $request->description : null;
+            if ($request->hasFile('image')) {
+                $result = ($request->file('image')->store('image'));
+                $product->image =  (!empty($request->image = $result)) ? $request->image : null;
+            }
             $product->save();
 
             $warehouse = new Warehouse();
             $warehouse->product_id = $product->id;
-            // $warehouse->product_supplier_id = $request->product_supplier_id;
             $warehouse->amount = $request->amount;
             $warehouse->save();
             DB::commit();
             return 'thành công!';
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             DB::rollback();
             // dd($e);
             return 'thất bại';
@@ -141,7 +140,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        return Product::findOrFail($id);
+        $baseUrl = env('APP_URL') . '/';
+        return Product::select(['*', DB::raw("CONCAT('$baseUrl','storage/', da5_product.image) as img_src")])->findOrFail($id);
     }
 
     /**
@@ -181,18 +181,21 @@ class ProductController extends Controller
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 404);
         }
-            $result =($request->file('image')->store('image'));
-            $product = Product::findOrFail($id);
-            $product->category_id =  (!empty($request->category_id)) ? $request->category_id : null;
-            $product->name = $request->name;
-            $product->default_price = $request->default_price;
-            $product->price = $request->price;
+        $product = Product::findOrFail($id);
+        $product->category_id =  (!empty($request->category_id)) ? $request->category_id : null;
+
+        $product->name = $request->name;
+        $product->default_price = $request->default_price;
+        $product->price = $request->price;
+        if ($request->hasFile('image')) {
+            $result = ($request->file('image')->store('image'));
             Storage::delete($product->image);
-            $product->image=  (!empty($request->image=$result)) ? $request->image : null;
-            $product->description =  (!empty($request->description)) ? $request->description : null;
-            $product ->update();
-        if ($product)
-        {
+            $product->image =  (!empty($request->image = $result)) ? $request->image : null;
+            // $product->image = $compPic;
+        }
+        $product->description =  (!empty($request->description)) ? $request->description : null;
+        $product->update();
+        if ($product) {
             return response()->json([
                 'messege' => 'Sửa thành công !',
             ], 201);

@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\VideoController;
 use App\Http\Controllers\Api\WarehouseController;
 use App\Http\Controllers\Api\Test_db_projectController;
 use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\Api\Front_end_Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -199,5 +200,12 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function() {
     Route::delete('test_db_project/{id}',[Test_db_projectController::class,'destroy']);
 
     Route::post('test_db_project',[Test_db_projectController::class,'upload']);
+
+    
+    // Front end
+    Route::get('/get_product',[Front_end_Controller::class,'index']);
+    Route::get('/get_product/{id}', [Front_end_Controller::class, 'show']);
+
+
 
 
