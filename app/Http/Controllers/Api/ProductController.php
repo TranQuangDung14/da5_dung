@@ -119,17 +119,7 @@ class ProductController extends Controller
         }
 
 
-        // if ($status)
-        // {
-        //     // return response()->json([
-        //     //     'messege' => 'Thêm thành công!',
-        //     // ], 201);
-        //     return $data;
-        // } else {
-        //     return response()->json([
-        //         'messege' => 'Thêm thất bại!',
-        //     ], 400);
-        // }
+
     }
 
     /**

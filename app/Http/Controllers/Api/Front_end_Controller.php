@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Posts;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Type_Posts;
+use App\Models\Type_Video;
+use App\Models\Video;
 use Illuminate\Support\Facades\DB;
 
 class Front_end_Controller extends Controller
@@ -14,10 +18,13 @@ class Front_end_Controller extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    //  danh sách sản phẩm
+    public function index(Request $request)
     {
         //
         // return product::all();
+        $category=$request->category;
         $baseUrl = env('APP_URL') . '/';
         return response()->json([
             'product' => Product::where('status', 1)
@@ -28,6 +35,47 @@ class Front_end_Controller extends Controller
                 ])
                 ->limit(5)
                 ->get(),
+                // Danh sách sản phẩm
+                'product_sale'=>Product::where('category_id',$category)->get(),
+        ], 200);
+    }
+
+    //danh sách video
+    public function video(){
+        return response()->json([
+            'video' => Video::select('*')->where('status',1)->get(),
+            'type_video' => Type_Video::select('*')->where('status',1)->get(),
+            
+        ], 200);
+    }
+
+    // danh mục video
+    public function cate_video(){
+        return response()->json([
+            'cate_video' => Type_Video::select('*')->where('status',1)->get(),
+            
+        ], 200);
+    }
+
+    // danh mục bài viết
+    public function cate_posts(){
+        return response()->json([
+            'cate_posts' => Type_Posts::select('*')->where('status',1)->get(),
+            
+        ], 200);
+    }
+    // bài viết
+    public function posts(){
+
+        $baseUrl = env('APP_URL') . '/';
+        return response()->json([
+           
+            'posts' => Posts::select([
+                '*',
+                DB::raw("CONCAT('$baseUrl','storage/', da5_posts.image) as img_src")
+            ])->where('status',1)->get(),
+            'type_posts' => Type_Posts::select('*')->where('status',1)->get(),
+       
         ], 200);
     }
 
@@ -52,6 +100,7 @@ class Front_end_Controller extends Controller
         //
     }
 
+    // chi tiết sản phẩm
     /**
      * Display the specified resource.
      *
@@ -64,6 +113,14 @@ class Front_end_Controller extends Controller
         // return Product::findOrFail($id);
         $baseUrl = env('APP_URL') . '/';
         return Product::select(['*', DB::raw("CONCAT('$baseUrl','storage/', da5_product.image) as img_src")])->findOrFail($id);
+
+    }
+    public function show_posts($id)
+    {
+        //
+        // return Product::findOrFail($id);
+        $baseUrl = env('APP_URL') . '/';
+        return Posts::select(['*',DB::raw("CONCAT('$baseUrl','storage/', da5_posts.image) as img_src")])->findOrFail($id);
 
     }
 

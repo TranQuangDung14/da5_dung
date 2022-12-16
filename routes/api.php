@@ -206,6 +206,13 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function() {
     Route::get('/get_product',[Front_end_Controller::class,'index']);
     Route::get('/get_product/{id}', [Front_end_Controller::class, 'show']);
 
+    //front end video 
+    Route::get('/get_video',[Front_end_Controller::class,'video']);
+    // Route::get('/get_posts',[Front_end_Controller::class,'video']);
+    Route::get('/get_posts',[Front_end_Controller::class,'posts']);
+    Route::get('/get_posts/{id}', [Front_end_Controller::class, 'show_posts']);
+
+
 
 
 

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Posts;
 use App\Models\Type_Posts;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class PostsController extends Controller
 {
@@ -67,19 +68,21 @@ class PostsController extends Controller
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 404);
         }
-        $data = $request->only('type_post_id', 'title', 'staff_id','content','status');
-        $status = Posts::create($data);
-
-        if ($status)
-        {
-            // return response()->json([
-            //     'messege' => 'Thêm thành công!',
-            // ], 201);
-            return $data;
-        } else {
-            return response()->json([
-                'messege' => 'Thêm thất bại!',
-            ], 400);
+        try {
+            $posts = new Posts();
+            $posts->type_post_id =  (!empty($request->type_post_id)) ? $request->type_post_id : null;
+            $posts->title = $request->title;
+            $posts->staff_id =  (!empty($request->staff_id)) ? $request->staff_id : null;
+            $posts->content = $request->content;
+            if ($request->hasFile('image')) {
+                $result = ($request->file('image')->store('image/posts'));
+                $posts->image =  (!empty($request->image = $result)) ? $request->image : null;
+            }
+            $posts->save();
+            return $posts;
+        } catch (\Exception $e) {
+   
+            return 'thất bại';
         }
     }
 
@@ -130,14 +133,19 @@ class PostsController extends Controller
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 404);
         }
-        $data = $request->only('type_post_id', 'title', 'staff_id','content','status');
-        $user = Posts::findOrFail($id);
-        // $status = Posts::create($data);
-        $status = $user->update($data);
-        // $status = Posts::create($data);
 
-        if ($status)
-        {
+        $posts = Posts::findOrFail($id);
+        $posts->type_post_id =  (!empty($request->type_post_id)) ? $request->type_post_id : null;
+        $posts->title = $request->title;
+        $posts->staff_id =  (!empty($request->staff_id)) ? $request->staff_id : null;
+        $posts->content = $request->content;
+        if ($request->hasFile('image')) {
+            $result = ($request->file('image')->store('image/posts'));
+            Storage::delete($posts->image);
+            $posts->image =  (!empty($request->image = $result)) ? $request->image : null;
+        }
+        $posts->update();
+        if ($posts) {
             return response()->json([
                 'messege' => 'Sửa thành công !',
             ], 201);
