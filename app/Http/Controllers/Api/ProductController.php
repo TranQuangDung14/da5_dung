@@ -14,6 +14,7 @@ use App\Models\Product_Supplier;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\UploadController;
 
 class ProductController extends Controller
 {
@@ -104,6 +105,7 @@ class ProductController extends Controller
                 $result = ($request->file('image')->store('image'));
                 $product->image =  (!empty($request->image = $result)) ? $request->image : null;
             }
+            // $product->image =  (!empty($request->image)) ? upload($request->file, $destination) : null;
             $product->save();
 
             $warehouse = new Warehouse();
@@ -111,16 +113,32 @@ class ProductController extends Controller
             $warehouse->amount = $request->amount;
             $warehouse->save();
             DB::commit();
-            return 'thành công!';
+            return response()->json([
+                'messege' => $product,
+            ], 200);
         } catch (\Exception $e) {
             DB::rollback();
             // dd($e);
-            return 'thất bại';
+            return response()->json([
+                'messege' => 'Thất bại!',
+            ], 200);
         }
 
 
 
     }
+        //
+        // public function upload(Request $request){
+        //     $image =$request->file('image');
+        //     if($request->hasFile('image')){
+        //         $new_name =rand().'.'.$image->getClientOriginalExtension();
+        //         $image->move(public_path('/uploads/images'),$new_name);
+        //         return response()->json($new_name);
+        //     }else{
+        //         return response()->json('ảnh trống');
+        //     }
+    
+        // }
 
     /**
      * Display the specified resource.

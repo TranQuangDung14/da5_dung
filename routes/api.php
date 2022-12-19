@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\WarehouseController;
 use App\Http\Controllers\Api\Test_db_projectController;
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\Front_end_Controller;
+use App\Http\Controllers\UploadController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -204,6 +205,9 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function() {
     
     // Front end
     Route::get('/get_product',[Front_end_Controller::class,'index']);
+    // hiển thị sản phẩm theo danh mục
+    Route::get('/get_product_by_category',[Front_end_Controller::class,'show_product_by_category']);
+
     Route::get('/get_product/{id}', [Front_end_Controller::class, 'show']);
 
     //front end video 
@@ -212,6 +216,12 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function() {
     Route::get('/get_posts',[Front_end_Controller::class,'posts']);
     Route::get('/get_posts/{id}', [Front_end_Controller::class, 'show_posts']);
 
+
+    // Route::get('/testleftjion', [Front_end_Controller::class, 'testleftjion']);
+
+    // upload 
+
+   Route::post('upload',[UploadController::class,'upload']);
 
 
 

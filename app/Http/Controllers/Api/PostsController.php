@@ -79,10 +79,14 @@ class PostsController extends Controller
                 $posts->image =  (!empty($request->image = $result)) ? $request->image : null;
             }
             $posts->save();
-            return $posts;
+            return response()->json([
+                'messege' => $posts,
+            ], 200);
         } catch (\Exception $e) {
    
-            return 'thất bại';
+            return response()->json([
+                'messege' => 'thất bại!'
+            ], 200);
         }
     }
 
