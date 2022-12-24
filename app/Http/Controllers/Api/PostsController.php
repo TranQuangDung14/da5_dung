@@ -21,6 +21,7 @@ class PostsController extends Controller
     public function index()
     {
         //
+        // $baseUrl = env('APP_URL') . '/';
         return response()->json([
             // 'messege' => 'day la bản test db!',
             'posts_all' => Posts::all(),
@@ -30,6 +31,8 @@ class PostsController extends Controller
             ->select('da5_posts.*','da5_type_posts.name')
             ->where('da5_type_posts.status',1)
             ->get(),
+            // 'image_posts'=>Posts::select
+            // 'image_posts'=> Posts::select(['*', DB::raw("CONCAT('$baseUrl','storage/', da5_posts.image) as img_src")])->get(),
         ], 200);
         // return Posts::all();
 
@@ -151,7 +154,7 @@ class PostsController extends Controller
         $posts->update();
         if ($posts) {
             return response()->json([
-                'messege' => 'Sửa thành công !',
+                'messege' => $posts,
             ], 201);
         } else {
             return response()->json([

@@ -62,12 +62,14 @@ class AuthController extends Controller
             ]
         );
         // return User::all();
-        return response()->json(
-            [
-                'message'=>"Tạo tài khoản thành công!"
-            ],
-            404
-        );
+        // return response()->json(
+        //     [
+        //         'message'=>"Tạo tài khoản thành công!",
+        //         'tesst'=>"Tạo tài khoản thành công!"
+        //     ],
+        //     404
+        // );
+        // return response()->json([
         
     } 
     //

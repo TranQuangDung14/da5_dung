@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 class UploadController extends Controller
 {
+
+    // file này chỉ để lưu hàm upload 
     //
     public function upload(Request $request){
         $image =$request->file('image');
