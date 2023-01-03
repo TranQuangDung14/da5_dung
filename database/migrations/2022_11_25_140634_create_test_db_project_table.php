@@ -19,6 +19,7 @@ class CreateTestDbProjectTable extends Migration
             $table->integer('number_phone')->unsigned()->nullable();
             $table->string('email')->nullable();
             $table->string('adress')->nullable();
+            $table->integer("testdb1_id")->unsigned()->nullable();
             $table->timestamps();
         });
     }

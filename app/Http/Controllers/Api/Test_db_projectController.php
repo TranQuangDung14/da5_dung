@@ -5,6 +5,7 @@ namespace App\Http\Controllers\APi;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\test_db_project;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -64,7 +65,23 @@ class Test_db_projectController extends Controller
                 'error'=>$validator->errors()
             ]);
         }
-        $data = $request->only('name','number_phone','email','adress');
+        // DB::beginTransaction();
+        // try {
+        //     $test_db = new test_db_project();
+        //     // $test
+        //     $test_db->name         =  (!empty($request->name)) ? $request->name : null;
+        //     $test_db->number_phone =  (!empty($request->number_phone)) ? $request->number_phone : null;
+        //     $test_db->testdb1_id =  (!empty($request->testdb1_id)) ? $request->testdb1_id : null;
+        //     $test_db->email =  (!empty($request->email)) ? $request->email : null;
+        //     $test_db->adress =  (!empty($request->adress)) ? $request->adress : null;
+
+        //     $test_db->save();
+        //     // DB::commit();
+
+        // }catch(\Exception $e){
+        //     // DB::rollback();
+        // }
+        $data = $request->only('name','number_phone','email','adress','testdb1_id');
         $status = test_db_project::create($data);
         if($status){
             return response()->json([
@@ -142,6 +159,8 @@ class Test_db_projectController extends Controller
             return 'thất bại';
         }
     }
+
+    
 
     /**
      * Remove the specified resource from storage.

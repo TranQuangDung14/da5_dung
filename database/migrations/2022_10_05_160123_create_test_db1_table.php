@@ -19,6 +19,7 @@ class CreateTestDb1Table extends Migration
             $table->string('sex');
             $table->integer('age');
             $table->integer('phone');
+            $table->integer('tets_id')->unsigned()->nullable();
             $table->timestamps();
         });
     }

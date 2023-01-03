@@ -17,7 +17,8 @@ class CreateDa5OrderTable extends Migration
             $table->id();
             $table->integer("product_id")->unsigned()->nullable();
             $table->integer("customer_id")->unsigned()->nullable();
-            $table->integer("warehouse_id")->unsigned()->nullable();
+            // $table->integer("warehouse_id")->unsigned()->nullable();
+            $table->integer('total_price')->unsigned()->nullable();
             $table->integer("status")->default(1);
             $table->timestamps();
         });

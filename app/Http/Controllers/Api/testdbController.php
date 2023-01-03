@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\test_db_project;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\testdb;
+use Illuminate\Support\Facades\DB;
 
 class testdbController extends Controller
 {
@@ -61,20 +63,47 @@ class testdbController extends Controller
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 404);
         }
-        $data = $request->only('name', 'sex', 'age','phone');
-        $status = testdb::create($data);
 
-        if ($status)
-        {
-            // return response()->json([
-            //     'messege' => 'Thêm thành công!',
-            // ], 201);
-            return $data;
-        } else {
+        DB::beginTransaction();
+        try {
+            // return $result;
+            $test = new testdb();
+            $test->name =  (!empty($request->name)) ? $request->name : null;
+            $test->sex =  (!empty($request->sex)) ? $request->sex : null;
+            $test->age =  (!empty($request->age)) ? $request->age : null;
+            $test->phone =  (!empty($request->phone)) ? $request->phone : null;
+            // $test->testdb1_id = $testdb_pro->id;
+            // $product->image =  (!empty($request->image)) ? upload($request->file, $destination) : null;
+            $test->save();
+            foreach ( $request->testdb_pro as $answer) {
+                test_db_project::create([
+                    // 'username' => Auth::user()->name,
+                    'name' => $request->name,
+                    'number_phone' => $request->number_phone,
+                    'email' => $request->email,
+                    'adress' => $request->adress,
+                    'testdb1_id' => $test->id
+                    // 'correct_answer' => $answer,
+                    // 'question_id' => $request->question_id,
+                ]);
+            }
+
+           
+            DB::commit();
             return response()->json([
-                'messege' => 'Thêm thất bại!',
-            ], 400);
+                'messege' => $test,
+                'testdb_pro'=>$answer,
+            ], 200);
+        } catch (\Exception $e) {
+            DB::rollback();
+            // dd($e);
+            return response()->json([
+                'messege' => 'Thất bại!',
+            ], 200);
         }
+
+
+
     }
 
     /**

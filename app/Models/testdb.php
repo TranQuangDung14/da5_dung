@@ -21,5 +21,6 @@ class testdb extends Model
         'sex',
         'age',
         'phone',
+        'tets_id'
     ];
 }

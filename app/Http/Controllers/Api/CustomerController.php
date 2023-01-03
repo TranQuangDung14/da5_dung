@@ -44,22 +44,22 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {  
-        $input = $request->all();
-        $rules = array(
-            'name' => 'required',
-            'date_of_birth' => 'required',
-            'sex' => 'required',
-        );
-        $messages = array(
-            'name.required' => 'Tên  không được phép trống!',
-            'date_of_birth.required' => 'ngày sinh không được phép trống!',
-            'sex.required' => 'giới tính không được phép trống!',
-        );
-        $validator = Validator::make($input, $rules, $messages);
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 404);
-        }
-        $data = $request->only('id_user', 'name', 'date_of_birth','sex','number_phone','email','adress');
+        // $input = $request->all();
+        // $rules = array(
+        //     'name' => 'required',
+        //     'date_of_birth' => 'required',
+        //     'sex' => 'required',
+        // );
+        // $messages = array(
+        //     'name.required' => 'Tên  không được phép trống!',
+        //     'date_of_birth.required' => 'ngày sinh không được phép trống!',
+        //     'sex.required' => 'giới tính không được phép trống!',
+        // );
+        // $validator = Validator::make($input, $rules, $messages);
+        // if ($validator->fails()) {
+        //     return response()->json(['error' => $validator->errors()], 404);
+        // }
+        $data = $request->only('id_user','order_id', 'name', 'date_of_birth','sex','number_phone','email','adress');
         $status = Customer::create($data);
 
         if ($status)

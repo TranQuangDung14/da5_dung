@@ -61,6 +61,16 @@ Route::group(['middleware'=>'auth:sanctum'],function(){
     Route::delete('/testdb/{id}', [testdbController::class, 'destroy']);
 
 
+    //test db 
+    Route::get('test_db_project',[Test_db_projectController::class,'index']);
+    Route::post('test_db_project',[Test_db_projectController::class,'store']);
+    Route::put('test_db_project/{id}',[Test_db_projectController::class,'update']);
+    Route::get('test_db_project/{id}',[Test_db_projectController::class,'show']);
+    Route::delete('test_db_project/{id}',[Test_db_projectController::class,'destroy']);
+
+    Route::post('test_db_project',[Test_db_projectController::class,'upload']);
+
+
     //dashboard
     Route::get('/dashboard', [DashboardController::class, 'index']);
 
@@ -194,13 +204,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function() {
     // Route::delete('/testdb/{id}', [testdbController::class, 'destroy']);
 
 
-    Route::get('test_db_project',[Test_db_projectController::class,'index']);
-    Route::post('test_db_project',[Test_db_projectController::class,'store']);
-    Route::put('test_db_project/{id}',[Test_db_projectController::class,'update']);
-    Route::get('test_db_project/{id}',[Test_db_projectController::class,'show']);
-    Route::delete('test_db_project/{id}',[Test_db_projectController::class,'destroy']);
 
-    Route::post('test_db_project',[Test_db_projectController::class,'upload']);
 
     
     // Front end

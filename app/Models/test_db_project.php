@@ -21,5 +21,6 @@ class test_db_project extends Model
         'number_phone',
         'email',
         'adress',
+        'testdb1_id',
     ];
 }
