@@ -34,6 +34,7 @@ class Front_end_Controller extends Controller
                     DB::raw("CONCAT('$baseUrl','storage/', da5_product.image) as img_src")
                 ])
                 ->limit(5)
+                ->orderBy('created_at', 'desc')
                 ->get(),
             // Danh sách sản phẩm
             'all_product' => Product::where('status', 1)
@@ -41,6 +42,7 @@ class Front_end_Controller extends Controller
                     '*',
                     DB::raw("CONCAT('$baseUrl','storage/', da5_product.image) as img_src")
                 ])
+                ->orderBy('created_at', 'desc')
                 ->get(),
 
             // danh mục sản phẩm
@@ -191,9 +193,19 @@ class Front_end_Controller extends Controller
     public function show($id)
     {
         //
+        // $product= Product::findOrFail($id);
+        // $category = Category_product::where('order_id','=',$id)->get();
         // return Product::findOrFail($id);
         $baseUrl = env('APP_URL') . '/';
         return Product::select(['*', DB::raw("CONCAT('$baseUrl','storage/', da5_product.image) as img_src")])->findOrFail($id);
+        // return response()->json([
+
+        //     'data'=>DB::table('da5_product') 
+        //     ->Join('da5_category_product', 'da5_category_product.id', '=', 'da5_product.category_id')
+        //     ->select(['da5_product.*', 'da5_category_product.name as name_category', DB::raw("CONCAT('$baseUrl','storage/', da5_product.image) as img_src")])
+        //     // ->select()
+        //     ->first($id),
+        // ]);
     }
     public function show_posts($id)
     {
@@ -201,6 +213,7 @@ class Front_end_Controller extends Controller
         // return Product::findOrFail($id);
         $baseUrl = env('APP_URL') . '/';
         return Posts::select(['*', DB::raw("CONCAT('$baseUrl','storage/', da5_posts.image) as img_src")])->findOrFail($id);
+
     }
 
     /**
