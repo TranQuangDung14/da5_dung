@@ -60,7 +60,7 @@ class Front_end_Controller extends Controller
         $baseUrl = env('APP_URL') . '/';
         return response()->json([
             // Hiển thị sản phẩm theo danh mục
-            // id =1 
+            // id =1
             'show_by_cate_product_1' => Product::select([
                 '*',
                 DB::raw("CONCAT('$baseUrl','storage/', da5_product.image) as img_src")
