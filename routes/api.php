@@ -53,7 +53,7 @@ Route::group(['middleware'=>'auth:sanctum'],function(){
     Route::get('/user', [AuthController::class, 'user']);
     Route::get('/logout', [AuthController::class, 'logout']);
 
-    // test api 
+    // test api
     Route::get('/testdb', [testdbController::class, 'index']);
     Route::get('/testdb/{id}', [testdbController::class, 'show']);
     Route::post('/testdb', [testdbController::class, 'store']);
@@ -61,7 +61,7 @@ Route::group(['middleware'=>'auth:sanctum'],function(){
     Route::delete('/testdb/{id}', [testdbController::class, 'destroy']);
 
 
-    //test db 
+    //test db
     Route::get('test_db_project',[Test_db_projectController::class,'index']);
     Route::post('test_db_project',[Test_db_projectController::class,'store']);
     Route::put('test_db_project/{id}',[Test_db_projectController::class,'update']);
@@ -82,12 +82,12 @@ Route::group(['middleware'=>'auth:sanctum'],function(){
     Route::delete('/customer/{id}', [CustomerController::class, 'destroy']);
 
 
-    //category_product / oke
-    Route::get('/category_product', [Category_ProductController::class, 'index']);
-    Route::get('/category_product/{id}', [Category_ProductController::class, 'show']);
-    Route::post('/category_product', [Category_ProductController::class, 'store']);
-    Route::put('/category_product/{id}', [Category_ProductController::class, 'update']);
-    Route::delete('/category_product/{id}', [Category_ProductController::class, 'destroy']);
+    // //category_product / oke
+    // Route::get('/category_product', [Category_ProductController::class, 'index']);
+    // Route::get('/category_product/{id}', [Category_ProductController::class, 'show']);
+    // Route::post('/category_product', [Category_ProductController::class, 'store']);
+    // Route::put('/category_product/{id}', [Category_ProductController::class, 'update']);
+    // Route::delete('/category_product/{id}', [Category_ProductController::class, 'destroy']);
 
     //Info_Supplier / oke
     Route::get('/info_supplier', [Info_SupplierController::class, 'index']);
@@ -151,7 +151,7 @@ Route::group(['middleware'=>'auth:sanctum'],function(){
     Route::delete('/transport/{id}', [TransportController::class, 'destroy']);
 
 
-    //Type_Posts 
+    //Type_Posts
     Route::get('/type_posts', [Type_PostsController::class, 'index']);
     Route::get('/type_posts/{id}', [Type_PostsController::class, 'show']);
     Route::post('/type_posts', [Type_PostsController::class, 'store']);
@@ -183,14 +183,14 @@ Route::group(['middleware'=>'auth:sanctum'],function(){
     Route::delete('/warehouse/{id}', [WarehouseController::class, 'destroy']);
 
 
-    
+
 });
     Route::post('/login',[AuthController::class,'login']);
     Route::post('/register',[AuthController::class,'register']);
-    
+
     // Route::get('testdb', function);
     // Route::get('testdb', function ($id) {
-        
+
     // });
 Route::group(['namespace' => 'App\Http\Controllers\Api'], function() {
     Route::resource('users', 'UserController');
@@ -206,7 +206,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function() {
 
 
 
-    
+
     // Front end
     Route::get('/get_product',[Front_end_Controller::class,'index']);
     // hiển thị sản phẩm theo danh mục
@@ -214,7 +214,7 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function() {
 
     Route::get('/get_product/{id}', [Front_end_Controller::class, 'show']);
 
-    //front end video 
+    //front end video
     Route::get('/get_video',[Front_end_Controller::class,'video']);
     // Route::get('/get_posts',[Front_end_Controller::class,'video']);
     Route::get('/get_posts',[Front_end_Controller::class,'posts']);
@@ -223,10 +223,15 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function() {
 
     // Route::get('/testleftjion', [Front_end_Controller::class, 'testleftjion']);
 
-    // upload 
+    // upload
 
    Route::post('upload',[UploadController::class,'upload']);
 
 
 
-
+//category_product / oke
+Route::get('/category_product', [Category_ProductController::class, 'index']);
+Route::get('/category_product/{id}', [Category_ProductController::class, 'show']);
+Route::post('/category_product', [Category_ProductController::class, 'store']);
+Route::put('/category_product/{id}', [Category_ProductController::class, 'update']);
+Route::delete('/category_product/{id}', [Category_ProductController::class, 'destroy']);
