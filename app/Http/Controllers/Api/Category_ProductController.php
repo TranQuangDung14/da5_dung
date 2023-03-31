@@ -24,10 +24,11 @@ class Category_ProductController extends Controller
         return response()->json([
             'supplier'=>Info_Supplier::where('status',1)->select('id','name')->get(),
             'category_product' => DB::table('da5_category_product')
-                                ->Join('da5_info_supplier','da5_category_product.product_supplier_id','=','da5_info_supplier.id')
-                                ->Join('da5_status','da5_category_product.status','=','da5_status.id')
+                                ->leftJoin('da5_info_supplier','da5_category_product.product_supplier_id','=','da5_info_supplier.id')
+                                ->leftJoin('da5_status','da5_category_product.status','=','da5_status.id')
                                 ->select('da5_category_product.*','da5_info_supplier.name as name_supplier','da5_status.name_status')
                                 ->get(),
+            'category' =>Category_product::where('status',1)->get()
 
         ], 200);
     }
@@ -50,7 +51,7 @@ class Category_ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {  
+    {
         $input = $request->all();
         $rules = array(
             'name' => 'required',
@@ -99,7 +100,7 @@ class Category_ProductController extends Controller
     public function edit($id)
     {
         //
-        
+
     }
 
     /**

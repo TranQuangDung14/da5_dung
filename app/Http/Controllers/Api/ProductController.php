@@ -48,7 +48,7 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.   
+     * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
@@ -103,7 +103,7 @@ class ProductController extends Controller
             $product->description =  (!empty($request->description)) ? $request->description : null;
             if ($request->hasFile('image')) {
                 $result = ($request->file('image')->store('image'));
-                $product->image =  (!empty($request->image = $result)) ? $request->image : null;
+                $product->image =  (!empty( $request->image =$result  )) ? $request->image : null;
             }
             // $product->image =  (!empty($request->image)) ? upload($request->file, $destination) : null;
             $product->save();
@@ -137,7 +137,6 @@ class ProductController extends Controller
         //     }else{
         //         return response()->json('ảnh trống');
         //     }
-    
         // }
 
     /**

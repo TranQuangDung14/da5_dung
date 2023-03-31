@@ -8,6 +8,7 @@ use App\Models\User;
 // use App\Models\Staff;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class AuthController extends Controller
 {
@@ -24,7 +25,7 @@ class AuthController extends Controller
         }
         $token =$user->createToken('authToken')->plainTextToken;
 
-        return 
+        return
         [
             // 'email'=>$request->email,
             // 'password'=>$request->password
@@ -34,17 +35,27 @@ class AuthController extends Controller
         ];
     }
 
-        
+
     public function register(Request $request)
     {
         $messages =[
             'email.email'=>"Error email",
             'email.required'=>"Vui lòng nhập! ",
-            'password.required'=>"Vui lòng nhập mật khẩu! "
+            'password.required'=>"Vui lòng nhập mật khẩu! ",
+            'email.unique' => 'Địa chỉ email đã được sử dụng, vui lòng nhập địa chỉ email khác',
         ];
         $validate = Validator::make($request->all(),[
-            'email'=>'email|required',
+            // 'email'=>'email|required',
+            // 'loi'
+            'email' => [
+                'email',
+                'required',
+                Rule::unique('users')->where(function ($query) use ($request) {
+                    return $query->where('email', $request->email);
+                }),
+            ],
             'password'=>'required',
+
         ],$messages );
         if($validate->fails()){
             return response()->json(
@@ -62,16 +73,16 @@ class AuthController extends Controller
             ]
         );
         // return User::all();
-        // return response()->json(
-        //     [
-        //         'message'=>"Tạo tài khoản thành công!",
-        //         'tesst'=>"Tạo tài khoản thành công!"
-        //     ],
-        //     404
-        // );
+        return response()->json(
+            [
+                'message'=>"Tạo tài khoản thành công!",
+                'tesst'=>"Tạo tài khoản thành công!"
+            ],
+            404
+        );
         // return response()->json([
-        
-    } 
+
+    }
     //
     public function user(Request $request)
     {
@@ -83,10 +94,10 @@ class AuthController extends Controller
         // return "logout!";
         // Revoke all tokens...
         // auth()->user()->tokens()->delete();
-    auth()->user()->tokens()->delete();        
+    auth()->user()->tokens()->delete();
         // Revoke the token that was used to authenticate the current request...
         // auth()->user()->currentAccessToken()->delete();
-        
+
         // // Revoke a specific token...
         // $user->tokens()->where('id', $tokenId)->delete();
 
