@@ -82,12 +82,12 @@ Route::group(['middleware'=>'auth:sanctum'],function(){
     Route::delete('/customer/{id}', [CustomerController::class, 'destroy']);
 
 
-    // //category_product / oke
-    // Route::get('/category_product', [Category_ProductController::class, 'index']);
-    // Route::get('/category_product/{id}', [Category_ProductController::class, 'show']);
-    // Route::post('/category_product', [Category_ProductController::class, 'store']);
-    // Route::put('/category_product/{id}', [Category_ProductController::class, 'update']);
-    // Route::delete('/category_product/{id}', [Category_ProductController::class, 'destroy']);
+    //category_product / oke
+    Route::get('/category_product', [Category_ProductController::class, 'index']);
+    Route::get('/category_product/{id}', [Category_ProductController::class, 'show']);
+    Route::post('/category_product', [Category_ProductController::class, 'store']);
+    Route::put('/category_product/{id}', [Category_ProductController::class, 'update']);
+    Route::delete('/category_product/{id}', [Category_ProductController::class, 'destroy']);
 
     //Info_Supplier / oke
     Route::get('/info_supplier', [Info_SupplierController::class, 'index']);
@@ -230,8 +230,8 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function() {
 
 
 //category_product / oke
-Route::get('/category_product', [Category_ProductController::class, 'index']);
-Route::get('/category_product/{id}', [Category_ProductController::class, 'show']);
-Route::post('/category_product', [Category_ProductController::class, 'store']);
-Route::put('/category_product/{id}', [Category_ProductController::class, 'update']);
-Route::delete('/category_product/{id}', [Category_ProductController::class, 'destroy']);
+// Route::get('/category_product', [Category_ProductController::class, 'index']);
+// Route::get('/category_product/{id}', [Category_ProductController::class, 'show']);
+// Route::post('/category_product', [Category_ProductController::class, 'store']);
+// Route::put('/category_product/{id}', [Category_ProductController::class, 'update']);
+// Route::delete('/category_product/{id}', [Category_ProductController::class, 'destroy']);
