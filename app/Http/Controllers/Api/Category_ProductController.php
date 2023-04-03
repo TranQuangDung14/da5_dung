@@ -20,7 +20,7 @@ class Category_ProductController extends Controller
      */
     public function index()
     {
-
+//
         return response()->json([
             'supplier'=>Info_Supplier::where('status',1)->select('id','name')->get(),
             'category_product' => DB::table('da5_category_product')
