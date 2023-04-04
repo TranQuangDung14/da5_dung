@@ -18,7 +18,8 @@ class AuthController extends Controller
         if(!$user|| !Hash::check($request->password, $user->password,[])){
             return response()->json(
                 [
-                    'message'=>"Lỗi đăng nhập (login)!"
+                    // 'message'=>"Lỗi đăng nhập (login)!"
+                    'Thông tin tài khoản mật khẩu không chính xác!'
                 ],
                 404
             );
@@ -27,11 +28,7 @@ class AuthController extends Controller
 
         return
         [
-            // 'email'=>$request->email,
-            // 'password'=>$request->password
-
             'access_token'=>$token,
-            // 'type_token'=>'Bearer'
         ];
     }
 
@@ -62,7 +59,7 @@ class AuthController extends Controller
                 [
                     'message'=>$validate->errors()
                 ],
-                404
+                422
             );
         }
         User::create(
@@ -78,7 +75,7 @@ class AuthController extends Controller
                 'message'=>"Tạo tài khoản thành công!",
                 'tesst'=>"Tạo tài khoản thành công!"
             ],
-            404
+            201
         );
         // return response()->json([
 
@@ -105,7 +102,7 @@ class AuthController extends Controller
             [
                 'message'=>"Đăng xuất thành công!"
             ],
-            404
+            201
         );
     }
 }

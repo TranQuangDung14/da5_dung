@@ -24,32 +24,32 @@ class category_productSeeder extends Seeder
         //     ]
         //     );
 
-        $category                                   = new Category_product();
-        $category->id                               = 1;
-        $category->name                             = 'Hoa quả';
-        $category->product_supplier_id              = 1;
-        $category->status                           = 1;
-        $category->save();
+        // $category                                   = new Category_product();
+        // $category->id                               = 1;
+        // $category->name                             = 'Hoa quả';
+        // $category->product_supplier_id              = 1;
+        // $category->status                           = 1;
+        // $category->save();
 
-        $category                                   = new Category_product();
-        $category->id                               = 2;
-        $category->name                             = 'Rau củ';
-        $category->product_supplier_id              = 1;
-        $category->status                           = 1;
-        $category->save();
+        // $category                                   = new Category_product();
+        // $category->id                               = 2;
+        // $category->name                             = 'Rau củ';
+        // $category->product_supplier_id              = 1;
+        // $category->status                           = 1;
+        // $category->save();
 
-        $category                                   = new Category_product();
-        $category->id                               = 3;
-        $category->name                             = 'Đồ uống';
-        $category->product_supplier_id              = 1;
-        $category->status                           = 1;
-        $category->save();
+        // $category                                   = new Category_product();
+        // $category->id                               = 3;
+        // $category->name                             = 'Đồ uống';
+        // $category->product_supplier_id              = 1;
+        // $category->status                           = 1;
+        // $category->save();
 
-        $category                                   = new Category_product();
-        $category->id                               = 4;
-        $category->name                             = 'Thức ăn';
-        $category->product_supplier_id              = 1;
-        $category->status                           = 1;
-        $category->save();
+        // $category                                   = new Category_product();
+        // $category->id                               = 4;
+        // $category->name                             = 'Thức ăn';
+        // $category->product_supplier_id              = 1;
+        // $category->status                           = 1;
+        // $category->save();
     }
 }
