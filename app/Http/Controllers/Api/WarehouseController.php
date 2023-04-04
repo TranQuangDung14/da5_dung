@@ -49,7 +49,7 @@ class WarehouseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {  
+    {
         $input = $request->all();
         $rules = array(
             'amount' => 'required',
@@ -98,7 +98,7 @@ class WarehouseController extends Controller
     public function edit($id)
     {
         //
-        
+
     }
 
     /**
