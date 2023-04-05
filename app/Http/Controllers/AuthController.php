@@ -21,7 +21,7 @@ class AuthController extends Controller
                     // 'message'=>"Lỗi đăng nhập (login)!"
                     'Thông tin tài khoản mật khẩu không chính xác!'
                 ],
-                404
+                401
             );
         }
         $token =$user->createToken('authToken')->plainTextToken;
