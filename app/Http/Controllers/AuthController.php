@@ -36,7 +36,7 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $messages =[
-            'email.email'=>"Error email",
+            'email.email'=>"Chưa đúng định dạng email",
             'email.required'=>"Vui lòng nhập! ",
             'password.required'=>"Vui lòng nhập mật khẩu! ",
             'email.unique' => 'Địa chỉ email đã được sử dụng, vui lòng nhập địa chỉ email khác',
