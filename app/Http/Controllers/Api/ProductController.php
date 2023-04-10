@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\UploadController;
+use App\Models\Image;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -31,8 +33,8 @@ class ProductController extends Controller
             'category_product' => Category_product::where('status', 1)->select('id', 'name as name_cate')->get(),
             //use to test post
             'product' =>  DB::table('da5_product')
-                ->Join('da5_warehouse', 'da5_product.id', '=', 'da5_warehouse.product_id')
-                ->Join('da5_category_product', 'da5_category_product.id', '=', 'da5_product.category_id')
+                ->leftJoin('da5_warehouse', 'da5_product.id', '=', 'da5_warehouse.product_id')
+                ->leftJoin('da5_category_product', 'da5_category_product.id', '=', 'da5_product.category_id')
                 ->select([
                     'da5_product.*',
                     'da5_warehouse.amount',
@@ -40,6 +42,7 @@ class ProductController extends Controller
                     DB::raw("CONCAT('$baseUrl','storage/', da5_product.image) as img_src")
                 ])
                 ->where('da5_product.status', 1)
+                ->orderBy('id', 'desc')
                 ->get(),
 
             'product_all' => Product::all(),
@@ -58,12 +61,6 @@ class ProductController extends Controller
 
     }
 
-
-    // public function upload(Request $request){
-    //     $result =$request->file('file')->store('image');
-    //     return ["result"=>$result];
-    // }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -77,15 +74,11 @@ class ProductController extends Controller
             'name' => 'required',
             'default_price' => 'required',
             'price' => 'required',
-            'amount' => 'required',
-            // 'image'=>'required'
         );
         $messages = array(
             'name.required' => 'Tên  không được phép trống!',
             'default_price.required' => 'Giá tiền mặc định không được phép trống!',
             'price.required' => 'Giá tiền không được phép trống!',
-            'amount.required' => 'Số lượng không được phép trống!',
-            // 'image.required'=>'ảnh không được để trống'
         );
         $validator = Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
@@ -101,17 +94,33 @@ class ProductController extends Controller
             $product->default_price = $request->default_price;
             $product->price = $request->price;
             $product->description =  (!empty($request->description)) ? $request->description : null;
-            if ($request->hasFile('image')) {
-                $result = ($request->file('image')->store('image'));
-                $product->image =  (!empty( $request->image =$result  )) ? $request->image : null;
-            }
-            // $product->image =  (!empty($request->image)) ? upload($request->file, $destination) : null;
             $product->save();
 
+
+            if ($request->hasFile('image')) {
+                $images = $request->file('image');
+                foreach ($images as $image) {
+                    // Kiểm tra file có phải là ảnh và dung lượng không quá giới hạn cho phép
+                    if ($image->isValid() && in_array($image->getClientOriginalExtension(), ['jpg', 'jpeg', 'png', 'gif']) && $image->getSize() <= 5048000) {
+                        // chuỗi đặt tên file ảnh
+                        $filename = time() . '-' . Str::slug($image->getClientOriginalName(), '-') . '.' . $image->getClientOriginalExtension();
+                        // Lưu ảnh vào thư mục image/product
+                        $image->storeAs('image/product', $filename);
+
+                        // Thêm bản ghi vào bảng images
+                        Image::create([
+                            'product_id' => $product->id,
+                            'image' => $filename,
+                        ]);
+                    }
+                }
+            }
             $warehouse = new Warehouse();
             $warehouse->product_id = $product->id;
-            $warehouse->amount = $request->amount;
+            // $warehouse->amount = $request->amount;
             $warehouse->save();
+
+            // $image = new
             DB::commit();
             return response()->json([
                 'messege' => $product,
@@ -123,21 +132,18 @@ class ProductController extends Controller
                 'messege' => 'Thất bại!',
             ], 200);
         }
-
-
-
     }
-        //
-        // public function upload(Request $request){
-        //     $image =$request->file('image');
-        //     if($request->hasFile('image')){
-        //         $new_name =rand().'.'.$image->getClientOriginalExtension();
-        //         $image->move(public_path('/uploads/images'),$new_name);
-        //         return response()->json($new_name);
-        //     }else{
-        //         return response()->json('ảnh trống');
-        //     }
-        // }
+    //
+    // public function upload(Request $request){
+    //     $image =$request->file('image');
+    //     if($request->hasFile('image')){
+    //         $new_name =rand().'.'.$image->getClientOriginalExtension();
+    //         $image->move(public_path('/uploads/images'),$new_name);
+    //         return response()->json($new_name);
+    //     }else{
+    //         return response()->json('ảnh trống');
+    //     }
+    // }
 
     /**
      * Display the specified resource.
@@ -147,8 +153,14 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $baseUrl = env('APP_URL') . '/';
-        return Product::select(['*', DB::raw("CONCAT('$baseUrl','storage/', da5_product.image) as img_src")])->findOrFail($id);
+        $product = Product::findOrFail($id);
+        $warehouse = Warehouse::where('product_id', $id)->first();
+        $images = Image::where('product_id', $id)->get();
+        return response()->json([
+            'product' => $product,
+            'warehouse' => $warehouse,
+            'images' => $images
+        ]);
     }
 
     /**
@@ -188,28 +200,57 @@ class ProductController extends Controller
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 404);
         }
-        $product = Product::findOrFail($id);
-        $product->category_id =  (!empty($request->category_id)) ? $request->category_id : null;
+        DB::beginTransaction();
+        try {
+            $product = Product::findOrFail($id);
+            $product->category_id =  (!empty($request->category_id)) ? $request->category_id : null;
+            $product->name = $request->name;
+            $product->default_price = $request->default_price;
+            $product->price = $request->price;
 
-        $product->name = $request->name;
-        $product->default_price = $request->default_price;
-        $product->price = $request->price;
-        if ($request->hasFile('image')) {
-            $result = ($request->file('image')->store('image'));
-            Storage::delete($product->image);
-            $product->image =  (!empty($request->image = $result)) ? $request->image : null;
-            // $product->image = $compPic;
-        }
-        $product->description =  (!empty($request->description)) ? $request->description : null;
-        $product->update();
-        if ($product) {
+            $product->description =  (!empty($request->description)) ? $request->description : null;
+            // Nhận ID của hình ảnh được chọn để lưu giữ
+            $imageIds = $request->input('image_ids', []);
+
+            // Xóa hình ảnh không được chọn để lưu giữ
+            $imagesToDelete = $product->images()->whereNotIn('id', $imageIds)->get();
+            foreach ($imagesToDelete as $image) {
+                Storage::delete('image/product/' . $image->image);
+                $image->delete();
+            }
+            // Update product data
+            $product->save();
+
+            // Update product images
+            if ($request->hasFile('image')) {
+                $images = $request->file('image');
+                foreach ($images as $image) {
+                    if ($image->isValid() && in_array($image->getClientOriginalExtension(), ['jpg', 'jpeg', 'png', 'gif']) && $image->getSize() <= 5048000) {
+                        $filename = time() . '-' . Str::slug($image->getClientOriginalName(), '-') . '.' . $image->getClientOriginalExtension();
+                        $image->storeAs('image/product', $filename);
+                        Image::create([
+                            'product_id' => $product->id,
+                            'image' => $filename,
+                        ]);
+                    }
+                }
+            }
+            // Update product warehouse
+            // $warehouse = Warehouse::where('product_id', $id)->firstOrFail();
+            // $warehouse->amount = $request->amount;
+            // $warehouse->save();
+
+            DB::commit();
             return response()->json([
-                'messege' => 'Sửa thành công !',
-            ], 201);
-        } else {
+                'message' => 'Cập nhật sản phẩm thành công!',
+                'product' => $product,
+            ], 200);
+        } catch (\Exception $e) {
+            DB::rollback();
             return response()->json([
-                'messege' => 'Sửa thất bại!',
-            ], 400);
+                dd($e),
+                'message' => 'Cập nhật sản phẩm thất bại!',
+            ], 200);
         }
     }
 
@@ -221,12 +262,32 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $Product = Product::findOrFail($id);
-        // File::delete($Product->image);
-        Storage::delete($Product->image);
-        $Product->delete();
-        return response()->json([
-            'messege' => 'Xóa thành công!',
-        ], 200);
+        DB::beginTransaction();
+        try {
+            $product = Product::findOrFail($id);
+
+            // Xóa các ảnh sản phẩm
+            foreach ($product->images as $image) {
+                Storage::delete('image/product/' . $image->image);
+                $image->delete();
+            }
+
+            // Xóa sản phẩm
+            $product->delete();
+
+            // Xóa kho sản phẩm
+            $warehouse = Warehouse::where('product_id', $id)->firstOrFail();
+            $warehouse->delete();
+
+            DB::commit();
+            return response()->json([
+                'message' => 'Xóa sản phẩm thành công!',
+            ], 200);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json([
+                'message' => 'Xóa sản phẩm thất bại!',
+            ], 400);
+        }
     }
 }

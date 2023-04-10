@@ -35,7 +35,7 @@ class OrderController extends Controller
             //     ->Join('da5_status', 'da5_order.status', '=', 'da5_status.id')
             //     ->select('da5_order.*', 'da5_status.name_status', 'da5_product.name as name_product', 'da5_customer.name as name_customer')
             //     ->get(),
-            'order'=>DB::table('da5_order') 
+            'order'=>DB::table('da5_order')
                 ->Join('da5_customer', 'da5_order.id', '=', 'da5_customer.order_id')
                 ->Join('da5_order_product_list', 'da5_order.id', '=', 'da5_order_product_list.order_id')
                 ->select('da5_order.*', 'da5_customer.name as name_customer','da5_order_product_list.name')
@@ -57,7 +57,7 @@ class OrderController extends Controller
     }
 
     // public function store(Request $request)
-    // {  
+    // {
 
     //     $data = $request->only('product_id', 'customer_id', 'warehouse_id','total_price','status');
     //     $status = Order::create($data);
@@ -101,28 +101,29 @@ class OrderController extends Controller
             $customer->adress = (!empty($request->adress)) ? $request->adress : null;
             $customer->number_phone = (!empty($request->number_phone)) ? $request->number_phone : null;
             $customer->save();
-  
+
             foreach ($request->order_product_list as $order_product) {
                 Order_product_list::create([
                     'order_id' => $order->id,
                     // 'product_id' => $order_product['product_id'],
                     'qtyTotal' => $order_product['qtyTotal'],
-                    'price' => $order_product['price'],                    
-                    'img_src' => $order_product['img_src'],                    
-                    'name' => $order_product['name'],                    
+                    'price' => $order_product['price'],
+                    'img_src' => $order_product['img_src'],
+                    'name' => $order_product['name'],
                 ]);
             }
-            // dd($order_product->product_id); 
+            // dd($order_product->product_id);
 
             DB::commit();
             return response()->json([
-                
+
                 'messege' => 'thành công rồi',
                 'order' => $order,
             ], 200);
         } catch (\Exception $e) {
             DB::rollback();
             return response()->json([
+                dd($e),
                 'messege' => 'Thất bại!',
             ], 200);
         }
@@ -141,7 +142,7 @@ class OrderController extends Controller
         $customer = Customer::where('order_id','=',$id)->get();
         $order_product = Order_product_list::where('order_id','=',$id)->get();
         return response()->json([
-        
+
             'order'=>$order,
             'order_product'=>$order_product,
             'customer'=>$customer,

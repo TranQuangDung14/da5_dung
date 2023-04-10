@@ -5,27 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class Image extends Model
 {
     use HasFactory;
-    protected $table='da5_product';
+    protected $table='image';
 
-    public function images()
-    {
-        return $this->hasMany(Image::class);
-    }
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'category_id',
-        'name',
-        'default_price',
-        'price',
         'image',
-        'description',
-        'status',
+        'product_id',
     ];
 }
