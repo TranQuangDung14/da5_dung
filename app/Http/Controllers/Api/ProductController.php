@@ -73,12 +73,12 @@ class ProductController extends Controller
         $rules = array(
             'name' => 'required',
             'default_price' => 'required',
-            'price' => 'required',
+            // 'price' => 'required',
         );
         $messages = array(
             'name.required' => 'Tên  không được phép trống!',
             'default_price.required' => 'Giá tiền mặc định không được phép trống!',
-            'price.required' => 'Giá tiền không được phép trống!',
+            // 'price.required' => 'Giá tiền không được phép trống!',
         );
         $validator = Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
@@ -92,7 +92,8 @@ class ProductController extends Controller
             $product->category_id =  (!empty($request->category_id)) ? $request->category_id : null;
             $product->name = $request->name;
             $product->default_price = $request->default_price;
-            $product->price = $request->price;
+            $product->tech_specs =  (!empty($request->tech_specs)) ? $request->tech_specs : null;
+            // $product->price =  (!empty($request->price)) ? $request->price : null;
             $product->description =  (!empty($request->description)) ? $request->description : null;
             $product->save();
 
@@ -127,7 +128,7 @@ class ProductController extends Controller
             ], 200);
         } catch (\Exception $e) {
             DB::rollback();
-            // dd($e);
+            dd($e);
             return response()->json([
                 'messege' => 'Thất bại!',
             ], 200);
