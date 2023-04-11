@@ -10,7 +10,10 @@ class Product extends Model
     use HasFactory;
     protected $table='da5_product';
 
-
+    public function images()
+    {
+        return $this->hasMany(Image::class);
+    }
     /**
      * The attributes that are mass assignable.
      *

@@ -17,7 +17,7 @@ class CreateDa5WarehouseTable extends Migration
             $table->id();
             $table->integer("product_supplier_id")->unsigned()->nullable();
             $table->integer("product_id")->unsigned()->nullable();
-            $table->integer("amount")->unsigned();
+            $table->integer("amount")->unsigned()->nullable();
             $table->integer("status")->default(1);
             $table->timestamps();
         });
