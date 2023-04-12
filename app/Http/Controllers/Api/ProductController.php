@@ -81,6 +81,7 @@ class ProductController extends Controller
             // 'price.required' => 'Giá tiền không được phép trống!',
         );
         $validator = Validator::make($input, $rules, $messages);
+        // $baseUrl = env('APP_URL') . '/';
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 404);
         }
@@ -156,8 +157,10 @@ class ProductController extends Controller
     {
         try {
         $product = Product::with(['warehouse', 'images','category'])->findOrFail($id);
+        $images = $product->images;
         return response()->json([
             'product' => $product,
+            'images' =>$images
         ]);
     } catch (\Exception $e) {
 
