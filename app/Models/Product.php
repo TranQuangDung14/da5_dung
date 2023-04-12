@@ -14,6 +14,14 @@ class Product extends Model
     {
         return $this->hasMany(Image::class);
     }
+    public function warehouse()
+    {
+        return $this->hasOne(Warehouse::class);
+    }
+    public function category()
+    {
+        return $this->belongsTo(Category_product::class);
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -24,7 +32,6 @@ class Product extends Model
         'name',
         'default_price',
         'price',
-        'image',
         'description',
         'status',
     ];

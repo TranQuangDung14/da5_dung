@@ -10,7 +10,10 @@ class Category_product extends Model
     use HasFactory;
     protected $table='da5_category_product';
 
-
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
     /**
      * The attributes that are mass assignable.
      *

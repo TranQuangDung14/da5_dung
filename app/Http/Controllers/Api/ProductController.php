@@ -154,14 +154,18 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::findOrFail($id);
-        $warehouse = Warehouse::where('product_id', $id)->first();
-        $images = Image::where('product_id', $id)->get();
+        try {
+        $product = Product::with(['warehouse', 'images','category'])->findOrFail($id);
         return response()->json([
             'product' => $product,
-            'warehouse' => $warehouse,
-            'images' => $images
         ]);
+    } catch (\Exception $e) {
+
+            return response()->json([
+                dd($e),
+
+            ], 200);
+        }
     }
 
     /**
@@ -190,12 +194,12 @@ class ProductController extends Controller
         $rules = array(
             'name' => 'required',
             'default_price' => 'required',
-            'price' => 'required',
+            // 'price' => 'required',
         );
         $messages = array(
             'name.required' => 'Tên  không được phép trống!',
             'default_price.required' => 'Giá tiền mặc định không được phép trống!',
-            'price.required' => 'Giá tiền không được phép trống!',
+            // 'price.required' => 'Giá tiền không được phép trống!',
         );
         $validator = Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
@@ -207,7 +211,7 @@ class ProductController extends Controller
             $product->category_id =  (!empty($request->category_id)) ? $request->category_id : null;
             $product->name = $request->name;
             $product->default_price = $request->default_price;
-            $product->price = $request->price;
+            // $product->price = $request->price;
 
             $product->description =  (!empty($request->description)) ? $request->description : null;
             // Nhận ID của hình ảnh được chọn để lưu giữ
