@@ -31,7 +31,7 @@ class Product extends Model
         'category_id',
         'name',
         'default_price',
-        'price',
+        // 'price',
         'description',
         'status',
     ];

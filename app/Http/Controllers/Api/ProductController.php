@@ -215,7 +215,7 @@ class ProductController extends Controller
             $product->name = $request->name;
             $product->default_price = $request->default_price;
             // $product->price = $request->price;
-
+            $product->tech_specs =  (!empty($request->tech_specs)) ? $request->tech_specs : null;
             $product->description =  (!empty($request->description)) ? $request->description : null;
             // Nhận ID của hình ảnh được chọn để lưu giữ
             $imageIds = $request->input('image_ids', []);
@@ -243,11 +243,6 @@ class ProductController extends Controller
                     }
                 }
             }
-            // Update product warehouse
-            // $warehouse = Warehouse::where('product_id', $id)->firstOrFail();
-            // $warehouse->amount = $request->amount;
-            // $warehouse->save();
-
             DB::commit();
             return response()->json([
                 'message' => 'Cập nhật sản phẩm thành công!',
