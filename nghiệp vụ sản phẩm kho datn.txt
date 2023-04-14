@@ -1,0 +1,6 @@
+sản phẩm
+nhập các trường bắt buộc ..... sau khi nhập xong số lượng mặc định sẽ là 0 
+
+sản phẩm bị xóa thì kho cũng xóa theo
+
+cập nhập số lượng thì phải vào quản lý cập nhập kho ( màn hình cập nhật kho k được thêm mới , chỉ được cập nhật)  
