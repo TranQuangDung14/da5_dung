@@ -192,7 +192,16 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request->all());
+
         //
+
+        // dd(request('name','dd'));
+        return response()->json([
+            'message' => 'Cập nhật sản phẩm thành công!',
+            'product' =>request('name','dd'),
+            'input' => $request->all()
+        ], 200);
         $input = $request->all();
         $rules = array(
             'name' => 'required',
