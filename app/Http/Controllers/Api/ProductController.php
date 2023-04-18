@@ -197,11 +197,11 @@ class ProductController extends Controller
         //
 
         // dd(request('name','dd'));
-        return response()->json([
-            'message' => 'Cập nhật sản phẩm thành công!',
-            'product' =>request('name','dd'),
-            'input' => $request->all()
-        ], 200);
+        // return response()->json([
+        //     'message' => 'Cập nhật sản phẩm thành công!',
+        //     'product' =>request('name','dd'),
+        //     'input' => $request->all()
+        // ], 200);
         $input = $request->all();
         $rules = array(
             'name' => 'required',
