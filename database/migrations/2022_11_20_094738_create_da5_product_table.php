@@ -17,9 +17,10 @@ class CreateDa5ProductTable extends Migration
             $table->id();
             $table->integer("category_id")->unsigned()->nullable();
             // $table->integer("amount")->unsigned();
-            $table->string("name",100);
-            $table->integer("default_price")->unsigned();
-            $table->integer("price")->unsigned();
+            $table->string("name",100)->nullable();;
+            $table->integer("default_price")->nullable()->unsigned();
+            $table->integer("price")->unsigned()->nullable();
+            $table->string("hashtag",100)->nullable();
             $table->string("tech_specs",5000)->nullable();
             $table->string("description",10000)->nullable();
             $table->integer("status")->default(1);
