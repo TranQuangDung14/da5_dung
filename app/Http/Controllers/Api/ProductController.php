@@ -44,9 +44,7 @@ class ProductController extends Controller
                 'warehouse' => function ($query) {
                     $query->select('amount', 'product_id');
                 },
-                'category' => function ($query) {
-                    $query->select('name', 'product_supplier_id');
-                },
+                'category',
                 'images' => function ($query) {
                     $query->select('image', 'product_id')->orderBy('product_id')->distinct();
                     // $query->select('amount', 'product_id')->orderBy('product_id')->distinct('product_id');
@@ -59,7 +57,7 @@ class ProductController extends Controller
 
             // $image= Image::first()
             return response()->json([
-                // 'category_product' => Category_product::where('status', 1)->select('id', 'name as name_cate')->get(),
+                'category_product' => Category_product::where('status', 1)->select('id', 'name as name_cate')->get(),
                 //use to test post
                 // 'product' =>  DB::table('da5_product')
                 //     ->leftJoin('da5_warehouse', 'da5_product.id', '=', 'da5_warehouse.product_id')
