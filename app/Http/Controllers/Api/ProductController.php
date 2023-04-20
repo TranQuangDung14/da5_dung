@@ -232,9 +232,7 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         // dd($request->all());
-
         //
-
         // dd(request('name','dd'));
         // return response()->json([
         //     'message' => 'Cập nhật sản phẩm thành công!',

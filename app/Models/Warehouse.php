@@ -10,7 +10,10 @@ class Warehouse extends Model
     use HasFactory;
     protected $table='da5_warehouse';
 
-
+    public function product()
+    {
+        return $this->hasOne(Product::class);
+    }
     /**
      * The attributes that are mass assignable.
      *
