@@ -1,18 +1,35 @@
-Quản lý sản phẩm: Admin có thể thêm, sửa, xóa các thông tin về sản phẩm như tên, giá, hình ảnh, mô tả, thuộc tính và danh mục. Admin cũng có thể xem số lượng tồn kho và nhà cung cấp của từng sản phẩm.
-Quản lý danh mục: Admin có thể thêm, sửa, xóa các danh mục sản phẩm như laptop, máy tính bàn, phụ kiện và thiết bị văn phòng. Admin cũng có thể xem số lượng sản phẩm trong từng danh mục.
-Quản lý khách hàng: Admin có thể xem thông tin cá nhân, lịch sử mua hàng và gửi email thông báo cho khách hàng. Admin cũng có thể xóa hoặc khóa tài khoản của khách hàng nếu vi phạm chính sách của trang web.
-Quản lý tài khoản: Admin có thể đăng nhập, đăng xuất và đổi mật khẩu của tài khoản quản trị. Admin cũng có thể tạo hoặc xóa các tài khoản quản trị khác với các quyền hạn khác nhau.
-Quản lý kho: Admin có thể nhập hoặc xuất hàng từ kho và cập nhật số lượng tồn kho của các sản phẩm. Admin cũng có thể xem báo cáo về nhập xuất kho và tồn kho.
-Quản lý đơn hàng: Admin có thể xem trạng thái giao hàng, cập nhật tình trạng thanh toán và hủy đơn hàng của khách hàng. Admin cũng có thể xem báo cáo về doanh số, lợi nhuận và chi phí vận chuyển của các đơn hàng.
-Quản lý bài viết sản phẩm: Admin có thể viết, sửa, xóa các bài viết về sản phẩm để giới thiệu hoặc quảng cáo cho khách hàng. Admin cũng có thể chọn sản phẩm nào được hiển thị trên trang chủ hoặc trang danh mục.
-Quản lý video sản phẩm: Admin có thể tải lên, sửa, xóa các video về sản phẩm để giới thiệu hoặc quảng cáo cho khách hàng. Admin cũng có thể chọn video nào được hiển thị trên trang chủ hoặc trang danh mục.
-Quản lý vận chuyển: Admin có thể phân công nhân viên giao hàng cho từng đơn hàng và theo dõi vị trí của xe giao hàng. Admin cũng có thể xem báo cáo về hiệu quả và chi phí của vận chuyển.
-Quản lý lịch sử đơn hàng: Admin có thể xem lại các đơn hàng đã hoàn thành hoặc đã hủy của khách hàng. Admin cũng có thể xử lý các khiếu nại, hoàn trả hoặc đổi hàng của khách hàng.
++ Quản lý sản phẩm: Admin có thể thêm, sửa, xóa các thông tin về sản phẩm như tên, giá, hình ảnh, mô tả, thuộc tính và danh mục. Admin cũng có thể xem số lượng tồn
+kho và nhà cung cấp của từng sản phẩm.
++ Quản lý danh mục: Admin có thể thêm, sửa, xóa các danh mục sản phẩm như laptop, máy tính bàn, phụ kiện và thiết bị văn phòng. Admin cũng có thể xem số lượng sản
+phẩm trong từng danh mục.
++ Quản lý khách hàng: Admin có thể xem thông tin cá nhân, lịch sử mua hàng và gửi email thông báo cho khách hàng. Admin cũng có thể xóa hoặc khóa tài khoản của
+khách hàng nếu vi phạm chính sách của trang web.
++ Quản lý tài khoản: Admin có thể đăng nhập, đăng xuất và đổi mật khẩu của tài khoản quản trị. Admin cũng có thể tạo hoặc xóa các tài khoản quản trị khác với các
+quyền hạn khác nhau.
++ Quản lý kho: Admin có thể nhập hoặc xuất hàng từ kho và cập nhật số lượng tồn kho của các sản phẩm. Admin cũng có thể xem báo cáo về nhập xuất kho và tồn kho.
++ Quản lý đơn hàng: Admin có thể xem trạng thái giao hàng, cập nhật tình trạng thanh toán và hủy đơn hàng của khách hàng. Admin cũng có thể xem báo cáo về doanh
+số, lợi nhuận và chi phí vận chuyển của các đơn hàng.
++ Quản lý bài viết sản phẩm: Admin có thể viết, sửa, xóa các bài viết về sản phẩm để giới thiệu hoặc quảng cáo cho khách hàng. Admin cũng có thể chọn sản phẩm nào
+được hiển thị trên trang chủ hoặc trang danh mục.
++ Quản lý video sản phẩm: Admin có thể tải lên, sửa, xóa các video về sản phẩm để giới thiệu hoặc quảng cáo cho khách hàng. Admin cũng có thể chọn video nào được
+hiển thị trên trang chủ hoặc trang danh mục.
++ Quản lý vận chuyển: Admin có thể phân công nhân viên giao hàng cho từng đơn hàng và theo dõi vị trí của xe giao hàng. Admin cũng có thể xem báo cáo về hiệu quả
+và chi phí của vận chuyển.
++ Quản lý lịch sử đơn hàng: Admin có thể xem lại các đơn hàng đã hoàn thành hoặc đã hủy của khách hàng. Admin cũng có thể xử lý các khiếu nại, hoàn trả hoặc đổi
+hàng của khách hàng.
 
 
-Quản lý sản phẩm: Admin có thể thêm, sửa, xóa các thông tin về sản phẩm như tên, giá, hình ảnh, mô tả, thuộc tính và danh mục. Để thêm một sản phẩm mới, admin cần nhập các thông tin cần thiết và chọn hình ảnh từ máy tính hoặc từ internet. Để sửa một sản phẩm đã có, admin cần chọn sản phẩm từ danh sách và chỉnh sửa các thông tin mong muốn. Để xóa một sản phẩm, admin cần chọn sản phẩm từ danh sách và xác nhận việc xóa. Admin cũng có thể xem số lượng tồn kho và nhà cung cấp của từng sản phẩm bằng cách chọn sản phẩm từ danh sách và xem chi tiết.
-Quản lý danh mục: Admin có thể thêm, sửa, xóa các danh mục sản phẩm như laptop, máy tính bàn, phụ kiện và thiết bị văn phòng. Để thêm một danh mục mới, admin cần nhập tên danh mục và chọn hình ảnh từ máy tính hoặc từ internet. Để sửa một danh mục đã có, admin cần chọn danh mục từ danh sách và chỉnh sửa tên hoặc hình ảnh. Để xóa một danh mục, admin cần chọn danh mục từ danh sách và xác nhận việc xóa. Admin cũng có thể xem số lượng sản phẩm trong từng danh mục bằng cách chọn danh mục từ danh sách và xem chi tiết.
-Quản lý kho: Admin có thể nhập hoặc xuất hàng từ kho và cập nhật số lượng tồn kho của các sản phẩm. Để nhập hàng vào kho, admin cần nhập mã sản phẩm, số lượng nhập và ngày nhập. Để xuất hàng ra khỏi kho, admin cần nhập mã sản phẩm, số lượng xuất và ngày xuất. Admin cũng có thể xem báo cáo về nhập xuất kho và tồn kho bằng cách chọn khoảng thời gian mong muốn
++ Quản lý sản phẩm: Admin có thể thêm, sửa, xóa các thông tin về sản phẩm như tên, giá, hình ảnh, mô tả, thuộc tính và danh mục. Để thêm một sản phẩm mới, admin
+cần nhập các thông tin cần thiết và chọn hình ảnh từ máy tính hoặc từ internet. Để sửa một sản phẩm đã có, admin cần chọn sản phẩm từ danh sách và chỉnh sửa các
+thông tin mong muốn. Để xóa một sản phẩm, admin cần chọn sản phẩm từ danh sách và xác nhận việc xóa. Admin cũng có thể xem số lượng tồn kho và nhà cung cấp của
+ừng sản phẩm bằng cách chọn sản phẩm từ danh sách và xem chi tiết.
++ Quản lý danh mục: Admin có thể thêm, sửa, xóa các danh mục sản phẩm như laptop, máy tính bàn, phụ kiện và thiết bị văn phòng. Để thêm một danh mục mới, admin
+cần nhập tên danh mục và chọn hình ảnh từ máy tính hoặc từ internet. Để sửa một danh mục đã có, admin cần chọn danh mục từ danh sách và chỉnh sửa tên hoặc hình ảnh.
+Để xóa một danh mục, admin cần chọn danh mục từ danh sách và xác nhận việc xóa. Admin cũng có thể xem số lượng sản phẩm trong từng danh mục bằng cách chọn danh mục
+từ danh sách và xem chi tiết.
++ Quản lý kho: Admin có thể nhập hoặc xuất hàng từ kho và cập nhật số lượng tồn kho của các sản phẩm. Để nhập hàng vào kho, admin cần nhập mã sản phẩm, số lượng
+nhập và ngày nhập. Để xuất hàng ra khỏi kho, admin cần nhập mã sản phẩm, số lượng xuất và ngày xuất. Admin cũng có thể xem báo cáo về nhập xuất kho và tồn kho bằng
+cách chọn khoảng thời gian mong muốn
 
 
 
