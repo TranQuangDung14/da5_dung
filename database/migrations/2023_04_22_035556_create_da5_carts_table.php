@@ -4,21 +4,19 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDa5CategoryProductTable extends Migration
+class CreateDa5CartsTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
+    // giỏ hàng
     public function up()
     {
-        Schema::create('da5_category_product', function (Blueprint $table) {
+        Schema::create('da5_carts', function (Blueprint $table) {
             $table->id();
-            $table->string("name",100)->nullable();
-            $table->string("description",200)->nullable();
-            // $table->integer("product_supplier_id")->unsigned()->nullable();
-            $table->integer("status")->default(1);
+            $table->integer("customer_id")->unsigned()->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateDa5CategoryProductTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('da5_category_product');
+        Schema::dropIfExists('da5_carts');
     }
 }

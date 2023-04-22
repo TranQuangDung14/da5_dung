@@ -14,9 +14,8 @@ class CreateDa5CustomerTable extends Migration
     public function up()
     {
         Schema::create('da5_customer', function (Blueprint $table) {
-            $table->id();       
-            $table->integer("id_user")->unsigned()->nullable();
-            $table->integer("order_id")->unsigned()->nullable();
+            $table->id();
+            $table->integer("user_id")->unsigned()->nullable();
             $table->string("name",100)->nullable();
             $table->date("date_of_birth")->nullable();
             $table->string("sex",5)->nullable();

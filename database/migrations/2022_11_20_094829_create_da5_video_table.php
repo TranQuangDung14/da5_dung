@@ -15,9 +15,11 @@ class CreateDa5VideoTable extends Migration
     {
         Schema::create('da5_video', function (Blueprint $table) {
             $table->id();
-            $table->string("title",100);
             $table->integer("type_video_id")->unsigned()->nullable();
+            $table->integer("staff_id")->unsigned()->nullable();
+            $table->string("title",100);
             $table->string("video",200)->nullable();
+            $table->string("hashtag",100)->nullable();
             $table->string("description",100)->nullable();
             $table->integer("status")->default(1);
             $table->timestamps();

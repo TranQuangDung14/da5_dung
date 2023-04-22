@@ -15,7 +15,8 @@ class CreateDa5StaffTable extends Migration
     {
         Schema::create('da5_staff', function (Blueprint $table) {
             $table->id();
-            $table->string("name",100);
+            $table->string("name",100)->nullable();
+            $table->integer("user_id")->nullable();
             $table->date("date_of_birth");
             $table->string("sex",5);
             $table->integer("number_phone")->unsigned()->nullable();
