@@ -18,6 +18,7 @@ class Staff extends Model
     // Cần có những trường bắt buộc phải thay đổi
     protected $fillable = [
         'name',
+        'user_id',
         'date_of_birth',
         'sex',
         'number_phone',

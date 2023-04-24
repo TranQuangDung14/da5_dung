@@ -21,7 +21,6 @@ class Info_Supplier extends Model
         'email',
         'adress',
         'number_phone',
-        'sectors',
         'status',
     ];
 }

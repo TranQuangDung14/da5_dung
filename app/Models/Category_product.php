@@ -21,7 +21,7 @@ class Category_product extends Model
      */
     protected $fillable = [
         'name',
-        'product_supplier_id',
+        'description',
         'status',
     ];
 }

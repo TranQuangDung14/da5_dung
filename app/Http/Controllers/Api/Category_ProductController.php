@@ -22,13 +22,13 @@ class Category_ProductController extends Controller
     {
 //
         return response()->json([
-            'supplier'=>Info_Supplier::where('status',1)->select('id','name')->get(),
-            'category_product' => DB::table('da5_category_product')
-                                ->leftJoin('da5_info_supplier','da5_category_product.product_supplier_id','=','da5_info_supplier.id')
-                                ->leftJoin('da5_status','da5_category_product.status','=','da5_status.id')
-                                ->select('da5_category_product.*','da5_info_supplier.name as name_supplier','da5_status.name_status')
-                                ->orderBy('id', 'desc')
-                                ->get(),
+            // 'supplier'=>Info_Supplier::where('status',1)->select('id','name')->get(),
+            // 'category_product' => DB::table('da5_category_product')
+            //                     ->leftJoin('da5_info_supplier','da5_category_product.product_supplier_id','=','da5_info_supplier.id')
+            //                     ->leftJoin('da5_status','da5_category_product.status','=','da5_status.id')
+            //                     ->select('da5_category_product.*','da5_info_supplier.name as name_supplier','da5_status.name_status')
+            //                     ->orderBy('id', 'desc')
+            //                     ->get(),
             'category' =>Category_product::where('status',1)->get()
 
         ], 200);
@@ -65,7 +65,7 @@ class Category_ProductController extends Controller
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 404);
         }
-        $data = $request->only('name', 'product_supplier_id','warehouse_id','status');
+        $data = $request->only('name', 'description','status');
         $status = Category_product::create($data);
 
         if ($status)
@@ -125,7 +125,7 @@ class Category_ProductController extends Controller
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 404);
         }
-        $data = $request->only('name', 'product_supplier_id','warehouse_id','status');
+        $data = $request->only('name', 'description','status');
         $user = Category_product::findOrFail($id);
         $status = $user->update($data);
         // $status = Category_product::create($data);

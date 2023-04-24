@@ -17,9 +17,13 @@ class Order extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'product_id',
         'customer_id',
-        'total_price',
+        'payment_method',
+        'export_order_id',
+        'delivery_date',
+        'shipping_fee',
+        'receiver_name',
+        'receiver_address',
         'status',
     ];
 }

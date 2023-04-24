@@ -18,9 +18,10 @@ class Posts extends Model
      */
     protected $fillable = [
         'type_post_id',
-        'title',
-        'image',
         'staff_id',
+        'title',
+        'hashtag',
+        'image',
         'content',
         'status',
     ];

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\BrandsController;
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\testdbController;
 use App\Http\Controllers\Api\Category_ProductController;
@@ -59,6 +60,13 @@ Route::group(['middleware'=>'auth:sanctum'],function(){
     Route::post('/testdb', [testdbController::class, 'store']);
     Route::put('/testdb/{id}', [testdbController::class, 'update']);
     Route::delete('/testdb/{id}', [testdbController::class, 'destroy']);
+
+    // thương hiệu
+    Route::get('/brands', [BrandsController::class, 'index']);
+    Route::get('/brands/{id}', [BrandsController::class, 'show']);
+    Route::post('/brands', [BrandsController::class, 'store']);
+    Route::put('/brands/{id}', [BrandsController::class, 'update']);
+    Route::delete('/brands/{id}', [BrandsController::class, 'destroy']);
 
 
     //test db

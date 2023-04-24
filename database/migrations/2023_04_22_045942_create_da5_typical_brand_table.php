@@ -16,6 +16,7 @@ class CreateDa5TypicalBrandTable extends Migration
         Schema::create('da5_typical_brand', function (Blueprint $table) {
             $table->id();
             $table->string("image",200)->nullable();
+            $table->integer("status")->default(1);
             $table->timestamps();
         });
     }
