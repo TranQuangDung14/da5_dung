@@ -17,7 +17,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        
+
         // return response()->json([
         //     'messege' => 'day !',
         //     'data' => Customer::all(),
@@ -43,7 +43,7 @@ class CustomerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {  
+    {
         // $input = $request->all();
         // $rules = array(
         //     'name' => 'required',
@@ -59,7 +59,7 @@ class CustomerController extends Controller
         // if ($validator->fails()) {
         //     return response()->json(['error' => $validator->errors()], 404);
         // }
-        $data = $request->only('id_user','order_id', 'name', 'date_of_birth','sex','number_phone','email','adress');
+        $data = $request->only('user_id','order_id', 'name', 'date_of_birth','sex','number_phone','email','adress');
         $status = Customer::create($data);
 
         if ($status)
@@ -96,7 +96,7 @@ class CustomerController extends Controller
     public function edit($id)
     {
         //
-        
+
     }
 
     /**

@@ -156,10 +156,10 @@ class ProductController extends Controller
                     }
                 }
             }
-            $warehouse = new Warehouse();
-            $warehouse->product_id = $product->id;
-            // $warehouse->amount = $request->amount;
-            $warehouse->save();
+            // $warehouse = new Warehouse();
+            // $warehouse->product_id = $product->id;
+            // // $warehouse->amount = $request->amount;
+            // $warehouse->save();
 
             // $image = new
             DB::commit();
@@ -175,16 +175,6 @@ class ProductController extends Controller
         }
     }
     //
-    // public function upload(Request $request){
-    //     $image =$request->file('image');
-    //     if($request->hasFile('image')){
-    //         $new_name =rand().'.'.$image->getClientOriginalExtension();
-    //         $image->move(public_path('/uploads/images'),$new_name);
-    //         return response()->json($new_name);
-    //     }else{
-    //         return response()->json('ảnh trống');
-    //     }
-    // }
 
     /**
      * Display the specified resource.

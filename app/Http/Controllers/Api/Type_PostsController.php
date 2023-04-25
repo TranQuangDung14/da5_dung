@@ -43,15 +43,15 @@ class Type_PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {  
+    {
         $input = $request->all();
         $rules = array(
             'name' => 'required',
-            
+
         );
         $messages = array(
             'name.required' => 'Tên  không được phép trống!',
- 
+
         );
         $validator = Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
@@ -93,7 +93,7 @@ class Type_PostsController extends Controller
     public function edit($id)
     {
         //
-        
+
     }
 
     /**
