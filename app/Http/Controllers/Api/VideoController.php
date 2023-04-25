@@ -23,13 +23,13 @@ class VideoController extends Controller
         return response()->json([
             // 'messege' => 'day la bản test db!',
             // 'data' => Video::all(),
-            'video_all' => Video::all(),
-            'type_video' =>Type_Video::all(),
-            'video'=> DB::table('da5_video')
-            ->Join('da5_type_video','da5_video.type_video_id','=','da5_type_video.id')
-            ->select('da5_video.*','da5_type_video.name')
-            ->where('da5_type_video.status',1)
-            ->get(),
+            'video' => Video::all(),
+            // 'type_video' =>Type_Video::all(),
+            // 'video'=> DB::table('da5_video')
+            // ->Join('da5_type_video','da5_video.type_video_id','=','da5_type_video.id')
+            // ->select('da5_video.*','da5_type_video.name')
+            // ->where('da5_type_video.status',1)
+            // ->get(),
         ], 200);
         // return Video::all();
     }
@@ -52,23 +52,21 @@ class VideoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {  
+    {
         $input = $request->all();
         $rules = array(
             'title' => 'required',
-
         );
         $messages = array(
-            'name.required' => 'Tiêu đề không được phép trống!',
+            'title.required' => 'Tiêu đề không được phép trống!',
 
         );
         $validator = Validator::make($input, $rules, $messages);
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 404);
         }
-        $data = $request->only('title', 'type_video_id', 'video','description','status');
+        $data = $request->only('title','staff_id','hashtag', 'type_video_id', 'video','description','status');
         $status = Video::create($data);
-
         if ($status)
         {
             // return response()->json([
@@ -102,7 +100,7 @@ class VideoController extends Controller
     public function edit($id)
     {
         //
-        
+
     }
 
     /**
