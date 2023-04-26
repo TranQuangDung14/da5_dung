@@ -24,7 +24,7 @@ class VideoController extends Controller
             // 'messege' => 'day la bản test db!',
             // 'data' => Video::all(),
             'video' => Video::all(),
-            // 'type_video' =>Type_Video::all(),
+            'type_video' =>Type_Video::all(),
             // 'video'=> DB::table('da5_video')
             // ->Join('da5_type_video','da5_video.type_video_id','=','da5_type_video.id')
             // ->select('da5_video.*','da5_type_video.name')
@@ -126,7 +126,7 @@ class VideoController extends Controller
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 404);
         }
-        $data = $request->only('title', 'type_video_id', 'video','description','status');        $user = Video::findOrFail($id);
+        $data = $request->only('title','staff_id','hashtag', 'type_video_id', 'video','description','status');        $user = Video::findOrFail($id);
         $status = $user->update($data);
         // $status = Video::create($data);
 

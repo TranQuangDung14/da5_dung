@@ -41,9 +41,9 @@ class ProductController extends Controller
             //     return $product;
             // });
             $product = Product::with([
-                'warehouse' => function ($query) {
-                    $query->select('amount', 'product_id');
-                },
+                // 'warehouse' => function ($query) {
+                //     $query->select('amount', 'product_id');
+                // },
                 'category',
                 'images' => function ($query) {
                     $query->select('image', 'product_id')->orderBy('product_id')->distinct();
