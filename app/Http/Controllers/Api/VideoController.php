@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\Video;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class VideoController extends Controller
 {
@@ -24,7 +25,7 @@ class VideoController extends Controller
             // 'messege' => 'day la bản test db!',
             // 'data' => Video::all(),
             'video' => Video::all(),
-            'type_video' =>Type_Video::all(),
+            'type_video' => Type_Video::all(),
             // 'video'=> DB::table('da5_video')
             // ->Join('da5_type_video','da5_video.type_video_id','=','da5_type_video.id')
             // ->select('da5_video.*','da5_type_video.name')
@@ -65,19 +66,42 @@ class VideoController extends Controller
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 404);
         }
-        $data = $request->only('title','staff_id','hashtag', 'type_video_id', 'video','description','status');
-        $status = Video::create($data);
-        if ($status)
-        {
-            // return response()->json([
-            //     'messege' => 'Thêm thành công!',
-            // ], 201);
-            return $data;
-        } else {
+        try {
+            $video = new Video();
+            $video->staff_id               =   (!empty($request->staff_id)) ? $request->staff_id : null;
+            $video->type_video_id          =   (!empty($request->type_video_id)) ? $request->type_video_id : null;
+            $video->title                  =   (!empty($request->title)) ? $request->title : null;
+            $video->hashtag                =   (!empty($request->hashtag)) ? $request->hashtag : null;
+            $video->video                  =   (!empty($request->video)) ? $request->video : null;
+            $replaced                      =   Str::replace('https://www.youtube.com/watch?v=', '', $video->video);
+            $array_id_video                =   array_map('strval', explode('&', $replaced));
+            $video->link_id                =   $array_id_video[0];
+            $video->description            =   (!empty($request->description)) ? $request->description : null;
+            $video->save();
+
+            return response()->json([
+                'messege' => 'Thêm thành công!',
+            ], 201);
+        } catch (\Exception $e) {
+
             return response()->json([
                 'messege' => 'Thêm thất bại!',
             ], 400);
         }
+
+        // $data = $request->only('title','staff_id','hashtag', 'type_video_id', 'video','link_id','description','status');
+        // $status = Video::create($data);
+        // if ($status)
+        // {
+        //     // return response()->json([
+        //     //     'messege' => 'Thêm thành công!',
+        //     // ], 201);
+        //     return $data;
+        // } else {
+        //     return response()->json([
+        //         'messege' => 'Thêm thất bại!',
+        //     ], 400);
+        // }
     }
 
     /**
@@ -126,12 +150,12 @@ class VideoController extends Controller
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 404);
         }
-        $data = $request->only('title','staff_id','hashtag', 'type_video_id', 'video','description','status');        $user = Video::findOrFail($id);
+        $data = $request->only('title', 'staff_id', 'hashtag', 'type_video_id', 'video', 'description', 'status');
+        $user = Video::findOrFail($id);
         $status = $user->update($data);
         // $status = Video::create($data);
 
-        if ($status)
-        {
+        if ($status) {
             return response()->json([
                 'messege' => 'Sửa thành công !',
             ], 201);

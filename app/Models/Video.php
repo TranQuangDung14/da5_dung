@@ -21,6 +21,7 @@ class Video extends Model
         'staff_id',
         'title',
         'video',
+        'link_id',
         'hashtag',
         'description',
         'status',

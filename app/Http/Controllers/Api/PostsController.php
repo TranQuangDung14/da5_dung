@@ -56,12 +56,12 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {  
+    {
         $input = $request->all();
         $rules = array(
             'title' => 'required',
             'content' => 'required',
-          
+
         );
         $messages = array(
             'title.required' => 'Tiêu đề không được phép trống!',
@@ -77,6 +77,7 @@ class PostsController extends Controller
             $posts->title = $request->title;
             $posts->staff_id =  (!empty($request->staff_id)) ? $request->staff_id : null;
             $posts->content = $request->content;
+            $posts->hashtag = $request->hashtag;
             if ($request->hasFile('image')) {
                 $result = ($request->file('image')->store('image/posts'));
                 $posts->image =  (!empty($request->image = $result)) ? $request->image : null;
@@ -86,7 +87,7 @@ class PostsController extends Controller
                 'messege' => $posts,
             ], 200);
         } catch (\Exception $e) {
-   
+
             return response()->json([
                 'messege' => 'thất bại!'
             ], 200);
@@ -113,7 +114,7 @@ class PostsController extends Controller
     public function edit($id)
     {
         //
-        
+
     }
 
     /**
@@ -130,7 +131,7 @@ class PostsController extends Controller
         $rules = array(
             'title' => 'required',
             'content' => 'required',
-          
+
         );
         $messages = array(
             'title.required' => 'Tiêu đề không được phép trống!',
@@ -146,6 +147,7 @@ class PostsController extends Controller
         $posts->title = $request->title;
         $posts->staff_id =  (!empty($request->staff_id)) ? $request->staff_id : null;
         $posts->content = $request->content;
+        $posts->hashtag = $request->hashtag;
         if ($request->hasFile('image')) {
             $result = ($request->file('image')->store('image/posts'));
             Storage::delete($posts->image);

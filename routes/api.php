@@ -131,7 +131,7 @@ Route::group(['middleware'=>'auth:sanctum'],function(){
     Route::get('/posts', [PostsController::class, 'index']);
     Route::get('/posts/{id}', [PostsController::class, 'show']);
     Route::post('/posts', [PostsController::class, 'store']);
-    Route::put('/posts/{id}', [PostsController::class, 'update']);
+    Route::post('/posts/{id}', [PostsController::class, 'update']);
     Route::delete('/posts/{id}', [PostsController::class, 'destroy']);
 
 

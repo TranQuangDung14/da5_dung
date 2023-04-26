@@ -43,7 +43,7 @@ class Type_VideoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {  
+    {
         $input = $request->all();
         $rules = array(
             'name' => 'required',
@@ -93,7 +93,7 @@ class Type_VideoController extends Controller
     public function edit($id)
     {
         //
-        
+
     }
 
     /**
