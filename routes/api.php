@@ -194,6 +194,9 @@ Route::group(['middleware'=>'auth:sanctum'],function(){
 
 });
     Route::post('/login',[AuthController::class,'login']);
+    Route::post('/register_customer',[AuthController::class,'register_customer']);
+    Route::post('/register_staff',[AuthController::class,'register_staff']);
+    // Route::post('/register_customer',[AuthController::class,'registerCustomer']);
     Route::post('/register',[AuthController::class,'register']);
 
     // Route::get('testdb', function);

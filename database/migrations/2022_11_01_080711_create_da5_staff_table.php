@@ -17,8 +17,8 @@ class CreateDa5StaffTable extends Migration
             $table->id();
             $table->string("name",100)->nullable();
             $table->integer("user_id")->nullable();
-            $table->date("date_of_birth");
-            $table->string("sex",5);
+            $table->date("date_of_birth")->nullable();
+            $table->string("sex",5)->nullable();
             $table->integer("number_phone")->unsigned()->nullable();
             $table->string("email",100)->nullable();
             $table->string("adress",100)->nullable();
