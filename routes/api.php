@@ -46,13 +46,17 @@ use PhpParser\Node\Stmt\Return_;
 //     // return $request->get('/testdb', 'testdbController');
 
 //     });
-
-Route::group(['middleware'=>'auth:sanctum'],function(){
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/logout', [AuthController::class, 'logout']);
+});
+// Route::group(['middleware'=>'auth:sanctum'],function(){
+Route::group(['middleware'=> ['auth:sanctum', 'can:staff']],function(){
     // Route::get('/user', function (Request $request) {
     //     return $request->user();
     // });
     Route::get('/user', [AuthController::class, 'user']);
-    Route::get('/logout', [AuthController::class, 'logout']);
+    // Route::get('/logout', [AuthController::class, 'logout']);
+    // Route::post('/logout', [AuthController::class, 'logout']);
 
     // test api
     Route::get('/testdb', [testdbController::class, 'index']);

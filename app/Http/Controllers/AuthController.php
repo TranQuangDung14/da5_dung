@@ -34,7 +34,6 @@ class AuthController extends Controller
             ];
     }
 
-
     // public function register(Request $request)
     // {
     //     $messages =[
@@ -124,13 +123,13 @@ class AuthController extends Controller
     public function register_customer(Request $request)
     {
         // dd($request->all());
-        $messages =[
-            'email.email'=>"Chưa đúng định dạng email",
-            'email.required'=>"Vui lòng nhập! ",
-            'password.required'=>"Vui lòng nhập mật khẩu! ",
+        $messages = [
+            'email.email' => "Chưa đúng định dạng email",
+            'email.required' => "Vui lòng nhập! ",
+            'password.required' => "Vui lòng nhập mật khẩu! ",
             'email.unique' => 'Địa chỉ email đã được sử dụng, vui lòng nhập địa chỉ email khác',
         ];
-        $validate = Validator::make($request->all(),[
+        $validate = Validator::make($request->all(), [
             // 'email'=>'email|required',
             // 'loi'
             'email' => [
@@ -140,35 +139,34 @@ class AuthController extends Controller
                     return $query->where('email', $request->email);
                 }),
             ],
-            'password'=>'required',
-        ],$messages );
+            'password' => 'required',
+        ], $messages);
 
-        if($validate->fails()){
+        if ($validate->fails()) {
             throw new \Exception($validate->errors(), 422);
         }
         try {
 
             $user = User::create([
                 // dd($user->all()),
-                'name'=>$request->name,
-                'email'=>$request->email,
-                'password'=>Hash::make($request->password),
-                'role' =>'customer',
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => 'customer',
             ]);
 
-                $customer = Customer::create([
-                    'user_id' => $user->id,
-                    'name' => $request->input('name'),
-                    'date_of_birth' => $request->input('date_of_birth'),
-                    'sex' => $request->input('sex'),
-                    'number_phone' => $request->input('number_phone'),
-                    'address' => $request->input('address'),
-                ]);
+            $customer = Customer::create([
+                'user_id' => $user->id,
+                'name' => $request->input('name'),
+                'date_of_birth' => $request->input('date_of_birth'),
+                'sex' => $request->input('sex'),
+                'number_phone' => $request->input('number_phone'),
+                'address' => $request->input('address'),
+            ]);
 
             return response()->json([
-                'message'=>"Tạo tài khoản thành công!",
+                'message' => "Tạo tài khoản thành công!",
             ], 201);
-
         } catch (\Exception $e) {
             dd($e);
             return response()->json([
@@ -178,13 +176,13 @@ class AuthController extends Controller
     }
     public function register_staff(Request $request)
     {
-        $messages =[
-            'email.email'=>"Chưa đúng định dạng email",
-            'email.required'=>"Vui lòng nhập! ",
-            'password.required'=>"Vui lòng nhập mật khẩu! ",
+        $messages = [
+            'email.email' => "Chưa đúng định dạng email",
+            'email.required' => "Vui lòng nhập! ",
+            'password.required' => "Vui lòng nhập mật khẩu! ",
             'email.unique' => 'Địa chỉ email đã được sử dụng, vui lòng nhập địa chỉ email khác',
         ];
-        $validate = Validator::make($request->all(),[
+        $validate = Validator::make($request->all(), [
             // 'email'=>'email|required',
             // 'loi'
             'email' => [
@@ -194,38 +192,37 @@ class AuthController extends Controller
                     return $query->where('email', $request->email);
                 }),
             ],
-            'password'=>'required',
+            'password' => 'required',
             // 'role' => 'required|in:customer,employee',
-        ],$messages );
+        ], $messages);
 
         try {
-            if($validate->fails()){
+            if ($validate->fails()) {
                 throw new \Exception($validate->errors(), 422);
             }
 
             $user = User::create([
-                'name'=>$request->name,
-                'email'=>$request->email,
-                'password'=>Hash::make($request->password),
-                'role' =>'staff',
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => 'staff',
             ]);
 
-                $employee = Staff::create([
-                    'user_id' => $user->id,
-                    'name' => $request->input('name'),
-                    'date_of_birth' => $request->input('date_of_birth'),
-                    'sex' => $request->input('sex'),
-                    'number_phone' => $request->input('number_phone'),
-                    'address' => $request->input('address'),
-                    'position' => $request->input('position'),
-                    'department' => $request->input('department'),
-                ]);
+            $employee = Staff::create([
+                'user_id' => $user->id,
+                'name' => $request->input('name'),
+                'date_of_birth' => $request->input('date_of_birth'),
+                'sex' => $request->input('sex'),
+                'number_phone' => $request->input('number_phone'),
+                'address' => $request->input('address'),
+                'position' => $request->input('position'),
+                'department' => $request->input('department'),
+            ]);
 
             return response()->json([
-                'message'=>"Tạo tài khoản thành công!",
-                'tesst'=>"Tạo tài khoản thành công!"
+                'message' => "Tạo tài khoản thành công!",
+                'tesst' => "Tạo tài khoản thành công!"
             ], 201);
-
         } catch (\Exception $e) {
             dd($e);
             return response()->json([
@@ -284,23 +281,38 @@ class AuthController extends Controller
         # code...
         return $request->user();
     }
-    public function logout()
+    // public function logout()
+    // {
+    //     // return "logout!";
+    //     // Revoke all tokens...
+    //     // auth()->user()->tokens()->delete();
+    //     auth()->user()->tokens()->delete();
+    //     // Revoke the token that was used to authenticate the current request...
+    //     // auth()->user()->currentAccessToken()->delete();
+
+    //     // // Revoke a specific token...
+    //     // $user->tokens()->where('id', $tokenId)->delete();
+
+    //     return response()->json(
+    //         [
+    //             'message' => "Đăng xuất thành công!"
+    //         ],
+    //         201
+    //     );
+    // }
+    public function logout(Request $request)
     {
-        // return "logout!";
-        // Revoke all tokens...
-        // auth()->user()->tokens()->delete();
-        auth()->user()->tokens()->delete();
-        // Revoke the token that was used to authenticate the current request...
-        // auth()->user()->currentAccessToken()->delete();
-
-        // // Revoke a specific token...
-        // $user->tokens()->where('id', $tokenId)->delete();
-
-        return response()->json(
-            [
-                'message' => "Đăng xuất thành công!"
-            ],
-            201
-        );
+        try {
+            $request->user()->tokens()->delete();
+            return response()->json([
+                'message' => 'Đăng xuất thành công!'
+            ], 200);
+        } catch (\Exception $e) {
+            dd($e);
+            return response()->json([
+                'message' => $e->getMessage()
+            ], 500);
+        }
     }
+
 }
