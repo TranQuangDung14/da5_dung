@@ -20,7 +20,7 @@ class BrandsController extends Controller
             return Brands::all();
         } catch (\Exception $e) {
            return response()->json([
-            dd($e),
+            // dd($e),
             'message' => 'Mở thất bại!',
         ], 200);
         }

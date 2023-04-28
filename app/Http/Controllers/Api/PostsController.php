@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\Posts;
 use App\Models\Type_Posts;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -28,9 +29,11 @@ class PostsController extends Controller
             'type_post' =>Type_Posts::all(),
             'posts'=> DB::table('da5_posts')
             ->Join('da5_type_posts','da5_posts.type_post_id','=','da5_type_posts.id')
-            ->select('da5_posts.*','da5_type_posts.name')
+            ->Join('users','da5_posts.staff_id','=','users.id')
+            ->select('da5_posts.*','da5_type_posts.name','users.name as name_user')
             ->where('da5_type_posts.status',1)
             ->get(),
+            // 'user' =>User::where('role','staff')->get(),
             // 'image_posts'=>Posts::select
             // 'image_posts'=> Posts::select(['*', DB::raw("CONCAT('$baseUrl','storage/', da5_posts.image) as img_src")])->get(),
         ], 200);
@@ -72,10 +75,12 @@ class PostsController extends Controller
             return response()->json(['error' => $validator->errors()], 404);
         }
         try {
+            // Lấy id của nhân viên đăng nhập
+            $staffId = $request->user()->id;
             $posts = new Posts();
             $posts->type_post_id =  (!empty($request->type_post_id)) ? $request->type_post_id : null;
             $posts->title = $request->title;
-            $posts->staff_id =  (!empty($request->staff_id)) ? $request->staff_id : null;
+            $posts->staff_id =  $staffId;
             $posts->content = $request->content;
             $posts->hashtag = $request->hashtag;
             if ($request->hasFile('image')) {

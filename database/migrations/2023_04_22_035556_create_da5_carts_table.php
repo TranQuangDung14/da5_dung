@@ -17,6 +17,7 @@ class CreateDa5CartsTable extends Migration
         Schema::create('da5_carts', function (Blueprint $table) {
             $table->id();
             $table->integer("customer_id")->unsigned()->nullable();
+            $table->integer("total_money")->unsigned()->nullable();
             $table->timestamps();
         });
     }

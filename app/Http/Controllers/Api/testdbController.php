@@ -22,12 +22,12 @@ class testdbController extends Controller
         //
         return response()->json([
             'messege' => 'day la bản test db!',
-            'data' => testdb::all(),
+            // 'data' => testdb::all(),
         ], 200);
         // return testdb::all();
     }
 
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -47,7 +47,7 @@ class testdbController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {  
+    {
         $input = $request->all();
         $rules = array(
             'name' => 'required',
@@ -88,7 +88,7 @@ class testdbController extends Controller
                 ]);
             }
 
-           
+
             DB::commit();
             return response()->json([
                 'messege' => $test,
@@ -126,7 +126,7 @@ class testdbController extends Controller
     public function edit($id)
     {
         //
-        
+
     }
 
     /**

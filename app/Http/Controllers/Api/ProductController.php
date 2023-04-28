@@ -29,56 +29,19 @@ class ProductController extends Controller
     public function index()
     {
         try {
-            // 'supplier'=>Info_Supplier::where('status',1)->select('id','name')->get(),
-            // $baseUrl = env('APP_URL') . '/';
-            // $productsWithImages = Product::with(['warehouse', 'category', 'images' => function($query) {
-            //     $query->take(1);
-            // }])->get();
-
-            // $productsWithImages->map(function($product) {
-            //     $product->image = $product->images->first();
-            //     unset($product->images);
-            //     return $product;
-            // });
             $product = Product::with([
-                // 'warehouse' => function ($query) {
-                //     $query->select('amount', 'product_id');
-                // },
                 'category',
                 'images' => function ($query) {
                     $query->select('image', 'product_id')->orderBy('product_id')->distinct();
-                    // $query->select('amount', 'product_id')->orderBy('product_id')->distinct('product_id');
-                    // $query->select('image', 'product_id')->orderBy('product_id')->distinct('product_id');
                 },
             ])
-                ->select(['id', 'name', 'category_id'])
+                ->select(['id', 'name','quantity','default_price', 'category_id'])
                 ->orderBy('id', 'desc')
                 ->get();
 
-            // $image= Image::first()
             return response()->json([
                 'category_product' => Category_product::where('status', 1)->select('id', 'name as name_cate')->get(),
-                //use to test post
-                // 'product' =>  DB::table('da5_product')
-                //     ->leftJoin('da5_warehouse', 'da5_product.id', '=', 'da5_warehouse.product_id')
-                //     ->leftJoin('image', 'da5_product.id', '=', 'image.product_id')
-                //     ->leftJoin('da5_category_product', 'da5_category_product.id', '=', 'da5_product.category_id')
-                //     ->select([
-                //         'da5_product.*',
-                //         'da5_warehouse.amount',
-                //         'da5_category_product.name as name_cate',
-                //         'image.image'
-                //         // DB::raw("CONCAT('$baseUrl','storage/', da5_product.image) as img_src")
-                //     ])
-                //     ->where('da5_product.status', 1)
-                //     ->orderBy('id', 'desc')
-                //     ->first(),
                 'product'=>$product,
-                // 'product' => Product::with(['warehouse', 'images', 'category'])
-                //     // ->select(['id','name','image.image'])
-                //     ->orderby('id', 'DESC')->get(),
-
-                // 'product_all' => Product::get(),
             ]);
             // return Product::all();
         } catch (\Exception $e) {
@@ -135,6 +98,7 @@ class ProductController extends Controller
             $product->tech_specs =  (!empty($request->tech_specs)) ? $request->tech_specs : null;
             // $product->price =  (!empty($request->price)) ? $request->price : null;
             $product->description =  (!empty($request->description)) ? $request->description : null;
+            $product->quantity=0;
             $product->save();
 
 

@@ -67,8 +67,9 @@ class VideoController extends Controller
             return response()->json(['error' => $validator->errors()], 404);
         }
         try {
+            // $staffId                       =   $request->user()->id;
             $video = new Video();
-            $video->staff_id               =   (!empty($request->staff_id)) ? $request->staff_id : null;
+            $video->staff_id               =   $request->user()->id;
             $video->type_video_id          =   (!empty($request->type_video_id)) ? $request->type_video_id : null;
             $video->title                  =   (!empty($request->title)) ? $request->title : null;
             $video->hashtag                =   (!empty($request->hashtag)) ? $request->hashtag : null;

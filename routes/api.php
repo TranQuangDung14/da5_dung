@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\BrandsController;
 use App\Http\Controllers\Api\CustomerController;
+use App\Http\Controllers\Api\Import_OrdersController;
 use App\Http\Controllers\Api\testdbController;
 use App\Http\Controllers\Api\Category_ProductController;
 use App\Http\Controllers\Api\Info_SupplierController;
@@ -19,6 +20,7 @@ use App\Http\Controllers\Api\WarehouseController;
 use App\Http\Controllers\Api\Test_db_projectController;
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\Front_end_Controller;
+// use App\Http\Controllers\Api\ImportOrderController;
 use App\Http\Controllers\UploadController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -46,11 +48,23 @@ use PhpParser\Node\Stmt\Return_;
 //     // return $request->get('/testdb', 'testdbController');
 
 //     });
-Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/logout', [AuthController::class, 'logout']);
-});
+
+
+
 // Route::group(['middleware'=>'auth:sanctum'],function(){
-Route::group(['middleware'=> ['auth:sanctum', 'can:staff']],function(){
+    Route::post('/customer-login',[AuthController::class,'customerLogin']);
+    Route::post('/staff-login',[AuthController::class,'staffLogin']);
+    Route::post('/register_customer',[AuthController::class,'register_customer']);
+    Route::post('/register_staff',[AuthController::class,'register_staff']);
+    // Route::post('/register',[AuthController::class,'register']);
+    // đăng xuất
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::get('/logout', [AuthController::class, 'logout']);
+    });
+
+
+    Route::group(['middleware'=> ['auth:sanctum', 'admin']],function(){
+        // Route::group(['middleware'=> ['auth:sanctum','can:access-admin']],function(){
     // Route::get('/user', function (Request $request) {
     //     return $request->user();
     // });
@@ -64,6 +78,7 @@ Route::group(['middleware'=> ['auth:sanctum', 'can:staff']],function(){
     Route::post('/testdb', [testdbController::class, 'store']);
     Route::put('/testdb/{id}', [testdbController::class, 'update']);
     Route::delete('/testdb/{id}', [testdbController::class, 'destroy']);
+
 
     // thương hiệu
     Route::get('/brands', [BrandsController::class, 'index']);
@@ -154,6 +169,10 @@ Route::group(['middleware'=> ['auth:sanctum', 'can:staff']],function(){
     Route::post('/product/{id}', [ProductController::class, 'update']);
     Route::delete('/product/{id}', [ProductController::class, 'destroy']);
 
+    //Nhập kho
+    Route::get('/import-order', [Import_OrdersController::class, 'index']);
+    Route::post('/import-order', [Import_OrdersController::class, 'store']);
+    Route::put('/import-order/{importOrder}', [ImportOrderController::class, 'update']);
 
     //Transport
     Route::get('/transport', [TransportController::class, 'index']);
@@ -197,11 +216,7 @@ Route::group(['middleware'=> ['auth:sanctum', 'can:staff']],function(){
 
 
 });
-    Route::post('/login',[AuthController::class,'login']);
-    Route::post('/register_customer',[AuthController::class,'register_customer']);
-    Route::post('/register_staff',[AuthController::class,'register_staff']);
-    // Route::post('/register_customer',[AuthController::class,'registerCustomer']);
-    Route::post('/register',[AuthController::class,'register']);
+
 
     // Route::get('testdb', function);
     // Route::get('testdb', function ($id) {
