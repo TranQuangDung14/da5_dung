@@ -140,7 +140,6 @@ class AuthController extends Controller
 
             return response()->json([
                 'message' => "Tạo tài khoản thành công!",
-                'tesst' => "Tạo tài khoản thành công!"
             ], 201);
         } catch (\Exception $e) {
             dd($e);
