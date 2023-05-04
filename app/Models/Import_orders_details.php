@@ -11,6 +11,14 @@ class Import_orders_details extends Model
     protected $table='da5_import_orders_detail';
 
 
+    // public function import_orders()
+    // {
+    //     return $this->hasOne(Import_orders::class);
+    // }
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
     /**
      * The attributes that are mass assignable.
      *

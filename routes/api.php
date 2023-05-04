@@ -172,7 +172,12 @@ use PhpParser\Node\Stmt\Return_;
     //Nhập kho
     Route::get('/import-order', [Import_OrdersController::class, 'index']);
     Route::post('/import-order', [Import_OrdersController::class, 'store']);
-    Route::put('/import-order/{importOrder}', [ImportOrderController::class, 'update']);
+    Route::put('/import-order/{importOrder}', [Import_OrdersController::class, 'update']);
+    // Route::get('/import-order/{importOrder}', [ImportOrderController::class, 'show']);
+    Route::get('/import-order/{id}', [Import_OrdersController::class, 'show']);
+    Route::delete('/import-order/{importOrder}', [Import_OrdersController::class, 'destroy']);
+
+
 
     //Transport
     Route::get('/transport', [TransportController::class, 'index']);

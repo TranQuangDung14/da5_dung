@@ -12,7 +12,7 @@ class Import_orders extends Model
 
     public function import_orders_details()
     {
-        return $this->hasOne(Import_orders_details::class);
+        return $this->hasMany(Import_orders_details::class,'import_order_id');
     }
 
     /**

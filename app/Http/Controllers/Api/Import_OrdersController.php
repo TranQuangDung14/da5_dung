@@ -19,21 +19,23 @@ class Import_OrdersController extends Controller
     public function index()
     {
         // dd('đây');
+
         try {
             return response()->json([
-                'message' => 'đây là nhập kho',
+                // 'message' => 'đây là nhập kho',
                 // 'import_order' =>
+                'product'=>  Product::where('status', 1)->select('id', 'name as name_product')->get(),
                 'import_order' => DB::table('da5_import_orders')
-                ->leftJoin('da5_import_orders_detail', 'da5_import_orders_detail.import_order_id', '=', 'da5_import_orders.id')
-                ->leftJoin('da5_product', 'da5_import_orders_detail.product_id', '=', 'da5_product.id')
-                ->select('da5_import_orders.*', 'da5_import_orders_detail.*', 'da5_product.name as name_product')
-                ->orderBy('da5_import_orders.id', 'desc')
-                ->get(),
+                    ->leftJoin('da5_import_orders_detail', 'da5_import_orders_detail.import_order_id', '=', 'da5_import_orders.id')
+                    ->leftJoin('da5_product', 'da5_import_orders_detail.product_id', '=', 'da5_product.id')
+                    ->Join('users','da5_import_orders.staff_id','=','users.id')
+                    ->select('da5_import_orders.*', 'da5_import_orders_detail.*', 'da5_product.name as name_product','users.name as name_user')
+                    ->orderBy('da5_import_orders.id', 'desc')
+                    ->get(),
             ]);
         } catch (\Exception $e) {
             dd($e);
         }
-
     }
 
     /**
@@ -98,8 +100,12 @@ class Import_OrdersController extends Controller
      */
     public function show($id)
     {
-        //
+        $import_order = Import_orders::with(['import_orders_details', 'import_orders_details.product'])->findOrFail($id);
+        return response()->json([
+            'import' => $import_order
+        ]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -133,8 +139,8 @@ class Import_OrdersController extends Controller
             $product = Product::where('id', $request->product_id)->first();
             if ($product) {
                 $importOrderDetail = Import_orders_details::where('import_order_id', $importOrder->id)
-                                                      ->where('product_id', $product->id)
-                                                      ->first();
+                    ->where('product_id', $product->id)
+                    ->first();
                 if ($importOrderDetail) {
                     $oldQuantity = $importOrderDetail->quantity;
 
@@ -155,7 +161,7 @@ class Import_OrdersController extends Controller
 
         $importOrder->save();
 
-        return response()->json(['message' => 'Import order updated successfully']);
+        return response()->json(['message' => 'Cập nhật thành công!']);
     }
 
 
@@ -165,8 +171,26 @@ class Import_OrdersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    // public function destroy($id)
+    // {
+    //     //
+    // }
+    public function destroy(Import_orders $importOrder)
     {
-        //
+        // dd($importOrder);
+        // Decrease the product quantity
+        // dd($importOrder->import_orders_details);
+        foreach ($importOrder->import_orders_details as $detail) {
+            $product = Product::find($detail->product_id);
+            if ($product) {
+                $product->quantity -= $detail->quantity;
+                $product->save();
+            }
+        }
+        // Delete import order details
+        $importOrder->import_orders_details()->delete();
+        // Delete import order
+        $importOrder->delete();
+        return response()->json(['message' => 'Xóa bản ghi nhập kho thành công!']);
     }
 }
