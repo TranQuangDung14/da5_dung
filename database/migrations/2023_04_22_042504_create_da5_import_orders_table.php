@@ -17,6 +17,7 @@ class CreateDa5ImportOrdersTable extends Migration
             $table->id();
             $table->integer("staff_id")->unsigned()->nullable();
             $table->integer("total_quantity")->unsigned()->nullable();
+            $table->integer("total_cost")->unsigned()->nullable();
             // $table->string("discout",200)->nullable();
             $table->timestamps();
         });

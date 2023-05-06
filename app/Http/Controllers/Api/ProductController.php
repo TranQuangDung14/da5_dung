@@ -279,14 +279,15 @@ class ProductController extends Controller
             $product->delete();
 
             // Xóa kho sản phẩm
-            $warehouse = Warehouse::where('product_id', $id)->firstOrFail();
-            $warehouse->delete();
+            // $warehouse = Warehouse::where('product_id', $id)->firstOrFail();
+            // $warehouse->delete();
 
             DB::commit();
             return response()->json([
                 'message' => 'Xóa sản phẩm thành công!',
             ], 200);
         } catch (\Exception $e) {
+            // dd($e);
             DB::rollback();
             return response()->json([
                 'message' => 'Xóa sản phẩm thất bại!',

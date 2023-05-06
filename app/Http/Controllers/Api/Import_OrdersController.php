@@ -24,6 +24,7 @@ class Import_OrdersController extends Controller
             return response()->json([
                 // 'message' => 'đây là nhập kho',
                 // 'import_order' =>
+                'import_order_detail'=>Import_orders_details::get(),
                 'product'=>  Product::where('status', 1)->select('id', 'name as name_product')->get(),
                 'import_order' => DB::table('da5_import_orders')
                     ->leftJoin('da5_import_orders_detail', 'da5_import_orders_detail.import_order_id', '=', 'da5_import_orders.id')
@@ -56,6 +57,7 @@ class Import_OrdersController extends Controller
      */
     public function store(Request $request)
     {
+        DB::beginTransaction();
         try {
             $importOrder = new Import_orders();
             $importOrder->staff_id =  $request->user()->id;
@@ -77,15 +79,14 @@ class Import_OrdersController extends Controller
 
             // Update total quantity of the import order
             $importOrder->total_quantity += $request->quantity;
+            $importOrder->total_cost = ($request->quantity)*($request->price);
             $importOrder->save();
-
+            DB::commit();
             return response()->json(['message' => 'Nhập kho thành công']);
-            // }
-            // else {
-            //     return response()->json(['message' => ''], 404);
-            // }
+
         } catch (\Exception $e) {
             //throw $th;
+            DB::rollback();
             return response()->json([
                 'message' => 'Hỏng rồi! Khôn lên'
             ]);
@@ -100,9 +101,12 @@ class Import_OrdersController extends Controller
      */
     public function show($id)
     {
-        $import_order = Import_orders::with(['import_orders_details', 'import_orders_details.product'])->findOrFail($id);
         return response()->json([
-            'import' => $import_order
+            'import_order' => DB::table('da5_import_orders')
+                    ->leftJoin('da5_import_orders_detail', 'da5_import_orders_detail.import_order_id', '=', 'da5_import_orders.id')
+                    ->select('da5_import_orders.*', 'da5_import_orders_detail.*')
+                    ->where('da5_import_orders.id', $id)
+                    ->first(),
         ]);
     }
 
@@ -127,11 +131,10 @@ class Import_OrdersController extends Controller
      */
     public function update(Request $request, Import_orders $importOrder)
     {
-        // Update import order details
-        // if ($request->has('staff_id')) {
-        //     // $importOrder->staff_id = $request->staff_id;
-        // }
-        //cập nhật lại người nhập kho
+
+        DB::beginTransaction();
+        try {
+          //cập nhật lại người nhập kho
         $importOrder->staff_id =  $request->user()->id;
 
         // Update import order detail
@@ -160,8 +163,17 @@ class Import_OrdersController extends Controller
         }
 
         $importOrder->save();
+        DB::commit();
+        return response()->json([
+            'message' => 'Cập nhật thành công!'
+        ]);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json([
+                'message' => 'Cập nhật thất bại!'
+            ]);
+        }
 
-        return response()->json(['message' => 'Cập nhật thành công!']);
     }
 
 
