@@ -52,8 +52,11 @@ use PhpParser\Node\Stmt\Return_;
 
 
 // Route::group(['middleware'=>'auth:sanctum'],function(){
+    // đăng nhập
     Route::post('/customer-login',[AuthController::class,'customerLogin']);
     Route::post('/staff-login',[AuthController::class,'staffLogin']);
+
+    // đăng ký
     Route::post('/register_customer',[AuthController::class,'register_customer']);
     Route::post('/register_staff',[AuthController::class,'register_staff']);
     // Route::post('/register',[AuthController::class,'register']);

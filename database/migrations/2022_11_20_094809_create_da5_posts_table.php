@@ -20,7 +20,7 @@ class CreateDa5PostsTable extends Migration
             $table->string("title",100)->nullable();
             $table->string("hashtag",100)->nullable();
             $table->string("image",200)->nullable();
-            $table->string("content",1000)->nullable();
+            $table->text('content');
             $table->integer("status")->default(1);
             $table->timestamps();
         });

@@ -92,7 +92,7 @@ class PostsController extends Controller
                 'messege' => $posts,
             ], 200);
         } catch (\Exception $e) {
-
+            dd($e);
             return response()->json([
                 'messege' => 'thất bại!'
             ], 200);
