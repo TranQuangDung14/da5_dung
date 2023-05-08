@@ -40,10 +40,12 @@ class Front_end_Controller extends Controller
             // // Danh sách sản phẩm
             'all_product' => $product->get(),
                 'product'=>$product->limit(5)->get(),
+                'featured_products'=>$product->limit(4)->get(),
             // danh mục sản phẩm
             'category' => Category_product::select('id', 'name')->where('status', 1)->get(),
             // giới hạn danh mục hiển thị
             'category_limit' => Category_product::select('id', 'name')->where('status', 1)->limit(4)->get(),
+            // 'product_by_cate'=> $product->limit(10)->get(),
             // đếm số lượng sản phẩm
             'count_product' => Product::count(),
         ], 200);
@@ -85,8 +87,6 @@ class Front_end_Controller extends Controller
                 ->where('category_id', 4)
                 ->limit(6)
                 ->get(),
-
-
         ], 200);
     }
 
@@ -149,13 +149,14 @@ class Front_end_Controller extends Controller
                 ->where('status', 1)
                 ->get(),
 
+            'featured_post'=>Posts::orderBy('id', 'desc')->first(),
             // bài viết bên trang chủ
             'posts_index' => Posts::select([
                 '*',
                 DB::raw("CONCAT('$baseUrl','storage/', da5_posts.image) as img_src")
             ])
                 ->where('status', 1)
-                ->limit(3)
+                ->limit(5)
                 ->orderBy('id','desc')
                 ->get(),
 
