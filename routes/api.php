@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\BrandsController;
+use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\Import_OrdersController;
 use App\Http\Controllers\Api\testdbController;
@@ -264,7 +265,14 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function() {
     // upload
 
    Route::post('upload',[UploadController::class,'upload']);
+   Route::group(['middleware'=> ['auth:sanctum', 'user']],function(){
+       Route::post('/cart-add', [CartController::class, 'addProduct']);
+       Route::get('/cart', [CartController::class, 'getCart']);
+       Route::put('/cart/update/{cartDetail}', [CartController::class, 'updateQuantity']);
+       Route::delete('/cart/remove/{cartDetail}', [CartController::class, 'removeProduct']);
+       Route::post('/cart/apply-voucher', [CartController::class, 'applyVoucher']);
 
+   });
 
 
 //category_product / oke

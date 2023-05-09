@@ -8,8 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Carts extends Model
 {
     use HasFactory;
-    protected $table='da5_carts';
+    protected $table = 'da5_carts';
 
+    public function customer()
+    {
+        return $this->belongsTo(User::class, 'customer_id');
+    }
+    public function cartDetails()
+    {
+        return $this->hasMany(CartDetail::class, 'cart_id');
+    }
     /**
      * The attributes that are mass assignable.
      *

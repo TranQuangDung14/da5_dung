@@ -10,6 +10,15 @@ class Carts_details extends Model
     use HasFactory;
     protected $table='da5_cart_details';
 
+    public function cart()
+    {
+        return $this->belongsTo(Cart::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
     /**
      * The attributes that are mass assignable.
      *
