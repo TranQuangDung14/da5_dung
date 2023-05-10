@@ -19,7 +19,7 @@ class CheckUser
         $user = $request->user();
 
         if ($user->role !== 'customer') {
-            return response()->json(['message' => 'Bạn không có quyền truy cập trang người dùng'], 403);
+            return response()->json(['message' => 'Tài khoản này không có quyền truy cập trang người dùng'], 403);
         }
         return $next($request);
     }

@@ -19,7 +19,7 @@ class CheckAdmin
         $user = $request->user();
 
         if ($user->role !== 'staff') {
-            return response()->json(['message' => 'Bạn không có quyền truy cập trang admin'], 403);
+            return response()->json(['message' => 'Tài khoản này không có quyền truy cập trang admin'], 403);
         }
         return $next($request);
     }

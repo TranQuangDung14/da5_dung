@@ -77,7 +77,7 @@ class AuthController extends Controller
             $customer = Customer::create([
                 'user_id' => $user->id,
                 'name' => $request->input('name'),
-                'date_of_birth' => $request->input('date_of_birth'),
+                'date_of_birth'=>$request->input('date_of_birth'),
                 'sex' => $request->input('sex'),
                 'number_phone' => $request->input('number_phone'),
                 'address' => $request->input('address'),

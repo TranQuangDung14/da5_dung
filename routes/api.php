@@ -267,9 +267,10 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function() {
    Route::post('upload',[UploadController::class,'upload']);
    Route::group(['middleware'=> ['auth:sanctum', 'user']],function(){
        Route::post('/cart-add', [CartController::class, 'addProduct']);
+       Route::get('/testdata', [CartController::class, 'Test']);
        Route::get('/cart', [CartController::class, 'getCart']);
-       Route::put('/cart/update/{cartDetail}', [CartController::class, 'updateQuantity']);
-       Route::delete('/cart/remove/{cartDetail}', [CartController::class, 'removeProduct']);
+       Route::put('/cart-update/{cartDetail}', [CartController::class, 'updateQuantity']);
+       Route::delete('/cart-remove/{cartDetail}', [CartController::class, 'removeProduct']);
        Route::post('/cart/apply-voucher', [CartController::class, 'applyVoucher']);
 
    });

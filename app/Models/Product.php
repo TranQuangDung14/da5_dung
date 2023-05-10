@@ -22,6 +22,10 @@ class Product extends Model
     {
         return $this->belongsTo(Category_product::class);
     }
+    public function cartDetails()
+    {
+        return $this->hasMany(Carts_details::class,'product_id');
+    }
     /**
      * The attributes that are mass assignable.
      *

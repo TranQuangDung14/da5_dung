@@ -16,7 +16,7 @@ class Carts extends Model
     }
     public function cartDetails()
     {
-        return $this->hasMany(CartDetail::class, 'cart_id');
+        return $this->hasMany(Carts_details::class,'cart_id');
     }
     /**
      * The attributes that are mass assignable.
