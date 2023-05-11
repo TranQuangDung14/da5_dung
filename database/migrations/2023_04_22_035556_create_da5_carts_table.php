@@ -18,6 +18,8 @@ class CreateDa5CartsTable extends Migration
             $table->id();
             $table->integer("customer_id")->unsigned()->nullable();
             $table->integer("total_money")->unsigned()->nullable();
+            $table->integer('discounted_price')->nullable();
+            $table->integer("voucher_id")->unsigned()->nullable();
             $table->timestamps();
         });
     }

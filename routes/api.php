@@ -21,6 +21,7 @@ use App\Http\Controllers\Api\WarehouseController;
 use App\Http\Controllers\Api\Test_db_projectController;
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\Front_end_Controller;
+use App\Http\Controllers\Api\VoucherController;
 // use App\Http\Controllers\Api\ImportOrderController;
 use App\Http\Controllers\UploadController;
 use Illuminate\Http\Request;
@@ -53,22 +54,22 @@ use PhpParser\Node\Stmt\Return_;
 
 
 // Route::group(['middleware'=>'auth:sanctum'],function(){
-    // đăng nhập
-    Route::post('/customer-login',[AuthController::class,'customerLogin']);
-    Route::post('/staff-login',[AuthController::class,'staffLogin']);
+// đăng nhập
+Route::post('/customer-login', [AuthController::class, 'customerLogin']);
+Route::post('/staff-login', [AuthController::class, 'staffLogin']);
 
-    // đăng ký
-    Route::post('/register_customer',[AuthController::class,'register_customer']);
-    Route::post('/register_staff',[AuthController::class,'register_staff']);
-    // Route::post('/register',[AuthController::class,'register']);
-    // đăng xuất
-    Route::middleware('auth:sanctum')->group(function () {
-        Route::get('/logout', [AuthController::class, 'logout']);
-    });
+// đăng ký
+Route::post('/register_customer', [AuthController::class, 'register_customer']);
+Route::post('/register_staff', [AuthController::class, 'register_staff']);
+// Route::post('/register',[AuthController::class,'register']);
+// đăng xuất
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/logout', [AuthController::class, 'logout']);
+});
 
 
-    Route::group(['middleware'=> ['auth:sanctum', 'admin']],function(){
-        // Route::group(['middleware'=> ['auth:sanctum','can:access-admin']],function(){
+Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
+    // Route::group(['middleware'=> ['auth:sanctum','can:access-admin']],function(){
     // Route::get('/user', function (Request $request) {
     //     return $request->user();
     // });
@@ -93,13 +94,13 @@ use PhpParser\Node\Stmt\Return_;
 
 
     //test db
-    Route::get('test_db_project',[Test_db_projectController::class,'index']);
-    Route::post('test_db_project',[Test_db_projectController::class,'store']);
-    Route::put('test_db_project/{id}',[Test_db_projectController::class,'update']);
-    Route::get('test_db_project/{id}',[Test_db_projectController::class,'show']);
-    Route::delete('test_db_project/{id}',[Test_db_projectController::class,'destroy']);
+    Route::get('test_db_project', [Test_db_projectController::class, 'index']);
+    Route::post('test_db_project', [Test_db_projectController::class, 'store']);
+    Route::put('test_db_project/{id}', [Test_db_projectController::class, 'update']);
+    Route::get('test_db_project/{id}', [Test_db_projectController::class, 'show']);
+    Route::delete('test_db_project/{id}', [Test_db_projectController::class, 'destroy']);
 
-    Route::post('test_db_project',[Test_db_projectController::class,'upload']);
+    Route::post('test_db_project', [Test_db_projectController::class, 'upload']);
 
 
     //dashboard
@@ -223,57 +224,65 @@ use PhpParser\Node\Stmt\Return_;
     Route::delete('/warehouse/{id}', [WarehouseController::class, 'destroy']);
 
 
-
+    //voucher
+    Route::get('/voucher', [VoucherController::class, 'index']);
+    Route::get('/voucher/{id}', [VoucherController::class, 'show']);
+    Route::post('/voucher', [VoucherController::class, 'store']);
+    Route::put('/voucher/{id}', [VoucherController::class, 'update']);
+    Route::delete('/voucher/{id}', [VoucherController::class, 'destroy']);
 });
 
 
-    // Route::get('testdb', function);
-    // Route::get('testdb', function ($id) {
+// Route::get('testdb', function);
+// Route::get('testdb', function ($id) {
 
-    // });
-Route::group(['namespace' => 'App\Http\Controllers\Api'], function() {
+// });
+Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
     Route::resource('users', 'UserController');
     // Route::resource('staff', 'StaffController');
     // Route::resource('testdb', 'testdbController');
 });
-    // Route::get('/testdb', [testdbController::class, 'index']);
-    // Route::get('/testdb/{id}', [testdbController::class, 'show']);
-    // Route::post('/testdb', [testdbController::class, 'store']);
-    // Route::put('/testdb/{id}', [testdbController::class, 'update']);
-    // Route::delete('/testdb/{id}', [testdbController::class, 'destroy']);
+// Route::get('/testdb', [testdbController::class, 'index']);
+// Route::get('/testdb/{id}', [testdbController::class, 'show']);
+// Route::post('/testdb', [testdbController::class, 'store']);
+// Route::put('/testdb/{id}', [testdbController::class, 'update']);
+// Route::delete('/testdb/{id}', [testdbController::class, 'destroy']);
 
 
 
 
 
-    // Front end
-    Route::get('/get_product',[Front_end_Controller::class,'index']);
-    // hiển thị sản phẩm theo danh mục
-    Route::get('/get_product_by_category',[Front_end_Controller::class,'show_product_by_category']);
+// Front end
+Route::get('/get_product', [Front_end_Controller::class, 'index']);
+// hiển thị sản phẩm theo danh mục
+Route::get('/get_product_by_category', [Front_end_Controller::class, 'show_product_by_category']);
 
-    Route::get('/get_product/{id}', [Front_end_Controller::class, 'show']);
+Route::get('/get_product/{id}', [Front_end_Controller::class, 'show']);
 
-    //front end video
-    Route::get('/get_video',[Front_end_Controller::class,'video']);
-    // Route::get('/get_posts',[Front_end_Controller::class,'video']);
-    Route::get('/get_posts',[Front_end_Controller::class,'posts']);
-    Route::get('/get_posts/{id}', [Front_end_Controller::class, 'show_posts']);
+//front end video
+Route::get('/get_video', [Front_end_Controller::class, 'video']);
+// Route::get('/get_posts',[Front_end_Controller::class,'video']);
+Route::get('/get_posts', [Front_end_Controller::class, 'posts']);
+Route::get('/get_posts/{id}', [Front_end_Controller::class, 'show_posts']);
 
 
-    // Route::get('/testleftjion', [Front_end_Controller::class, 'testleftjion']);
+// Route::get('/testleftjion', [Front_end_Controller::class, 'testleftjion']);
 
-    // upload
+// upload
+Route::post('upload', [UploadController::class, 'upload']);
 
-   Route::post('upload',[UploadController::class,'upload']);
-   Route::group(['middleware'=> ['auth:sanctum', 'user']],function(){
-       Route::post('/cart-add', [CartController::class, 'addProduct']);
-       Route::get('/testdata', [CartController::class, 'Test']);
-       Route::get('/cart', [CartController::class, 'getCart']);
-       Route::put('/cart-update/{cartDetail}', [CartController::class, 'updateQuantity']);
-       Route::delete('/cart-remove/{cartDetail}', [CartController::class, 'removeProduct']);
-       Route::post('/cart/apply-voucher', [CartController::class, 'applyVoucher']);
 
-   });
+
+Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
+
+    // giỏ hàng
+    Route::get('/cart', [CartController::class, 'getCart']);
+    Route::post('/cart-add', [CartController::class, 'addProduct']);
+    Route::get('/testdata', [CartController::class, 'Test']);
+    Route::put('/cart-update/{cartDetail}', [CartController::class, 'updateQuantity']);
+    Route::delete('/cart-remove/{cartDetail}', [CartController::class, 'removeProduct']);
+    Route::post('/apply-voucher', [CartController::class, 'applyVoucher']);
+});
 
 
 //category_product / oke

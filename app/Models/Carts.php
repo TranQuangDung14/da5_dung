@@ -26,6 +26,8 @@ class Carts extends Model
     // Cần có những trường bắt buộc phải thay đổi
     protected $fillable = [
         'customer_id',
-        'total_money'
+        'total_money',
+        'voucher_id',
+        'discounted_price'
     ];
 }

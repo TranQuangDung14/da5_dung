@@ -15,8 +15,8 @@ class CreateVouchersTable extends Migration
     {
         Schema::create('vouchers', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->unique();
-            $table->float('discount_percentage');
+            $table->string('code')->unique()->nullable();
+            $table->float('discount_percentage')->nullable();
             $table->timestamp('start_date')->nullable();
             $table->timestamp('end_date')->nullable();
             $table->timestamps();

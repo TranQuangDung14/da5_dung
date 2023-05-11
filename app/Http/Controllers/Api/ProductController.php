@@ -38,7 +38,7 @@ class ProductController extends Controller
                 ->select(['id', 'name','quantity','default_price', 'category_id'])
                 ->orderBy('id', 'desc')
                 ->get();
-
+                // dd($product);
             return response()->json([
                 'category_product' => Category_product::where('status', 1)->select('id', 'name as name_cate')->get(),
                 'product'=>$product,
