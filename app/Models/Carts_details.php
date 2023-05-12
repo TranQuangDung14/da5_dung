@@ -30,5 +30,6 @@ class Carts_details extends Model
         'product_id',
         'quantity',
         'discout',
+        'price_by_quantity'
     ];
 }

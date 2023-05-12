@@ -230,6 +230,7 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
     Route::post('/voucher', [VoucherController::class, 'store']);
     Route::put('/voucher/{id}', [VoucherController::class, 'update']);
     Route::delete('/voucher/{id}', [VoucherController::class, 'destroy']);
+
 });
 
 
@@ -253,17 +254,18 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
 
 
 // Front end
+
+
+Route::get('/get_posts', [Front_end_Controller::class, 'posts']);
+Route::get('/get_posts/{id}', [Front_end_Controller::class, 'show_posts']);
 Route::get('/get_product', [Front_end_Controller::class, 'index']);
 // hiển thị sản phẩm theo danh mục
 Route::get('/get_product_by_category', [Front_end_Controller::class, 'show_product_by_category']);
 
 Route::get('/get_product/{id}', [Front_end_Controller::class, 'show']);
-
 //front end video
 Route::get('/get_video', [Front_end_Controller::class, 'video']);
 // Route::get('/get_posts',[Front_end_Controller::class,'video']);
-Route::get('/get_posts', [Front_end_Controller::class, 'posts']);
-Route::get('/get_posts/{id}', [Front_end_Controller::class, 'show_posts']);
 
 
 // Route::get('/testleftjion', [Front_end_Controller::class, 'testleftjion']);
@@ -275,13 +277,15 @@ Route::post('upload', [UploadController::class, 'upload']);
 
 Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
 
+    // Route::get('/testdata', [CartController::class, 'Test']);
     // giỏ hàng
     Route::get('/cart', [CartController::class, 'getCart']);
     Route::post('/cart-add', [CartController::class, 'addProduct']);
-    Route::get('/testdata', [CartController::class, 'Test']);
     Route::put('/cart-update/{cartDetail}', [CartController::class, 'updateQuantity']);
     Route::delete('/cart-remove/{cartDetail}', [CartController::class, 'removeProduct']);
     Route::post('/apply-voucher', [CartController::class, 'applyVoucher']);
+
+
 });
 
 

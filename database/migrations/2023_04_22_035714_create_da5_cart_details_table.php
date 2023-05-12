@@ -19,6 +19,7 @@ class CreateDa5CartDetailsTable extends Migration
             $table->integer("cart_id")->unsigned()->nullable();
             $table->integer("product_id")->unsigned()->nullable();
             $table->integer("quantity")->unsigned()->nullable();
+            $table->integer("price_by_quantity")->unsigned()->nullable();
             $table->string("discout",200)->nullable();
 
             $table->timestamps();
