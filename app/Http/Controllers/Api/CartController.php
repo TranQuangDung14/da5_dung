@@ -24,9 +24,12 @@ class CartController extends Controller
 
     public function getCart()
     {
-        // dd('day');
         $cart = auth()->user()->cart;
-        // dd(   $cart->load('cartDetails.product'));
+        if (!$cart) {
+            return response()->json([
+                'message' => 'Giỏ hàng của bạn hiện đang trống!'
+            ]);
+        }
         $cart->load('cartDetails.product');
 
         return response()->json($cart);
