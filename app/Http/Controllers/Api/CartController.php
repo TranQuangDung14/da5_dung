@@ -24,19 +24,20 @@ class CartController extends Controller
 
     public function getCart()
     {
+        // dd(auth()->user());
         $cart = auth()->user()->cart;
         if (!$cart) {
             return response()->json([
                 'message' => 'Giỏ hàng của bạn hiện đang trống!'
             ]);
         }
-        $cart->load('cartDetails.product');
+        $cart->load('cartDetails.product.images');
 
         return response()->json($cart);
     }
 
 
-    public function addProduct(Request $request, Carts $dung)
+    public function addProduct(Request $request)
     {
         $input = $request->all();
         $rules = array(
