@@ -28,6 +28,7 @@ class Carts extends Model
         'customer_id',
         'total_money',
         'voucher_id',
-        'discounted_price'
+        'discounted_price',
+        'real_money'
     ];
 }

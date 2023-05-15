@@ -17,9 +17,10 @@ class CreateDa5CartsTable extends Migration
         Schema::create('da5_carts', function (Blueprint $table) {
             $table->id();
             $table->integer("customer_id")->unsigned()->nullable();
-            $table->integer("total_money")->unsigned()->nullable();
-            $table->integer('discounted_price')->nullable();
+            $table->decimal("total_money", 10, 2)->unsigned()->default(0);
+            $table->decimal('discounted_price', 10, 2)->default(0);
             $table->integer("voucher_id")->unsigned()->nullable();
+            $table->decimal('real_money', 10, 2)->default(0);
             $table->timestamps();
         });
     }

@@ -24,19 +24,17 @@ class category_productSeeder extends Seeder
         //     ]
         //     );
 
-        // $category                                   = new Category_product();
-        // $category->id                               = 1;
-        // $category->name                             = 'Hoa quả';
-        // $category->product_supplier_id              = 1;
-        // $category->status                           = 1;
-        // $category->save();
+        $category                                   = new Category_product();
+        $category->id                               = 1;
+        $category->name                             = 'Danh mục sản phẩm 1';
+        $category->status                           = 1;
+        $category->save();
 
-        // $category                                   = new Category_product();
-        // $category->id                               = 2;
-        // $category->name                             = 'Rau củ';
-        // $category->product_supplier_id              = 1;
-        // $category->status                           = 1;
-        // $category->save();
+        $category                                   = new Category_product();
+        $category->id                               = 2;
+        $category->name                             = 'Danh mục sản phẩm 2';
+        $category->status                           = 1;
+        $category->save();
 
         // $category                                   = new Category_product();
         // $category->id                               = 3;
