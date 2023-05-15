@@ -277,7 +277,7 @@ Route::post('upload', [UploadController::class, 'upload']);
 
 Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
 
-    // Route::get('/testdata', [CartController::class, 'Test']);
+    Route::get('/testdata', [CartController::class, 'Test']);
     // giỏ hàng
     Route::get('/cart', [CartController::class, 'getCart']);
     Route::post('/cart-add', [CartController::class, 'addProduct']);

@@ -17,7 +17,8 @@ class CartController extends Controller
     {
         // $mang=[2,4,5,2,12,4];
         // dd($mang);
-        dd($request->user()->id);
+        // dd($request->user()->id);
+        // dd('non',$request->all(),'adad');
         return $request->user()->id;
     }
 
@@ -136,16 +137,16 @@ class CartController extends Controller
     //     return response()->json(['message' => 'Đã xóa sản phẩm khỏi giỏ hàng!']);
     // }
 
-    public function removeProduct(Carts_details $cartDetail)
-    {
-        $cartDetail->delete();
+    // public function removeProduct(Carts_details $cartDetail)
+    // {
+    //     $cartDetail->delete();
 
-        $cart = $cartDetail->cart;
-        $this->updateCartTotal($cart);
-        $this->removeVoucher($cart);
+    //     $cart = $cartDetail->cart;
+    //     $this->updateCartTotal($cart);
+    //     $this->removeVoucher($cart);
 
-        return response()->json(['message' => 'Đã xóa sản phẩm khỏi giỏ hàng!']);
-    }
+    //     return response()->json(['message' => 'Đã xóa sản phẩm khỏi giỏ hàng!']);
+    // }
 
     // private function removeVoucher(Carts $cart)
     // {
@@ -154,6 +155,22 @@ class CartController extends Controller
     //         'real_money' => $cart->total_money
     //     ]);
     // }
+    public function removeProduct(Carts_details $cartDetail)
+    {
+        $cart = $cartDetail->cart;
+        $cartDetail->delete();
+
+        $this->updateCartTotal($cart);
+
+        // Hủy áp dụng voucher
+        $cart->update([
+            'discounted_price' => 0,
+            'real_money' => $cart->total_money
+        ]);
+
+        return response()->json(['message' => 'Đã xóa sản phẩm khỏi giỏ hàng!']);
+    }
+
 
     public function applyVoucher(Request $request)
     {
@@ -195,26 +212,25 @@ class CartController extends Controller
             'real_money' => $realMoney
         ]);
     }
-//     private function updateCartTotal(Carts $cart)
-// {
-//     $totalMoney = $cart->cartDetails->sum(function ($cartDetail) {
-//         return $cartDetail->product->default_price * $cartDetail->quantity;
-//     });
-//     $discountAmount = $cart->discounted_price;
-//     $realMoney = $totalMoney - $discountAmount;
+    // private function updateCartTotal(Carts $cart)
+    // {
+    //     $totalMoney = $cart->cartDetails->sum(function ($cartDetail) {
+    //         return $cartDetail->product->default_price * $cartDetail->quantity;
+    //     });
+    //     $discountAmount = $cart->discounted_price;
+    //     $realMoney = $totalMoney - $discountAmount;
 
-//     $cart->update([
-//         'total_money' => $totalMoney,
-//         'real_money' => $realMoney
-//     ]);
+    //     $cart->update([
+    //         'total_money' => $totalMoney,
+    //         'real_money' => $realMoney
+    //     ]);
 
-//     // Hủy áp dụng voucher nếu discounted_price không hợp lệ
-//     if ($discountAmount && $realMoney < 0) {
-//         $cart->update([
-//             'discounted_price' => null,
-//             'real_money' => $totalMoney
-//         ]);
-//     }
-// }
-
+    //     // Hủy áp dụng voucher nếu discounted_price không hợp lệ
+    //     if ($discountAmount && $realMoney < 0) {
+    //         $cart->update([
+    //             'discounted_price' => null,
+    //             'real_money' => $totalMoney
+    //         ]);
+    //     }
+    // }
 }
