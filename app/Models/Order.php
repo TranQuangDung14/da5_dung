@@ -27,6 +27,7 @@ class Order extends Model
         'delivery_date',
         'shipping_fee',
         'receiver_name',
+        'number_phone',
         'receiver_address',
         'ward_id',
         'districts_id',

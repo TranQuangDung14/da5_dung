@@ -217,15 +217,16 @@ class OrderController extends Controller
             // Tạo đơn hàng và các chi tiết đơn hàng
             $order = Order::create([
                 'customer_id' => $cart->customer_id,
-                'payment_method' => $cart->payment_method,
+                'payment_method' => $request->payment_method,
                 'total_money' => $cart->real_money,
                 // 'delivery_date' => $cart->delivery_date,
-                // 'shipping_fee' => $cart->shipping_fee,
-                // 'receiver_name' => $cart->receiver_name,
-                // 'receiver_address' => $cart->receiver_address,
-                // 'ward_id' => $cart->ward_id,
-                // 'districts_id' => $cart->districts_id,
-                // 'provinces_id' => $cart->provinces_id,
+                'shipping_fee' => $request->shipping_fee,
+                'receiver_name' => $request->receiver_name,
+                'number_phone' => $request->number_phone,
+                'receiver_address' => $request->receiver_address,
+                'ward_id' => $request->ward_id,
+                'districts_id' => $request->districts_id,
+                'provinces_id' => $request->provinces_id,
                 // 'status' => 1,
             ]);
 
