@@ -39,6 +39,11 @@ class CartController extends Controller
 
     public function addProduct(Request $request)
     {
+          // Kiểm tra đăng nhập
+    if (!auth()->check()) {
+        return response()->json(['message' => 'Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng'], 401);
+    }
+
         $input = $request->all();
         $rules = array(
             'product_id' => 'required|exists:da5_product,id',

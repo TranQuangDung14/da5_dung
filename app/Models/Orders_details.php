@@ -10,7 +10,10 @@ class Orders_details extends Model
     use HasFactory;
     protected $table='da5_order_details';
 
-
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -22,6 +25,6 @@ class Orders_details extends Model
         'price',
         'quantity',
         'discout',
-        'status',
+        // 'status',
     ];
 }

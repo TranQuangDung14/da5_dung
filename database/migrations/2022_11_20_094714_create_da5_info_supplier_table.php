@@ -18,7 +18,7 @@ class CreateDa5InfoSupplierTable extends Migration
             $table->string("name",100)->nullable();
             $table->string("email",100)->nullable();
             $table->string("adress",100)->nullable();
-            $table->integer("number_phone")->unsigned()->nullable();
+            $table->string("number_phone",20)->nullable();
             // $table->string("sectors",100);
             $table->integer("status")->default(1);
             $table->timestamps();

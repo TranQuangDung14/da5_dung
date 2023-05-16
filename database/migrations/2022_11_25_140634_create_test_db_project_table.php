@@ -16,7 +16,7 @@ class CreateTestDbProjectTable extends Migration
         Schema::create('test_db_project', function (Blueprint $table) {
             $table->id();
             $table->string('name',50);
-            $table->integer('number_phone')->unsigned()->nullable();
+            $table->string("number_phone",20)->nullable();
             $table->string('email')->nullable();
             $table->string('adress')->nullable();
             $table->integer("testdb1_id")->unsigned()->nullable();

@@ -284,6 +284,10 @@ Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
     Route::put('/cart-update/{cartDetail}', [CartController::class, 'updateQuantity']);
     Route::delete('/cart-remove/{cartDetail}', [CartController::class, 'removeProduct']);
     Route::post('/apply-voucher', [CartController::class, 'applyVoucher']);
+
+
+    // đặt hàng
+    Route::post('orders', [OrderController::class, 'store']);
 });
 
 

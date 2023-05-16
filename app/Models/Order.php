@@ -10,6 +10,10 @@ class Order extends Model
     use HasFactory;
     protected $table='da5_order';
 
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class);
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -19,11 +23,14 @@ class Order extends Model
     protected $fillable = [
         'customer_id',
         'payment_method',
-        'export_order_id',
+        'total_money',
         'delivery_date',
         'shipping_fee',
         'receiver_name',
         'receiver_address',
+        'ward_id',
+        'districts_id',
+        'provinces_id',
         'status',
     ];
 }

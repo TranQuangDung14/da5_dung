@@ -17,11 +17,15 @@ class CreateDa5OrderTable extends Migration
             $table->id();
             $table->integer("customer_id")->unsigned()->nullable();
             $table->integer("payment_method")->unsigned()->nullable();
-            $table->integer("export_order_id")->unsigned()->nullable();
+            // $table->integer("export_order_id")->unsigned()->nullable();
+            $table->decimal("total_money", 10, 2)->unsigned()->default(0);
             $table->string("delivery_date",200)->nullable();
             $table->integer("shipping_fee")->unsigned()->nullable();
             $table->string("receiver_name",200)->nullable();
-            $table->string("receiver_address",200)->nullable();
+            $table->string("receiver_address",200)->nullable();//địa chỉ chi tiết
+            $table->integer("ward_id")->nullable();
+            $table->integer("districts_id")->nullable();
+            $table->integer("provinces_id")->nullable();
             $table->integer("status")->default(1);
             $table->timestamps();
         });
