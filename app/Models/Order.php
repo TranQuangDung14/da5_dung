@@ -12,7 +12,7 @@ class Order extends Model
 
     public function orderDetails()
     {
-        return $this->hasMany(OrderDetail::class);
+        return $this->hasMany(Orders_details::class);
     }
 
     /**
@@ -22,6 +22,7 @@ class Order extends Model
      */
     protected $fillable = [
         'customer_id',
+        'code_order',
         'payment_method',
         'total_money',
         'delivery_date',

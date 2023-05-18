@@ -21,30 +21,48 @@ class OrderController extends Controller
     //  *
     //  * @return \Illuminate\Http\Response
     //  */
-    // public function index()
-    // {
-    //     //
-    //     return response()->json([
-    //         // 'messege' => 'day la bản test db!',
-    //         // 'data' => Order::all(),
-    //         // 'product' => Product::where('status', 1)->get(),
-    //         // 'customer' => Customer::get(),
-    //         // 'data' => DB::table('da5_order')
-    //         //     ->Join('da5_product', 'da5_order.product_id', '=', 'da5_product.id')
-    //         //     ->Join('da5_customer', 'da5_order.customer_id', '=', 'da5_customer.id')
-    //         //     // ->Join('da5_warehouse','da5_order.product_id','=','da5_warehouse.product_id')
-    //         //     ->Join('da5_status', 'da5_order.status', '=', 'da5_status.id')
-    //         //     ->select('da5_order.*', 'da5_status.name_status', 'da5_product.name as name_product', 'da5_customer.name as name_customer')
-    //         //     ->get(),
-    //         'order'=>DB::table('da5_order')
-    //             ->Join('da5_customer', 'da5_order.id', '=', 'da5_customer.order_id')
-    //             ->Join('da5_order_product_list', 'da5_order.id', '=', 'da5_order_product_list.order_id')
-    //             ->select('da5_order.*', 'da5_customer.name as name_customer','da5_order_product_list.name')
-    //             ->get(),
+    public function index()
+    {
+        // dd('day r');
+        try {
+            $order = Order::with('orderDetails.product.images')->orderBy('id','desc')->get();
+            //
+            return response()->json([
+                'data' => $order,
+            ], 200);
+        } catch (\Exception $e) {
+            dd($e);
+        }
 
-    //     ], 200);
-    //     // return Order::all();
-    // }
+        // return Order::all();
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        // dd($request->all());
+        $order = Order::findOrFail($id);
+        $order->status = $request->status;
+        $order->save();
+
+        return response()->json(['message' => 'Cập nhật trạng thái đơn hàng thành công']);
+    }
+
+    public function show($id)
+    {
+
+        try {
+            $order = Order::with('orderDetails.product.images')->findOrFail($id);
+            //
+            return response()->json([
+                'data' => $order,
+            ], 200);
+        } catch (\Exception $e) {
+            dd($e);
+        }
+
+        // return Order::all();
+    }
+
 
     // /**
     //  * Show the form for creating a new resource.
@@ -202,7 +220,15 @@ class OrderController extends Controller
     //         'messege' => 'Xóa thành công!',
     //     ], 200);
     // }
-
+    // đơn hàng chưa xử lý
+    public function Order_processing()
+    {
+        $orders = Order::with('orderDetails')->where('status', 1)->get();
+        // $orders = Order::where('status', 1)->get();
+        return response()->json(
+            $orders
+        );
+    }
     public function store(Request $request)
     {
         try {
@@ -213,13 +239,15 @@ class OrderController extends Controller
                     'message' => 'Giỏ hàng của bạn hiện đang trống!'
                 ]);
             }
+            $maxId = Order::max('id') + 1;
+            $code_order = 'MDH_' . $maxId;
 
             // Tạo đơn hàng và các chi tiết đơn hàng
             $order = Order::create([
                 'customer_id' => $cart->customer_id,
+                'code_order' => $code_order,
                 'payment_method' => $request->payment_method,
                 'total_money' => $cart->real_money,
-                // 'delivery_date' => $cart->delivery_date,
                 'shipping_fee' => $request->shipping_fee,
                 'receiver_name' => $request->receiver_name,
                 'number_phone' => $request->number_phone,
@@ -227,7 +255,10 @@ class OrderController extends Controller
                 'ward_id' => $request->ward_id,
                 'districts_id' => $request->districts_id,
                 'provinces_id' => $request->provinces_id,
+
+
                 // 'status' => 1,
+                // 'delivery_date' => $cart->delivery_date,
             ]);
 
             foreach ($cart->cartDetails as $cartDetail) {

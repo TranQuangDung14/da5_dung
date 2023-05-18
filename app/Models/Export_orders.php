@@ -10,6 +10,10 @@ class Export_orders extends Model
     use HasFactory;
     protected $table='da5_export_orders';
 
+    public function export_orders_details()
+    {
+        return $this->hasMany(Export_orders_details::class,'import_order_id');
+    }
 
     /**
      * The attributes that are mass assignable.

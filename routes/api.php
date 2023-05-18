@@ -146,9 +146,12 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
     //Order
     Route::get('/order', [OrderController::class, 'index']);
     Route::get('/order/{id}', [OrderController::class, 'show']);
-    Route::post('/order', [OrderController::class, 'store']);
-    Route::put('/order/{id}', [OrderController::class, 'update']);
-    Route::delete('/order/{id}', [OrderController::class, 'destroy']);
+    Route::get('/order_processing', [OrderController::class, 'Order_processing']);
+    Route::put('/update_status_order/{id}', [OrderController::class, 'updateStatus']);
+        // Route::get('/order/{id}', [OrderController::class, 'show']);
+    // Route::post('/order', [OrderController::class, 'store']);
+    // Route::put('/order/{id}', [OrderController::class, 'update']);
+    // Route::delete('/order/{id}', [OrderController::class, 'destroy']);
 
 
     //Posts
@@ -287,7 +290,7 @@ Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
 
 
     // đặt hàng
-    Route::post('orders', [OrderController::class, 'store']);
+    Route::post('payment-order', [OrderController::class, 'store']);
 });
 
 
