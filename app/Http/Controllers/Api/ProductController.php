@@ -149,10 +149,12 @@ class ProductController extends Controller
     public function show($id)
     {
         try {
-            $product = Product::with(['warehouse', 'images', 'category'])->findOrFail($id);
+            $product = Product::with(['images', 'category'])->findOrFail($id);
+            $product_related =Product::with(['images', 'category'])->where('category_id',$product->category_id)->whereNotIn('id', [$id])->get();
             $images = $product->images;
             return response()->json([
                 'product' => $product,
+                'product_related' => $product_related,
                 'images' => $images
             ]);
         } catch (\Exception $e) {

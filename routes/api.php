@@ -146,9 +146,18 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
     //Order
     Route::get('/order', [OrderController::class, 'index']);
     Route::get('/order/{id}', [OrderController::class, 'show']);
-    Route::get('/order_processing', [OrderController::class, 'Order_processing']);
     Route::put('/update_status_order/{id}', [OrderController::class, 'updateStatus']);
-        // Route::get('/order/{id}', [OrderController::class, 'show']);
+
+
+    // trạng thái đơn hàng
+    Route::get('/order_processing', [OrderController::class, 'Order_processing']);
+    Route::get('/orders_are_being_delivered', [OrderController::class, 'Orders_are_being_delivered']);
+    Route::get('/order_success', [OrderController::class, 'Order_success']);
+    Route::get('/order_cancel', [OrderController::class, 'Order_cancel']);
+
+
+
+    // Route::get('/order/{id}', [OrderController::class, 'show']);
     // Route::post('/order', [OrderController::class, 'store']);
     // Route::put('/order/{id}', [OrderController::class, 'update']);
     // Route::delete('/order/{id}', [OrderController::class, 'destroy']);

@@ -63,168 +63,35 @@ class OrderController extends Controller
         // return Order::all();
     }
 
-
-    // /**
-    //  * Show the form for creating a new resource.
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function create()
-    // {
-    //     //
-
-    // }
-
-    // // public function store(Request $request)
-    // // {
-
-    // //     $data = $request->only('product_id', 'customer_id', 'warehouse_id','total_price','status');
-    // //     $status = Order::create($data);
-
-    // //     if ($status)
-    // //     {
-    // //         return response()->json([
-    // //             'messege' => 'Thêm thành công!',
-    // //         ], 201);
-    // //         return $data;
-    // //     } else {
-    // //         return response()->json([
-    // //             'messege' => 'Thêm thất bại!',
-    // //         ], 400);
-    // //     }
-    // // }
-    // /**
-    //  * Store a newly created resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function store(Request $request)
-    // {
-
-
-    //     DB::beginTransaction();
-    //     try {
-    //         $order = new Order();
-
-    //         $order->total_price = (!empty($request->total_price)) ? $request->total_price : null;
-    //         $order->save();
-
-    //         $customer = new Customer();
-    //         $customer->order_id = $order->id;
-    //         $customer->name = (!empty($request->name)) ? $request->name : null;
-    //         $customer->id_user = (!empty($request->id_user)) ? $request->id_user : null;
-    //         $customer->date_of_birth = (!empty($request->date_of_birth)) ? $request->date_of_birth : null;
-    //         $customer->sex = (!empty($request->sex)) ? $request->sex : null;
-    //         $customer->email = (!empty($request->email)) ? $request->email : null;
-    //         $customer->adress = (!empty($request->adress)) ? $request->adress : null;
-    //         $customer->number_phone = (!empty($request->number_phone)) ? $request->number_phone : null;
-    //         $customer->save();
-
-    //         foreach ($request->order_product_list as $order_product) {
-    //             Order_product_list::create([
-    //                 'order_id' => $order->id,
-    //                 // 'product_id' => $order_product['product_id'],
-    //                 'qtyTotal' => $order_product['qtyTotal'],
-    //                 'price' => $order_product['price'],
-    //                 'img_src' => $order_product['img_src'],
-    //                 'name' => $order_product['name'],
-    //             ]);
-    //         }
-    //         // dd($order_product->product_id);
-
-    //         DB::commit();
-    //         return response()->json([
-
-    //             'messege' => 'thành công rồi',
-    //             'order' => $order,
-    //         ], 200);
-    //     } catch (\Exception $e) {
-    //         DB::rollback();
-    //         return response()->json([
-    //             dd($e),
-    //             'messege' => 'Thất bại!',
-    //         ], 200);
-    //     }
-    // }
-
-    // /**
-    //  * Display the specified resource.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function show($id)
-    // {
-    //     // return Order::findOrFail($id);
-    //     $order= Order::findOrFail($id);
-    //     $customer = Customer::where('order_id','=',$id)->get();
-    //     $order_product = Order_product_list::where('order_id','=',$id)->get();
-    //     return response()->json([
-
-    //         'order'=>$order,
-    //         'order_product'=>$order_product,
-    //         'customer'=>$customer,
-
-    //     ], 200);
-    // }
-
-    // /**
-    //  * Show the form for editing the specified resource.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function edit($id)
-    // {
-    //     //
-
-    // }
-
-    // /**
-    //  * Update the specified resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function update(Request $request, $id)
-    // {
-    //     $data = $request->only('product_id', 'customer_id', 'total_price', 'status');
-    //     $user = Order::findOrFail($id);
-    //     $status = $user->update($data);
-    //     // $status = Order::create($data);
-
-    //     if ($status) {
-    //         return response()->json([
-    //             'messege' => 'Sửa thành công !',
-    //         ], 201);
-    //     } else {
-    //         return response()->json([
-    //             'messege' => 'Sửa thất bại!',
-    //         ], 400);
-    //     }
-    // }
-
-    // /**
-    //  * Remove the specified resource from storage.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function destroy($id)
-    // {
-    //     $Order = Order::findOrFail($id);
-    //     $Order->delete();
-    //     return response()->json([
-    //         'messege' => 'Xóa thành công!',
-    //     ], 200);
-    // }
     // đơn hàng chưa xử lý
     public function Order_processing()
     {
         $orders = Order::with('orderDetails')->where('status', 1)->get();
-        // $orders = Order::where('status', 1)->get();
+        return response()->json(
+            $orders
+        );
+    }
+    // đơn hàng đã xuất - đang giao
+    public function Orders_are_being_delivered()
+    {
+        $orders = Order::with('orderDetails')->where('status', 3)->get();
+        return response()->json(
+            $orders
+        );
+    }
+
+    // đơn hàng đã giao thành công
+    public function Order_success()
+    {
+        $orders = Order::with('orderDetails')->where('status', 4)->get();
+        return response()->json(
+            $orders
+        );
+    }
+    // đơn hàng đã hủy
+    public function Order_cancel()
+    {
+        $orders = Order::with('orderDetails')->where('status', 5)->get();
         return response()->json(
             $orders
         );
@@ -255,8 +122,6 @@ class OrderController extends Controller
                 'ward_id' => $request->ward_id,
                 'districts_id' => $request->districts_id,
                 'provinces_id' => $request->provinces_id,
-
-
                 // 'status' => 1,
                 // 'delivery_date' => $cart->delivery_date,
             ]);

@@ -16,6 +16,7 @@ class Product extends Model
     }
     public function warehouse()
     {
+        // kho này k còn sử dụng nữa
         return $this->hasOne(Warehouse::class);
     }
     public function category()
