@@ -12,9 +12,13 @@ class Order extends Model
 
     public function orderDetails()
     {
+        // return $this->hasMany(Orders_details::class);
         return $this->hasMany(Orders_details::class);
     }
-
+    public function customer()
+    {
+        return $this->belongsTo(User::class, 'customer_id');
+    }
     /**
      * The attributes that are mass assignable.
      *

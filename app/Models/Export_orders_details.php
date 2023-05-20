@@ -14,6 +14,11 @@ class Export_orders_details extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function exportOrder()
+    {
+        return $this->belongsTo(Export_orders::class, 'export_order_id');
+    }
     /**
      * The attributes that are mass assignable.
      *

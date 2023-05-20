@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Mail\OrderStatusUpdate;
 use App\Models\Customer;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
@@ -11,8 +12,10 @@ use App\Models\Order;
 use App\Models\Order_product_list;
 use App\Models\Orders_details;
 use App\Models\Product;
+use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -36,15 +39,62 @@ class OrderController extends Controller
 
         // return Order::all();
     }
+    // data đơn hàng đợi xuất kho
+    public function getConfirmedOrders()
+    {
+        $orders = Order::where('status', 2)->get();
+
+        return response()->json(['orders' => $orders]);
+    }
+
+
+    // public function updateStatus(Request $request, $id)
+    // {
+    //     // dd($request->all());
+    //     $order = Order::findOrFail($id);
+    //     $order->status = $request->status;
+    //     $order->save();
+    //     $orderDetails = $order->orderDetails; // Lấy danh sách đơn hàng
+
+    //     foreach ($orderDetails as $orderDetail) {
+    //         // Truy cập thông tin từng đơn hàng
+    //         $product_id = $orderDetail->product_id;
+    //         $price = $orderDetail->price;
+    //         $quantity = $orderDetail->quantity;
+
+    //         // Thực hiện các thao tác khác với thông tin đơn hàng
+    //         // ...
+    //     }
+    //     // Mail::to($order->customer_email)->send(new OrderStatusUpdate($order));
+    //     return response()->json(['message' => 'Cập nhật trạng thái đơn hàng thành công']);
+    // }
 
     public function updateStatus(Request $request, $id)
     {
-        // dd($request->all());
-        $order = Order::findOrFail($id);
-        $order->status = $request->status;
-        $order->save();
+        try {
+            $order = Order::findOrFail($id);
+            $order->status = $request->status;
+            $order->save();
 
-        return response()->json(['message' => 'Cập nhật trạng thái đơn hàng thành công']);
+
+            // dd($statusText);
+            // Lấy thông tin khách hàng và địa chỉ email
+            $customer = User::findOrFail($order->customer_id);
+            $email = $customer->email;
+            // dd($email);
+
+            // Gửi email thông báo cập nhật trạng thái đơn hàng cho khách hàng
+            Mail::to($email)->send(new OrderStatusUpdate($order));
+
+
+            // session()->flash('success', 'Email thông báo đã được gửi thành công.');
+            // return view('emails.order_status_update', compact('order','orderDetails'));
+            return response()->json([
+                'message' => 'Cập nhật trạng thái đơn hàng thành công'
+            ]);
+        } catch (\Exception $e) {
+            dd('aaaa',$e);
+        }
     }
 
     public function show($id)

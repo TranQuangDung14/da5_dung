@@ -21,7 +21,9 @@ use App\Http\Controllers\Api\WarehouseController;
 use App\Http\Controllers\Api\Test_db_projectController;
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\Front_end_Controller;
+use App\Http\Controllers\Api\MailController;
 use App\Http\Controllers\Api\VoucherController;
+use App\Http\Controllers\Api\ExportOrderController;
 // use App\Http\Controllers\Api\ImportOrderController;
 use App\Http\Controllers\UploadController;
 use Illuminate\Http\Request;
@@ -29,7 +31,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Models\Customer;
 use PhpParser\Node\Stmt\Return_;
-
 // use App\Http\Controllers\Api;
 
 /*
@@ -52,7 +53,7 @@ use PhpParser\Node\Stmt\Return_;
 //     });
 
 
-
+Route::post('/send-email', [MailController::class, 'sendEmail']);
 // Route::group(['middleware'=>'auth:sanctum'],function(){
 // đăng nhập
 Route::post('/customer-login', [AuthController::class, 'customerLogin']);
@@ -99,7 +100,6 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
     Route::put('test_db_project/{id}', [Test_db_projectController::class, 'update']);
     Route::get('test_db_project/{id}', [Test_db_projectController::class, 'show']);
     Route::delete('test_db_project/{id}', [Test_db_projectController::class, 'destroy']);
-
     Route::post('test_db_project', [Test_db_projectController::class, 'upload']);
 
 
@@ -146,7 +146,11 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
     //Order
     Route::get('/order', [OrderController::class, 'index']);
     Route::get('/order/{id}', [OrderController::class, 'show']);
+    // cập nhật trạng thái đơn hàng
     Route::put('/update_status_order/{id}', [OrderController::class, 'updateStatus']);
+
+    // đon hàng đợi xuất kho
+    Route::get('confirmed-orders', [OrderController::class, 'getConfirmedOrders']);
 
 
     // trạng thái đơn hàng
@@ -194,6 +198,8 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
     Route::get('/import-order/{id}', [Import_OrdersController::class, 'show']);
     Route::delete('/import-order/{importOrder}', [Import_OrdersController::class, 'destroy']);
 
+    // xuất kho
+    Route::post('export-order', [ExportOrderController::class, 'exportOrder']);
 
 
     //Transport
