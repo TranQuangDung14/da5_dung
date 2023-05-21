@@ -14,7 +14,14 @@ class Export_orders extends Model
     {
         return $this->hasMany(Export_orders_details::class,'export_order_id');
     }
-
+    public function order()
+    {
+        return $this->belongsTo(Order::class, 'order_id');
+    }
+    public function staff()
+    {
+        return $this->belongsTo(User::class, 'staff_id');
+    }
     /**
      * The attributes that are mass assignable.
      *
@@ -23,5 +30,6 @@ class Export_orders extends Model
     protected $fillable = [
         'staff_id',
         'total_quantity',
+        'order_id'
     ];
 }

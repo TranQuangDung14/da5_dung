@@ -37,5 +37,12 @@ class UserSeeder extends Seeder
             'role'  =>'customer',
             // 'password' => bcrypt('123'),
         ]);
+        DB::table('users')->insert([
+            'name' => 'Quang Dũng',
+            'email' => 'quangstsdung@gmail.com',
+            'password' => Hash::make('123'),
+            'role'  =>'customer',
+            // 'password' => bcrypt('123'),
+        ]);
     }
 }

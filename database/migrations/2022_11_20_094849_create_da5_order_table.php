@@ -20,7 +20,7 @@ class CreateDa5OrderTable extends Migration
             $table->string('code_order')->unique()->nullable();
             // $table->integer("export_order_id")->unsigned()->nullable();
             $table->decimal("total_money", 10, 2)->unsigned()->default(0);
-            $table->string("delivery_date",200)->nullable();
+            $table->date("delivery_date",200)->nullable();
             $table->integer("shipping_fee")->unsigned()->nullable();
             $table->string("receiver_name",200)->nullable();
             $table->string("number_phone",20)->nullable();//số điện thoại người nhận

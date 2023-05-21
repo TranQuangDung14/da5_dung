@@ -16,128 +16,76 @@ use Illuminate\Support\Facades\Mail;
 
 class ExportOrderController extends Controller
 {
-    // Kiểm tra đơn hàng
-    //  $order = Order::findOrFail($orderId);
 
-    //  // Kiểm tra đơn hàng có status = 2 (đơn hàng đã xác nhận) không
-    //  if ($order->status != 2) {
-    //      return response()->json(['message' => 'Đơn hàng không hợp lệ'], 400);
-    //  }
-    // public function exportOrder(Request $request)
-    // {
-
-    //     // $order = Order::where('status',2)->get();
-    //     // Lấy ID đơn hàng từ request
-    //     $orderId = $request->input('order_id');
-
-    //     // Kiểm tra đơn hàng có status = 2 (đơn hàng đã xác nhận) không
-    //     $order = Order::where('status', 2)->findOrFail($orderId);
-    //     // Lấy thông tin sản phẩm từ đơn hàng
-    //     $orderDetails = Orders_details::where('order_id', $orderId)->get();
-
-    //     // Kiểm tra số lượng sản phẩm trong đơn hàng và kiểm tra hàng trong kho
-    //     foreach ($orderDetails as $orderDetail) {
-    //         $productId = $orderDetail->product_id;
-    //         $quantity = $orderDetail->quantity;
-
-    //         $product = Product::findOrFail($productId);
-
-    //         if ($product->quantity < $quantity) {
-    //             // Sản phẩm không đủ hàng, gửi thông báo cho khách hàng
-    //             Mail::to($order->customer_email)->send(new OrderOutOfStock($orderDetail));
-    //             return response()->json(['message' => 'Sản phẩm không đủ hàng'], 400);
-    //         }
-    //     }
-
-    //     // Tạo phiếu xuất kho
-    //     $exportOrder = Export_orders::create([
-    //         'staff_id' => $request->user()->id, // ID nhân viên xuất kho (đăng nhập)
-    //         'total_quantity' => $order->total_quantity,
-    //     ]);
-
-    //     // Tạo chi tiết phiếu xuất kho
-    //     foreach ($orderDetails as $orderDetail) {
-    //         Export_orders_details::create([
-    //             'export_order_id' => $exportOrder->id,
-    //             'product_id' => $orderDetail->product_id,
-    //             'quantity' => $orderDetail->quantity,
-    //             'price' => $orderDetail->price,
-    //         ]);
-
-    //         // Giảm số lượng sản phẩm trong kho
-    //         $product = Product::findOrFail($orderDetail->product_id);
-    //         $product->quantity -= $orderDetail->quantity;
-    //         $product->save();
-    //     }
-
-    //     // Gửi mail xác nhận đơn hàng
-    //     Mail::to($order->customer_email)->send(new OrderShipped($order));
-
-    //     return response()->json(['message' => 'Xuất kho thành công']);
-    // }
-
-
+    public function getExportOrders()
+    {
+        $exportOrders = Export_orders::with('order','staff')->get();
+        return response()->json(['exportOrders'=> $exportOrders]);
+    }
     public function exportOrder(Request $request)
     {
         try {
-             // $order = Order::where('status',2)->get();
-        // Lấy ID đơn hàng từ request
-        $orderId = $request->input('order_id');
+            // $order = Order::where('status',2)->get();
+            // Lấy ID đơn hàng từ request
+            $orderId = $request->input('order_id');
+            // dd($orderId);
 
-        // Kiểm tra đơn hàng có status = 2 (đơn hàng đã xác nhận) không
-        $order = Order::where('status', 2)->findOrFail($orderId);
+            // Kiểm tra đơn hàng có status = 2 (đơn hàng đã xác nhận) không
+            $order = Order::where('status', 2)->findOrFail($orderId);
             // dd($order);
-        // Lấy thông tin sản phẩm từ đơn hàng
-        $orderDetails = Orders_details::where('order_id', $orderId)->get();
-        $customer = User::findOrFail($order->customer_id);
-        $email = $customer->email;
-        // Kiểm tra số lượng sản phẩm trong đơn hàng và kiểm tra hàng trong kho
-        foreach ($orderDetails as $orderDetail) {
-            $productId = $orderDetail->product_id;
-            $quantity = $orderDetail->quantity;
+            // Lấy thông tin sản phẩm từ đơn hàng
+            $orderDetails = Orders_details::where('order_id', $orderId)->get();
+            $customer = User::findOrFail($order->customer_id);
+            $email = $customer->email;
+            // Kiểm tra số lượng sản phẩm trong đơn hàng và kiểm tra hàng trong kho
+            foreach ($orderDetails as $orderDetail) {
+                $productId = $orderDetail->product_id;
+                $quantity = $orderDetail->quantity;
 
-            $product = Product::findOrFail($productId);
+                $product = Product::findOrFail($productId);
 
-            if ($product->quantity < $quantity) {
-                // Sản phẩm không đủ hàng, gửi thông báo cho khách hàng
-                Mail::to($email)->send(new OrderOutOfStock($order,$orderDetail));
-                return response()->json(['message' => 'Sản phẩm không đủ hàng'], 400);
+                if ($product->quantity < $quantity) {
+                    // Sản phẩm không đủ hàng, gửi thông báo cho khách hàng
+                    Mail::to($email)->send(new OrderOutOfStock($order, $orderDetail));
+                    return response()->json(['message' => 'Sản phẩm không đủ hàng'], 400);
+                }
             }
-        }
 
-        // Tạo phiếu xuất kho
-        $exportOrder = Export_orders::create([
-            'staff_id' => $request->user()->id, // ID nhân viên xuất kho (đăng nhập)
-            'total_quantity' => $order->total_quantity,
-        ]);
-
-        // Tạo chi tiết phiếu xuất kho
-        foreach ($orderDetails as $orderDetail) {
-            Export_orders_details::create([
-                'export_order_id' => $exportOrder->id,
-                'product_id' => $orderDetail->product_id,
-                'quantity' => $orderDetail->quantity,
-                'price' => $orderDetail->price,
+            // Tạo phiếu xuất kho
+            $exportOrder = Export_orders::create([
+                'staff_id' => $request->user()->id, // ID nhân viên xuất kho (đăng nhập)
+                'order_id'=> $orderId,
+                'total_quantity' => $order->total_quantity,
             ]);
 
-            // Giảm số lượng sản phẩm trong kho
-            $product = Product::findOrFail($orderDetail->product_id);
-            $product->quantity -= $orderDetail->quantity;
-            $product->save();
-        }
+            // Tạo chi tiết phiếu xuất kho
+            foreach ($orderDetails as $orderDetail) {
+                Export_orders_details::create([
+                    'export_order_id' => $exportOrder->id,
+                    'product_id' => $orderDetail->product_id,
+                    'quantity' => $orderDetail->quantity,
+                    'price' => $orderDetail->price,
+                ]);
 
-        // Cập nhật trạng thái đơn hàng thành công
-        $order->status = 3; // Chuyển trạng thái thành 3 (đã xuất kho)
-        $order->save();
+                // Giảm số lượng sản phẩm trong kho
+                $product = Product::findOrFail($orderDetail->product_id);
+                $product->quantity -= $orderDetail->quantity;
+                $product->save();
+            }
 
-        // Gửi mail xác nhận đơn hàng
-        // Mail::to($order->customer_email)->send(new OrderShipped($order));
-        Mail::to($email)->send(new OrderShipped($order));
+            // Cập nhật trạng thái đơn hàng thành công
+            $order->status = 3; // Chuyển trạng thái thành 3 (đã xuất kho)
 
-        return response()->json(['message' => 'Xuất kho thành công']);
+            $order->delivery_date = $request->delivery_date;
+            $order->save();
+
+            // Gửi mail xác nhận đơn hàng
+            // Mail::to($order->customer_email)->send(new OrderShipped($order));
+            Mail::to($email)->send(new OrderShipped($order));
+
+            return response()->json(['message' => 'Xuất kho thành công']);
         } catch (\Exception $e) {
             dd($e);
         }
-
     }
 }

@@ -199,6 +199,8 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
     Route::delete('/import-order/{importOrder}', [Import_OrdersController::class, 'destroy']);
 
     // xuất kho
+    Route::get('export-order', [ExportOrderController::class, 'getExportOrders']);
+
     Route::post('export-order', [ExportOrderController::class, 'exportOrder']);
 
 

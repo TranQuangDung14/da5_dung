@@ -17,6 +17,7 @@ class CreateDa5ExportOrdersTable extends Migration
             $table->id();
             $table->integer("staff_id")->unsigned()->nullable();
             $table->integer("total_quantity")->unsigned()->nullable();
+            $table->integer("order_id")->unsigned()->nullable();
             $table->timestamps();
         });
     }
