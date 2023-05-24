@@ -108,7 +108,18 @@ class PostsController extends Controller
     public function show($id)
     {
         return Posts::findOrFail($id);
+
+        // return response()->json([
+        //     'posts'=> DB::table('da5_posts')
+        //     ->Join('da5_type_posts','da5_posts.type_post_id','=','da5_type_posts.id')
+        //     ->Join('users','da5_posts.staff_id','=','users.id')
+        //     ->select('da5_posts.*','da5_type_posts.name','users.name as name_user')
+        //     // ->where('da5_type_posts.status',1)
+        //     ->where('da5_posts.id',$id)
+        //     ->get(),
+        // ], 200);
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -116,11 +127,11 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    // public function edit($id)
+    // {
+    //     //
 
-    }
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -169,6 +180,7 @@ class PostsController extends Controller
             ], 400);
         }
     }
+
 
     /**
      * Remove the specified resource from storage.

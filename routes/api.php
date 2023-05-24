@@ -155,8 +155,12 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
 
     // trạng thái đơn hàng
     Route::get('/order_processing', [OrderController::class, 'Order_processing']);
+    // đơn hàng đang vận chuyển
     Route::get('/orders_are_being_delivered', [OrderController::class, 'Orders_are_being_delivered']);
+
+    // trạng thái thành công
     Route::get('/order_success', [OrderController::class, 'Order_success']);
+    // đơn hàng hủy
     Route::get('/order_cancel', [OrderController::class, 'Order_cancel']);
 
 
@@ -286,8 +290,6 @@ Route::get('/get_product/{id}', [Front_end_Controller::class, 'show']);
 //front end video
 Route::get('/get_video', [Front_end_Controller::class, 'video']);
 // Route::get('/get_posts',[Front_end_Controller::class,'video']);
-
-
 // Route::get('/testleftjion', [Front_end_Controller::class, 'testleftjion']);
 
 // upload
@@ -304,10 +306,10 @@ Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
     Route::put('/cart-update/{cartDetail}', [CartController::class, 'updateQuantity']);
     Route::delete('/cart-remove/{cartDetail}', [CartController::class, 'removeProduct']);
     Route::post('/apply-voucher', [CartController::class, 'applyVoucher']);
-
-
     // đặt hàng
     Route::post('payment-order', [OrderController::class, 'store']);
+// sản phẩm liên quan theo id
+    Route::get('/products/{id}', [ProductController::class, 'show']);
 });
 
 

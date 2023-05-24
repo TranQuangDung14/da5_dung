@@ -75,18 +75,13 @@ class OrderController extends Controller
             $order = Order::findOrFail($id);
             $order->status = $request->status;
             $order->save();
-
-
             // dd($statusText);
             // Lấy thông tin khách hàng và địa chỉ email
             $customer = User::findOrFail($order->customer_id);
             $email = $customer->email;
             // dd($email);
-
             // Gửi email thông báo cập nhật trạng thái đơn hàng cho khách hàng
             Mail::to($email)->send(new OrderStatusUpdate($order));
-
-
             // session()->flash('success', 'Email thông báo đã được gửi thành công.');
             // return view('emails.order_status_update', compact('order','orderDetails'));
             return response()->json([

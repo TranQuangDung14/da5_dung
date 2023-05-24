@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Import_orders;
 use App\Models\Import_orders_details;
+use App\Models\Info_Supplier;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -22,15 +23,15 @@ class Import_OrdersController extends Controller
 
         try {
             return response()->json([
-                // 'message' => 'đây là nhập kho',
-                // 'import_order' =>
                 'import_order_detail'=>Import_orders_details::get(),
                 'product'=>  Product::where('status', 1)->select('id', 'name as name_product')->get(),
+                'supplier'=> Info_Supplier::select('id', 'name as name_supplier')->get(),
                 'import_order' => DB::table('da5_import_orders')
                     ->leftJoin('da5_import_orders_detail', 'da5_import_orders_detail.import_order_id', '=', 'da5_import_orders.id')
                     ->leftJoin('da5_product', 'da5_import_orders_detail.product_id', '=', 'da5_product.id')
-                    ->Join('users','da5_import_orders.staff_id','=','users.id')
-                    ->select('da5_import_orders.*', 'da5_import_orders_detail.*', 'da5_product.name as name_product','users.name as name_user')
+                    ->leftJoin('da5_info_supplier', 'da5_import_orders.supplier_id', '=', 'da5_info_supplier.id')
+                    ->leftJoin('users','da5_import_orders.staff_id','=','users.id')
+                    ->select('da5_import_orders.*', 'da5_import_orders_detail.*', 'da5_product.name as name_product','users.name as name_user','da5_info_supplier.name as name_supplier')
                     ->orderBy('da5_import_orders.id', 'desc')
                     ->get(),
             ]);
@@ -61,6 +62,7 @@ class Import_OrdersController extends Controller
         try {
             $importOrder = new Import_orders();
             $importOrder->staff_id =  $request->user()->id;
+            $importOrder->supplier_id =  $request->supplier_id;
             $importOrder->save();
 
             $product = Product::where('id', $request->product_id)->first();
@@ -136,6 +138,7 @@ class Import_OrdersController extends Controller
         try {
           //cập nhật lại người nhập kho
         $importOrder->staff_id =  $request->user()->id;
+        $importOrder->supplier_id =  $request->supplier_id;
 
         // Update import order detail
         if ($request->has('product_id') && $request->has('quantity') && $request->has('price')) {
@@ -158,6 +161,7 @@ class Import_OrdersController extends Controller
 
                     // Update total quantity of the import order
                     $importOrder->total_quantity = $importOrder->total_quantity - $oldQuantity + $request->quantity;
+                    $importOrder->total_cost = ($request->quantity)*($request->price);
                 }
             }
         }

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\UploadController;
+use App\Models\Brands;
 use App\Models\Image;
 use Exception;
 use Illuminate\Support\Str;
@@ -34,13 +35,15 @@ class ProductController extends Controller
                 'images' => function ($query) {
                     $query->select('image', 'product_id')->orderBy('product_id')->distinct();
                 },
+                'brand',
             ])
-                ->select(['id', 'name','quantity','default_price', 'category_id'])
+                ->select(['id', 'name','quantity','default_price', 'category_id','brand_id'])
                 ->orderBy('id', 'desc')
                 ->get();
                 // dd($product);
             return response()->json([
                 'category_product' => Category_product::where('status', 1)->select('id', 'name as name_cate')->get(),
+                'brand'=>Brands::select('id','name')->get(),
                 'product'=>$product,
             ]);
             // return Product::all();
@@ -93,6 +96,7 @@ class ProductController extends Controller
             // return $result;
             $product = new Product();
             $product->category_id =  (!empty($request->category_id)) ? $request->category_id : null;
+            $product->brand_id =  (!empty($request->brand_id)) ? $request->brand_id : null;
             $product->name = $request->name;
             $product->default_price = $request->default_price;
             $product->tech_specs =  (!empty($request->tech_specs)) ? $request->tech_specs : null;
@@ -214,6 +218,7 @@ class ProductController extends Controller
         try {
             $product = Product::findOrFail($id);
             $product->category_id =  (!empty($request->category_id)) ? $request->category_id : null;
+            $product->brand_id =  (!empty($request->brand_id)) ? $request->brand_id : null;
             $product->name = $request->name;
             $product->default_price = $request->default_price;
             // $product->price = $request->price;

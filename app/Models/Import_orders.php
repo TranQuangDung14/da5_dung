@@ -22,6 +22,8 @@ class Import_orders extends Model
      */
     protected $fillable = [
         'staff_id',
+        'supplier_id',
+        'total_cost',
         'total_quantity',
 
     ];

@@ -151,20 +151,32 @@ class VideoController extends Controller
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 404);
         }
-        $data = $request->only('title', 'staff_id', 'hashtag', 'type_video_id', 'video', 'description', 'status');
-        $user = Video::findOrFail($id);
-        $status = $user->update($data);
+        // $data = $request->only('title', 'staff_id', 'hashtag', 'type_video_id', 'video', 'description', 'status');
+        $video = Video::findOrFail($id);
+        $video->staff_id               =   $request->user()->id;
+        $video->type_video_id          =   (!empty($request->type_video_id)) ? $request->type_video_id : null;
+        $video->title                  =   (!empty($request->title)) ? $request->title : null;
+        $video->hashtag                =   (!empty($request->hashtag)) ? $request->hashtag : null;
+        $video->video                  =   (!empty($request->video)) ? $request->video : null;
+        $replaced                      =   Str::replace('https://www.youtube.com/watch?v=', '', $video->video);
+        $array_id_video                =   array_map('strval', explode('&', $replaced));
+        $video->link_id                =   $array_id_video[0];
+        $video->description            =   (!empty($request->description)) ? $request->description : null;
+        $video->save();
+        // $status = $user->update($data);
         // $status = Video::create($data);
-
-        if ($status) {
-            return response()->json([
-                'messege' => 'Sửa thành công !',
-            ], 201);
-        } else {
-            return response()->json([
-                'messege' => 'Sửa thất bại!',
-            ], 400);
-        }
+        return response()->json([
+            'messege' => 'Cập nhật thành công!',
+        ], 201);
+        // if ($status) {
+        //     return response()->json([
+        //         'messege' => 'Sửa thành công !',
+        //     ], 201);
+        // } else {
+        //     return response()->json([
+        //         'messege' => 'Sửa thất bại!',
+        //     ], 400);
+        // }
     }
 
     /**

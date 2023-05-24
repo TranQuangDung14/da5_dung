@@ -127,6 +127,12 @@ class Front_end_Controller extends Controller
 
         ], 200);
     }
+    // 'posts'=> DB::table('da5_posts')
+    //         ->Join('da5_type_posts','da5_posts.type_post_id','=','da5_type_posts.id')
+    //         ->Join('users','da5_posts.staff_id','=','users.id')
+    //         ->select('da5_posts.*','da5_type_posts.name','users.name as name_user')
+    //         ->where('da5_type_posts.status',1)
+    //         ->get(),
     // bài viết
     public function posts()
     {
@@ -161,6 +167,15 @@ class Front_end_Controller extends Controller
                 ->get(),
 
         ], 200);
+    }
+
+    public function statistical()
+    {
+        try {
+
+        } catch (\Exception $e) {
+            dd($e);
+        }
     }
 
     /**
@@ -226,9 +241,17 @@ class Front_end_Controller extends Controller
     {
         //
         // return Product::findOrFail($id);
-        $baseUrl = env('APP_URL') . '/';
-        return Posts::select(['*', DB::raw("CONCAT('$baseUrl','storage/', da5_posts.image) as img_src")])->findOrFail($id);
-
+        // $baseUrl = env('APP_URL') . '/';
+        // return Posts::select(['*', DB::raw("CONCAT('$baseUrl','storage/', da5_posts.image) as img_src")])->findOrFail($id);
+      return response()->json([
+            'posts'=> DB::table('da5_posts')
+            ->Join('da5_type_posts','da5_posts.type_post_id','=','da5_type_posts.id')
+            ->Join('users','da5_posts.staff_id','=','users.id')
+            ->select('da5_posts.*','da5_type_posts.name','users.name as name_user','users.avatar')
+            // ->where('da5_type_posts.status',1)
+            ->where('da5_posts.id',$id)
+            ->get(),
+        ], 200);
     }
 
     /**

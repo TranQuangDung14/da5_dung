@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Customer;
-
+use App\Models\Order;
 
 class DashboardController extends Controller
 {
@@ -20,9 +20,11 @@ class DashboardController extends Controller
         //
         $product= Product::where('status',1)->count();
     //    return Product::where('status',1)->count();
+        $order=Order::count();
         $customer = Customer::count();
         return response()->json([
                 'product'=>$product,
+                'order'=>$order,
                 'customer'=>$customer,
         ]);
     }
