@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\BannerController;
 use App\Http\Controllers\Api\BrandsController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\CustomerController;
@@ -255,6 +256,10 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
     Route::put('/voucher/{id}', [VoucherController::class, 'update']);
     Route::delete('/voucher/{id}', [VoucherController::class, 'destroy']);
 
+    // banner
+    Route::get('/banner', [BannerController::class, 'index']);
+    Route::post('/banner', [BannerController::class, 'store']);
+
 });
 
 
@@ -295,6 +300,7 @@ Route::get('/get_video', [Front_end_Controller::class, 'video']);
 // upload
 Route::post('upload', [UploadController::class, 'upload']);
 
+Route::get('/banner-slide', [BannerController::class, 'slides']);
 
 
 Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
