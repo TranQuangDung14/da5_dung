@@ -37,14 +37,14 @@ class ProductController extends Controller
                 },
                 'brand',
             ])
-                ->select(['id', 'name','quantity','default_price', 'category_id','brand_id'])
+                ->select(['id', 'name', 'quantity', 'default_price', 'category_id', 'brand_id','status'])
                 ->orderBy('id', 'desc')
                 ->get();
-                // dd($product);
+            // dd($product);
             return response()->json([
                 'category_product' => Category_product::where('status', 1)->select('id', 'name as name_cate')->get(),
-                'brand'=>Brands::select('id','name')->get(),
-                'product'=>$product,
+                'brand' => Brands::select('id', 'name')->get(),
+                'product' => $product,
             ]);
             // return Product::all();
         } catch (\Exception $e) {
@@ -55,6 +55,19 @@ class ProductController extends Controller
         }
     }
 
+    public function updateStatus(Request $request, $id)
+    {
+        try {
+            $product = Product::findOrFail($id);
+            $product->update([
+                'status' => $request->status
+            ]);
+            return response()->json(['message' => 'Cập nhật trạng thái thành công']);
+        } catch (\Exception $e) {
+            // Toastr::error('Operation Failed', 'Failed');
+            return response()->json(['message' => 'Cập nhật trạng thái thất bại']);
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -102,7 +115,7 @@ class ProductController extends Controller
             $product->tech_specs =  (!empty($request->tech_specs)) ? $request->tech_specs : null;
             // $product->price =  (!empty($request->price)) ? $request->price : null;
             $product->description =  (!empty($request->description)) ? $request->description : null;
-            $product->quantity=0;
+            $product->quantity = 0;
             $product->save();
 
 
@@ -154,7 +167,7 @@ class ProductController extends Controller
     {
         try {
             $product = Product::with(['images', 'category'])->findOrFail($id);
-            $product_related =Product::with(['images', 'category'])->where('category_id',$product->category_id)->whereNotIn('id', [$id])->get();
+            $product_related = Product::with(['images', 'category'])->where('category_id', $product->category_id)->whereNotIn('id', [$id])->get();
             $images = $product->images;
             return response()->json([
                 'product' => $product,

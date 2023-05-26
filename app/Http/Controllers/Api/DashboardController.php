@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Customer;
 use App\Models\Order;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -17,18 +18,54 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        //
-        $product= Product::where('status',1)->count();
-    //    return Product::where('status',1)->count();
-        $order=Order::count();
-        $customer = Customer::count();
-        return response()->json([
-                'product'=>$product,
-                'order'=>$order,
-                'customer'=>$customer,
-        ]);
-    }
+        try {
+            //
+            // $product = Product::where('status', 1)->count();
+            //    return Product::where('status',1)->count();
+            $revenue = DB::table('da5_export_order_details')
+                ->join('da5_product', 'da5_export_order_details.product_id', '=', 'da5_product.id')
+                ->select(DB::raw('sum(da5_export_order_details.quantity * da5_export_order_details.price) as revenue'))
+                ->first();
 
+
+            // echo "Tổng doanh thu: " . $totalRevenue;
+            // $order = Order::count();
+            // $customer = Customer::count();
+            return response()->json([
+                // 'product' => $product,
+                // 'order' => $order,
+                // 'customer' => $customer,
+                'revenue' => $revenue,
+            ]);
+        } catch (\Exception $e) {
+            //throw $th;
+            dd($e);
+        }
+    }
+    public function revenueByMonthYear($month, $year)
+    {
+        try {
+            // Thống kê doanh thu từ bảng chi tiết xuất kho theo tháng và năm
+            $revenue = DB::table('da5_export_order_details')
+                ->join('da5_product', 'da5_export_order_details.product_id', '=', 'da5_product.id')
+                ->whereMonth('da5_export_order_details.created_at', $month)
+                ->whereYear('da5_export_order_details.created_at', $year)
+                ->select(DB::raw('sum(da5_export_order_details.quantity * da5_export_order_details.price) as revenue'))
+                ->first();
+            return response()->json([
+                // 'product' => $product,
+                // 'order' => $order,
+                // 'customer' => $customer,
+                'revenue' => $revenue,
+            ]);
+        } catch (\Exception $e) {
+            //throw $th;
+            dd($e);
+        }
+
+
+        // return response()->json($revenue);
+    }
     /**
      * Show the form for creating a new resource.
      *

@@ -106,6 +106,7 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
 
     //dashboard
     Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/revenueByMonthYear', [DashboardController::class, 'revenueByMonthYear']);
 
     //customer / oke
     Route::get('/customer', [CustomerController::class, 'index']);
@@ -121,6 +122,9 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
     Route::post('/category_product', [Category_ProductController::class, 'store']);
     Route::put('/category_product/{id}', [Category_ProductController::class, 'update']);
     Route::delete('/category_product/{id}', [Category_ProductController::class, 'destroy']);
+    // cập nhật trạng thái
+    Route::put('category_products/{id}/status', [Category_ProductController::class, 'updateStatus']);
+
 
     //Info_Supplier / oke
     Route::get('/info_supplier', [Info_SupplierController::class, 'index']);
@@ -178,7 +182,7 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
     Route::post('/posts', [PostsController::class, 'store']);
     Route::post('/posts/{id}', [PostsController::class, 'update']);
     Route::delete('/posts/{id}', [PostsController::class, 'destroy']);
-
+    Route::put('posts/{id}/status', [PostsController::class, 'updateStatus']);
 
     //Product_Supplier
     Route::get('/product_supplier', [Product_SupplierController::class, 'index']);
@@ -194,6 +198,7 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
     Route::post('/product', [ProductController::class, 'store']);
     Route::post('/product/{id}', [ProductController::class, 'update']);
     Route::delete('/product/{id}', [ProductController::class, 'destroy']);
+    Route::put('product/{id}/status', [ProductController::class, 'updateStatus']);
 
     //Nhập kho
     Route::get('/import-order', [Import_OrdersController::class, 'index']);
@@ -223,7 +228,7 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
     Route::post('/type_posts', [Type_PostsController::class, 'store']);
     Route::put('/type_posts/{id}', [Type_PostsController::class, 'update']);
     Route::delete('/type_posts/{id}', [Type_PostsController::class, 'destroy']);
-
+    Route::put('type_posts/{id}/status', [Type_PostsController::class, 'updateStatus']);
 
     //Type_Video
     Route::get('/type_video', [Type_VideoController::class, 'index']);
@@ -231,7 +236,7 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
     Route::post('/type_video', [Type_VideoController::class, 'store']);
     Route::put('/type_video/{id}', [Type_VideoController::class, 'update']);
     Route::delete('/type_video/{id}', [Type_VideoController::class, 'destroy']);
-
+    Route::put('type_video/{id}/status', [Type_VideoController::class, 'updateStatus']);
 
     //Video
     Route::get('/video', [VideoController::class, 'index']);
@@ -239,7 +244,7 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
     Route::post('/video', [VideoController::class, 'store']);
     Route::put('/video/{id}', [VideoController::class, 'update']);
     Route::delete('/video/{id}', [VideoController::class, 'destroy']);
-
+    Route::put('video/{id}/status', [VideoController::class, 'updateStatus']);
 
     //Warehouse
     Route::get('/warehouse', [WarehouseController::class, 'index']);

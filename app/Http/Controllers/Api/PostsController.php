@@ -26,13 +26,13 @@ class PostsController extends Controller
         return response()->json([
             // 'messege' => 'day la bản test db!',
             'posts_all' => Posts::all(),
-            'type_post' =>Type_Posts::all(),
-            'posts'=> DB::table('da5_posts')
-            ->Join('da5_type_posts','da5_posts.type_post_id','=','da5_type_posts.id')
-            ->Join('users','da5_posts.staff_id','=','users.id')
-            ->select('da5_posts.*','da5_type_posts.name','users.name as name_user')
-            ->where('da5_type_posts.status',1)
-            ->get(),
+            'type_post' => Type_Posts::all(),
+            'posts' => DB::table('da5_posts')
+                ->Join('da5_type_posts', 'da5_posts.type_post_id', '=', 'da5_type_posts.id')
+                ->Join('users', 'da5_posts.staff_id', '=', 'users.id')
+                ->select('da5_posts.*', 'da5_type_posts.name', 'users.name as name_user')
+                ->where('da5_type_posts.status', 1)
+                ->get(),
             // 'user' =>User::where('role','staff')->get(),
             // 'image_posts'=>Posts::select
             // 'image_posts'=> Posts::select(['*', DB::raw("CONCAT('$baseUrl','storage/', da5_posts.image) as img_src")])->get(),
@@ -51,7 +51,21 @@ class PostsController extends Controller
         //
 
     }
+    public function updateStatus(Request $request, $id)
+    {
+        try {
+            $post = Posts::findOrFail($id);
+            $post->update([
+                'status' => $request->status
+            ]);
 
+            return response()->json(['message' => 'Cập nhật trạng thái thành công']);
+        } catch (\Exception $e) {
+
+            // Toastr::error('Operation Failed', 'Failed');
+            return response()->json(['message' => 'Cập nhật trạng thái thất bại']);
+        }
+    }
     /**
      * Store a newly created resource in storage.
      *

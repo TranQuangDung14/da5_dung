@@ -35,7 +35,19 @@ class Type_VideoController extends Controller
         //
 
     }
-
+    public function updateStatus(Request $request, $id)
+    {
+        try {
+            $type_video = Type_Video::findOrFail($id);
+            $type_video->update([
+                'status' => $request->status
+            ]);
+            return response()->json(['message' => 'Cập nhật trạng thái thành công']);
+        } catch (\Exception $e) {
+            // Toastr::error('Operation Failed', 'Failed');
+            return response()->json(['message' => 'Cập nhật trạng thái thất bại']);
+        }
+    }
     /**
      * Store a newly created resource in storage.
      *

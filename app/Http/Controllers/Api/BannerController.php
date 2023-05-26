@@ -32,20 +32,6 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
-        // $input = $request->all();
-        // $rules = array(
-        //     'name' => 'required',
-
-        // );
-        // $messages = array(
-        //     'name.required' => 'Tên thương hiệu không được phép trống!',
-
-        // );
-        // $validator = Validator::make($input, $rules, $messages);
-        // if ($validator->fails()) {
-        //     return response()->json(['error' => $validator->errors()], 404);
-        // }
-
         try {
             $banner = new Banner();
             if ($request->hasFile('image')) {

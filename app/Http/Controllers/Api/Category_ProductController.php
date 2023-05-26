@@ -22,29 +22,50 @@ class Category_ProductController extends Controller
     {
 //
         return response()->json([
-            // 'supplier'=>Info_Supplier::where('status',1)->select('id','name')->get(),
-            // 'category_product' => DB::table('da5_category_product')
-            //                     ->leftJoin('da5_info_supplier','da5_category_product.product_supplier_id','=','da5_info_supplier.id')
-            //                     ->leftJoin('da5_status','da5_category_product.status','=','da5_status.id')
-            //                     ->select('da5_category_product.*','da5_info_supplier.name as name_supplier','da5_status.name_status')
-            //                     ->orderBy('id', 'desc')
-            //                     ->get(),
-            'category' =>Category_product::where('status',1)->get()
+            'category' =>Category_product::get()
 
         ], 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
 
+    // public function updatestatus(Request $request)
+    // {
+    //     try {
+    //         if ($request->status == 'on') {
+    //             $status = 1;
+    //         } else {
+    //             $status = 0;
+    //         }
+
+    //         $category = Category_product::find($request->id);
+    //         $category->status = $status;
+    //         $category->save();
+
+    //         return response()->json($category);
+    //     } catch (\Exception $e) {
+
+    //         // Toastr::error('Operation Failed', 'Failed');
+    //         return redirect()->back();
+    //     }
+
+    // }
+
+    public function updateStatus(Request $request, $id)
+    {
+        try {
+        $categoryProduct = Category_product::findOrFail($id);
+        $categoryProduct->update([
+            'status' => $request->status
+        ]);
+
+        return response()->json(['message' => 'Cập nhật trạng thái thành công']);
+    } catch (\Exception $e) {
+
+        // Toastr::error('Operation Failed', 'Failed');
+        return response()->json(['message' => 'Cập nhật trạng thái thất bại']);
     }
 
+    }
     /**
      * Store a newly created resource in storage.
      *

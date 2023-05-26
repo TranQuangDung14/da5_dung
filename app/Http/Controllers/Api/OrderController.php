@@ -48,27 +48,6 @@ class OrderController extends Controller
     }
 
 
-    // public function updateStatus(Request $request, $id)
-    // {
-    //     // dd($request->all());
-    //     $order = Order::findOrFail($id);
-    //     $order->status = $request->status;
-    //     $order->save();
-    //     $orderDetails = $order->orderDetails; // Lấy danh sách đơn hàng
-
-    //     foreach ($orderDetails as $orderDetail) {
-    //         // Truy cập thông tin từng đơn hàng
-    //         $product_id = $orderDetail->product_id;
-    //         $price = $orderDetail->price;
-    //         $quantity = $orderDetail->quantity;
-
-    //         // Thực hiện các thao tác khác với thông tin đơn hàng
-    //         // ...
-    //     }
-    //     // Mail::to($order->customer_email)->send(new OrderStatusUpdate($order));
-    //     return response()->json(['message' => 'Cập nhật trạng thái đơn hàng thành công']);
-    // }
-
     public function updateStatus(Request $request, $id)
     {
         try {
