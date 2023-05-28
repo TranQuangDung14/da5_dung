@@ -106,7 +106,14 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
 
     //dashboard
     Route::get('/dashboard', [DashboardController::class, 'index']);
-    Route::get('/revenueByMonthYear', [DashboardController::class, 'revenueByMonthYear']);
+    // Route::get('/revenueByMonthYear', [DashboardController::class, 'revenueByMonthYear']);
+    Route::get('/daily', [DashboardController::class, 'dailyRevenue']);
+    Route::get('/monthly', [DashboardController::class, 'monthlyRevenue']);
+    Route::get('/yearly', [DashboardController::class, 'yearlyRevenue']);
+    // Route::get('/daily', 'StatsController@dailyRevenue');
+    // Route::get('/monthly', 'StatsController@monthlyRevenue');
+    // Route::get('/yearly', 'StatsController@yearlyRevenue');
+
 
     //customer / oke
     Route::get('/customer', [CustomerController::class, 'index']);
@@ -264,7 +271,6 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
     // banner
     Route::get('/banner', [BannerController::class, 'index']);
     Route::post('/banner', [BannerController::class, 'store']);
-
 });
 
 
@@ -319,7 +325,7 @@ Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
     Route::post('/apply-voucher', [CartController::class, 'applyVoucher']);
     // đặt hàng
     Route::post('payment-order', [OrderController::class, 'store']);
-// sản phẩm liên quan theo id
+    // sản phẩm liên quan theo id
     Route::get('/products/{id}', [ProductController::class, 'show']);
 });
 

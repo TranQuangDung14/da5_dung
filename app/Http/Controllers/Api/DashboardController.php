@@ -20,7 +20,7 @@ class DashboardController extends Controller
     {
         try {
             //
-            // $product = Product::where('status', 1)->count();
+            $product = Product::where('status', 1)->count();
             //    return Product::where('status',1)->count();
             $revenue = DB::table('da5_export_order_details')
                 ->join('da5_product', 'da5_export_order_details.product_id', '=', 'da5_product.id')
@@ -29,12 +29,12 @@ class DashboardController extends Controller
 
 
             // echo "Tổng doanh thu: " . $totalRevenue;
-            // $order = Order::count();
-            // $customer = Customer::count();
+            $order = Order::count();
+            $customer = Customer::count();
             return response()->json([
-                // 'product' => $product,
-                // 'order' => $order,
-                // 'customer' => $customer,
+                'product' => $product,
+                'order' => $order,
+                'customer' => $customer,
                 'revenue' => $revenue,
             ]);
         } catch (\Exception $e) {
@@ -42,29 +42,53 @@ class DashboardController extends Controller
             dd($e);
         }
     }
-    public function revenueByMonthYear($month, $year)
+    //Doanh thu theo ngày
+    public function dailyRevenue()
     {
         try {
-            // Thống kê doanh thu từ bảng chi tiết xuất kho theo tháng và năm
             $revenue = DB::table('da5_export_order_details')
-                ->join('da5_product', 'da5_export_order_details.product_id', '=', 'da5_product.id')
-                ->whereMonth('da5_export_order_details.created_at', $month)
-                ->whereYear('da5_export_order_details.created_at', $year)
-                ->select(DB::raw('sum(da5_export_order_details.quantity * da5_export_order_details.price) as revenue'))
-                ->first();
-            return response()->json([
-                // 'product' => $product,
-                // 'order' => $order,
-                // 'customer' => $customer,
-                'revenue' => $revenue,
-            ]);
+            ->join('da5_export_orders', 'da5_export_order_details.export_order_id', '=', 'da5_export_orders.id')
+            ->select(DB::raw('DATE(da5_export_orders.created_at) as date, sum(da5_export_order_details.quantity * da5_export_order_details.price) as revenue'))
+            ->groupBy(DB::raw('DATE(da5_export_orders.created_at)'))
+            ->get();
+
+        return response()->json($revenue);
         } catch (\Exception $e) {
-            //throw $th;
             dd($e);
         }
 
+    }
+    // Doanh thu theo tháng
+    public function monthlyRevenue()
+    {
+        try {
+            $revenue = DB::table('da5_export_order_details')
+            ->join('da5_export_orders', 'da5_export_order_details.export_order_id', '=', 'da5_export_orders.id')
+            ->select(DB::raw('YEAR(da5_export_orders.created_at) as year, MONTH(da5_export_orders.created_at) as month, sum(da5_export_order_details.quantity * da5_export_order_details.price) as revenue'))
+            ->groupBy(DB::raw('YEAR(da5_export_orders.created_at), MONTH(da5_export_orders.created_at)'))
+            ->get();
 
-        // return response()->json($revenue);
+        return response()->json($revenue);
+        } catch (\Exception $e) {
+            dd($e);
+        }
+
+    }
+    // Doanh thu theo năm
+    public function yearlyRevenue()
+    {
+        try {
+            $revenue = DB::table('da5_export_order_details')
+            ->join('da5_export_orders', 'da5_export_order_details.export_order_id', '=', 'da5_export_orders.id')
+            ->select(DB::raw('YEAR(da5_export_orders.created_at) as year, sum(da5_export_order_details.quantity * da5_export_order_details.price) as revenue'))
+            ->groupBy(DB::raw('YEAR(da5_export_orders.created_at)'))
+            ->get();
+
+        return response()->json($revenue);
+        } catch (\Exception $e) {
+            dd($e);
+        }
+
     }
     /**
      * Show the form for creating a new resource.
