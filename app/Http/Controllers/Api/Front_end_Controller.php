@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Brands;
 use App\Models\Category_product;
 use App\Models\Posts;
 use Illuminate\Http\Request;
@@ -33,14 +34,15 @@ class Front_end_Controller extends Controller
                 $query->select('image', 'product_id')->orderBy('product_id')->distinct();
             },
         ])
-            ->select(['id', 'name','quantity','default_price', 'category_id'])
+            ->select(['id', 'name', 'quantity', 'default_price', 'category_id'])
             ->orderBy('id', 'desc');
         return response()->json([
 
             // // Danh sách sản phẩm
             'all_product' => $product->get(),
-                'product'=>$product->limit(5)->get(),
-                'featured_products'=>$product->limit(4)->get(),
+            'product' => $product->limit(5)->get(),
+            'featured_products' => $product->limit(4)->get(),
+            'brand'=>Brands::select('id','name')->get(),
             // danh mục sản phẩm
             'category' => Category_product::select('id', 'name')->where('status', 1)->get(),
             // giới hạn danh mục hiển thị
@@ -89,17 +91,6 @@ class Front_end_Controller extends Controller
                 ->get(),
         ], 200);
     }
-
-
-    // public function testleftjion(){
-    //     return response()->json([
-
-    //         'users' => DB::table('da5_product')
-    //             ->leftJoin('da5_category_product', 'da5_category_product.id', '=', 'da5_product.category_id')
-    //             ->select('da5_category_product.*','da5_product.name as name_product','da5_product.id','da5_product.category_id')
-    //             ->get(),
-    //     ],200);
-    // }
     //danh sách video
     public function video()
     {
@@ -109,7 +100,6 @@ class Front_end_Controller extends Controller
 
         ], 200);
     }
-
     // danh mục video
     public function cate_video()
     {
@@ -118,7 +108,6 @@ class Front_end_Controller extends Controller
 
         ], 200);
     }
-
     // danh mục bài viết
     public function cate_posts()
     {
@@ -127,35 +116,22 @@ class Front_end_Controller extends Controller
 
         ], 200);
     }
-    // 'posts'=> DB::table('da5_posts')
-    //         ->Join('da5_type_posts','da5_posts.type_post_id','=','da5_type_posts.id')
-    //         ->Join('users','da5_posts.staff_id','=','users.id')
-    //         ->select('da5_posts.*','da5_type_posts.name','users.name as name_user')
-    //         ->where('da5_type_posts.status',1)
-    //         ->get(),
     // bài viết
     public function posts()
     {
-
         $baseUrl = env('APP_URL') . '/';
         return response()->json([
-
-            // 'posts' => Posts::select([
-            //     '*',
-            //     DB::raw("CONCAT('$baseUrl','storage/', da5_posts.image) as img_src")
-            // ])
-            //     ->where('status', 1)->get(),
-            'posts'=> DB::table('da5_posts')
-            ->Join('da5_type_posts','da5_posts.type_post_id','=','da5_type_posts.id')
-            ->Join('users','da5_posts.staff_id','=','users.id')
-            ->select('da5_posts.*','da5_type_posts.name','users.name as name_user')
-            ->where('da5_type_posts.status',1)
-            ->get(),
+            'posts' => DB::table('da5_posts')
+                ->Join('da5_type_posts', 'da5_posts.type_post_id', '=', 'da5_type_posts.id')
+                ->Join('users', 'da5_posts.staff_id', '=', 'users.id')
+                ->select('da5_posts.*', 'da5_type_posts.name', 'users.name as name_user')
+                ->where('da5_type_posts.status', 1)
+                ->get(),
             'type_posts' => Type_Posts::select('*')
                 ->where('status', 1)
                 ->get(),
 
-            'featured_post'=>Posts::orderBy('id', 'desc')->first(),
+            'featured_post' => Posts::orderBy('id', 'desc')->first(),
             // bài viết bên trang chủ
             'posts_index' => Posts::select([
                 '*',
@@ -163,7 +139,7 @@ class Front_end_Controller extends Controller
             ])
                 ->where('status', 1)
                 ->limit(5)
-                ->orderBy('id','desc')
+                ->orderBy('id', 'desc')
                 ->get(),
 
         ], 200);
@@ -172,31 +148,9 @@ class Front_end_Controller extends Controller
     public function statistical()
     {
         try {
-
         } catch (\Exception $e) {
             dd($e);
         }
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     // chi tiết sản phẩm
@@ -208,83 +162,79 @@ class Front_end_Controller extends Controller
      */
     public function show($id)
     {
-        //
-        // $product= Product::findOrFail($id);
-        // $category = Category_product::where('order_id','=',$id)->get();
-        // return Product::findOrFail($id);
-        // dd('test');
-        // $baseUrl = env('APP_URL') . '/';
         $product = Product::with([
             'category',
             'images' => function ($query) {
                 $query->select('image', 'product_id')->orderBy('product_id')->distinct();
             },
         ])
-            ->select(['id', 'name','quantity','default_price', 'category_id','description','tech_specs'])
+            ->select(['id', 'name', 'quantity', 'default_price', 'category_id', 'description', 'tech_specs'])
             // ->where()
             ->orderBy('id', 'desc')
             ->findOrFail($id);
-            return response()->json([
-                $product
-            ], 200);
-        // return Product::select(['*', DB::raw("CONCAT('$baseUrl','storage/', da5_product.image) as img_src")])->findOrFail($id);
-        // return response()->json([
-
-        //     'data'=>DB::table('da5_product')
-        //     ->Join('da5_category_product', 'da5_category_product.id', '=', 'da5_product.category_id')
-        //     ->select(['da5_product.*', 'da5_category_product.name as name_category', DB::raw("CONCAT('$baseUrl','storage/', da5_product.image) as img_src")])
-        //     // ->select()
-        //     ->first($id),
-        // ]);
+        return response()->json([
+            $product
+        ], 200);
     }
     public function show_posts($id)
     {
-        //
-        // return Product::findOrFail($id);
-        // $baseUrl = env('APP_URL') . '/';
-        // return Posts::select(['*', DB::raw("CONCAT('$baseUrl','storage/', da5_posts.image) as img_src")])->findOrFail($id);
-      return response()->json([
-            'posts'=> DB::table('da5_posts')
-            ->Join('da5_type_posts','da5_posts.type_post_id','=','da5_type_posts.id')
-            ->Join('users','da5_posts.staff_id','=','users.id')
-            ->select('da5_posts.*','da5_type_posts.name','users.name as name_user','users.avatar')
-            // ->where('da5_type_posts.status',1)
-            ->where('da5_posts.id',$id)
-            ->get(),
+        return response()->json([
+            'posts' => DB::table('da5_posts')
+                ->Join('da5_type_posts', 'da5_posts.type_post_id', '=', 'da5_type_posts.id')
+                ->Join('users', 'da5_posts.staff_id', '=', 'users.id')
+                ->select('da5_posts.*', 'da5_type_posts.name', 'users.name as name_user', 'users.avatar')
+                // ->where('da5_type_posts.status',1)
+                ->where('da5_posts.id', $id)
+                ->get(),
         ], 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    // Hiển thị sản phẩm theo danh mục
+    public function showProductsByCategory($id)
     {
-        //
-    }
+        try {
+            $category = Category_product::findOrFail($id);
+            $products = $category->products;
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+            return response()->json($products);
+        } catch (\Exception $e) {
+            //throw $th;
+            dd($e);
+        }
+    }
+    // lọc sản phẩm theo điều kiện
+    public function filterProducts(Request $request)
     {
-        //
+        try {
+            $query = Product::with([
+                'category',
+                'images' => function ($query) {
+                    $query->select('image', 'product_id')->orderBy('product_id')->distinct();
+                },
+            ])->where('status',1);
+
+            if ($request->has('category_id')) {
+                $query->where('category_id', $request->category_id);
+            }
+            if ($request->has('brand_id')) {
+                $query->where('brand_id', $request->brand_id);
+            }
+
+            if ($request->has('min_price')) {
+                $query->where('default_price', '>=', $request->min_price);
+            }
+
+            if ($request->has('max_price')) {
+                $query->where('default_price', '<=', $request->max_price);
+            }
+
+            $products = $query->get();
+
+            return response()->json($products);
+        } catch (\Exception $e) {
+            dd($e);
+        }
+
     }
 }

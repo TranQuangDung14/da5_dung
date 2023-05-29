@@ -25,6 +25,7 @@ use App\Http\Controllers\Api\Front_end_Controller;
 use App\Http\Controllers\Api\MailController;
 use App\Http\Controllers\Api\VoucherController;
 use App\Http\Controllers\Api\ExportOrderController;
+use App\Http\Controllers\Api\Store_informationController;
 // use App\Http\Controllers\Api\ImportOrderController;
 use App\Http\Controllers\UploadController;
 use Illuminate\Http\Request;
@@ -110,6 +111,11 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
     Route::get('/daily', [DashboardController::class, 'dailyRevenue']);
     Route::get('/monthly', [DashboardController::class, 'monthlyRevenue']);
     Route::get('/yearly', [DashboardController::class, 'yearlyRevenue']);
+    Route::get('/order_statistics', [DashboardController::class, 'orderstatistics']);
+    Route::get('/order_growth', [DashboardController::class, 'getOrderGrowth']);
+    Route::get('/customer_growth', [DashboardController::class, 'getCustomerGrowth']);
+    Route::get('/product_growth', [DashboardController::class, 'getProductGrowth']);
+    Route::get('/revenue_growth', [DashboardController::class, 'getRevenueGrowth']);
     // Route::get('/daily', 'StatsController@dailyRevenue');
     // Route::get('/monthly', 'StatsController@monthlyRevenue');
     // Route::get('/yearly', 'StatsController@yearlyRevenue');
@@ -270,7 +276,17 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
 
     // banner
     Route::get('/banner', [BannerController::class, 'index']);
-    Route::post('/banner', [BannerController::class, 'store']);
+    Route::post('/banner',  [BannerController::class, 'store']);
+    Route::get('/banner/{id}', [BannerController::class, 'show']);
+    Route::post('/banner/{id}', [BannerController::class, 'update']);
+    Route::delete('/banner/{id}', [BannerController::class, 'destroy']);
+
+    //liên hệ
+    Route::get('/store_information', [Store_informationController::class, 'index']);
+    Route::get('/store_information/{id}', [Store_informationController::class, 'show']);
+    Route::post('/store_information', [Store_informationController::class, 'store']);
+    Route::put('/store_information/{id}', [Store_informationController::class, 'update']);
+    Route::delete('/store_information/{id}', [Store_informationController::class, 'destroy']);
 });
 
 
@@ -300,18 +316,27 @@ Route::get('/get_posts', [Front_end_Controller::class, 'posts']);
 Route::get('/get_posts/{id}', [Front_end_Controller::class, 'show_posts']);
 Route::get('/get_product', [Front_end_Controller::class, 'index']);
 // hiển thị sản phẩm theo danh mục
-Route::get('/get_product_by_category', [Front_end_Controller::class, 'show_product_by_category']);
+Route::get('product_by_category/{id}', [Front_end_Controller::class, 'showProductsByCategory']);
+
+
+Route::get('/filter_products',  [Front_end_Controller::class, 'filterProducts']);
+
+// // hiển thị sản phẩm theo danh mục
+// Route::get('/get_product_by_category', [Front_end_Controller::class, 'show_product_by_category']);
 
 Route::get('/get_product/{id}', [Front_end_Controller::class, 'show']);
 //front end video
 Route::get('/get_video', [Front_end_Controller::class, 'video']);
 // Route::get('/get_posts',[Front_end_Controller::class,'video']);
 // Route::get('/testleftjion', [Front_end_Controller::class, 'testleftjion']);
-
+// sản phẩm liên quan theo id
+Route::get('/products/{id}', [ProductController::class, 'show']);
 // upload
 Route::post('upload', [UploadController::class, 'upload']);
 
 Route::get('/banner-slide', [BannerController::class, 'slides']);
+Route::get('/store_information_customer', [Store_informationController::class, 'index']);
+
 
 
 Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
@@ -325,8 +350,14 @@ Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
     Route::post('/apply-voucher', [CartController::class, 'applyVoucher']);
     // đặt hàng
     Route::post('payment-order', [OrderController::class, 'store']);
-    // sản phẩm liên quan theo id
-    Route::get('/products/{id}', [ProductController::class, 'show']);
+
+
+    // đơn hàng của khách hàng
+    Route::get('/order_customer/{status}', [OrderController::class, 'getOrder']);
+    Route::get('/order_customer_detail/{id}', [OrderController::class, 'show']);
+
+    // cập nhật trạng thái đơn hàng
+    Route::put('/update_status_order_customer/{id}', [OrderController::class, 'updateStatus']);
 });
 
 

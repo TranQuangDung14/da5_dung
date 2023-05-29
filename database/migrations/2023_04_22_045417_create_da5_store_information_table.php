@@ -19,6 +19,8 @@ class CreateDa5StoreInformationTable extends Migration
             $table->string("map",1000)->nullable();
             $table->string("number_phone",50)->nullable();
             $table->string("email",50)->nullable();
+            $table->string("open_time",200)->nullable();
+            $table->string("address",200)->nullable();
             $table->integer("status")->default(1);
             $table->timestamps();
         });

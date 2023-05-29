@@ -20,6 +20,8 @@ class Store_information extends Model
         'map',
         'number_phone',
         'email',
+        'open_time',
+        'address',
         'status',
     ];
 }

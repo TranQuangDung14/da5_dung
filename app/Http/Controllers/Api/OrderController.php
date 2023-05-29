@@ -177,4 +177,26 @@ class OrderController extends Controller
             ], 500);
         }
     }
+
+
+
+    // đơn hàng trang người dùng
+    public function getOrder($status)
+    {
+        try {
+            $order = auth()->user()->order;
+            if (!$order) {
+                return response()->json([
+                    'message' => 'Đơn hàng!'
+                ]);
+            }
+            $sortedOrder = $order->where('status', $status)->sortByDesc('id')->values();
+            $sortedOrder->load('orderDetails.product.images');
+            return response()->json($sortedOrder);
+        } catch (\Exception $e) {
+            dd($e);
+        }
+        // dd(auth()->user());
+
+    }
 }
