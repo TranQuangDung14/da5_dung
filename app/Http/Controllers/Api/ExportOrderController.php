@@ -16,18 +16,7 @@ use Illuminate\Support\Facades\Mail;
 use PDF;
 class ExportOrderController extends Controller
 {
-    public function exportPdf($id)
-    {
-        // dd('eee');
-        try {
-            $Export_orders = Export_orders::find($id);
-            $pdf = PDF::loadView('pdf.pdf_view', ['user' => $Export_orders]);
-            return $pdf->download('user.pdf');
-        } catch (\Exception $e) {
-            //throw $th;
-            dd($e);
-        }
-    }
+
     public function getExportOrders()
     {
         $exportOrders = Export_orders::with('order','staff')->get();
@@ -96,6 +85,22 @@ class ExportOrderController extends Controller
 
             return response()->json(['message' => 'Xuất kho thành công']);
         } catch (\Exception $e) {
+            dd($e);
+        }
+    }
+    public function exportPdf($id)
+    {
+        // dd('eee');
+        try {
+            // dd($id);
+            $exportOrder = Export_orders::with('export_orders_details')->find($id);
+            // $order = Order::with('orderDetails.product.images')->findOrFail($id);
+
+            // dd($exportOrder);
+            $pdf = PDF::loadView('pdf.export_order', ['exportOrder' => $exportOrder]);
+            return $pdf->download('export_order.pdf');
+        } catch (\Exception $e) {
+            //throw $th;
             dd($e);
         }
     }

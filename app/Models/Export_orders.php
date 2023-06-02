@@ -12,7 +12,7 @@ class Export_orders extends Model
 
     public function export_orders_details()
     {
-        return $this->hasMany(Export_orders_details::class,'export_order_id');
+        return $this->hasMany(Export_orders_details::class,'export_order_id','id');
     }
     public function order()
     {
