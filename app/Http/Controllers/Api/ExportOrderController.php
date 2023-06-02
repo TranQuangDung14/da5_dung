@@ -13,10 +13,21 @@ use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-
+use PDF;
 class ExportOrderController extends Controller
 {
-
+    public function exportPdf($id)
+    {
+        // dd('eee');
+        try {
+            $Export_orders = Export_orders::find($id);
+            $pdf = PDF::loadView('pdf.pdf_view', ['user' => $Export_orders]);
+            return $pdf->download('user.pdf');
+        } catch (\Exception $e) {
+            //throw $th;
+            dd($e);
+        }
+    }
     public function getExportOrders()
     {
         $exportOrders = Export_orders::with('order','staff')->get();
@@ -88,4 +99,25 @@ class ExportOrderController extends Controller
             dd($e);
         }
     }
+    // public function exportPDF($orderId)
+    // {
+    //     try {
+    //         $exportOrder = Export_orders::where('order_id', $orderId)->first();
+    //         $exportOrderDetails = Export_orders_details::where('export_order_id', $exportOrder->id)->get();
+    //         $data = [
+    //             'exportOrder' => $exportOrder,
+    //             'exportOrderDetails' => $exportOrderDetails
+    //         ];
+    //         $html = View::make('pdf.pdf_view', $data)->render();
+
+    //         $pdf = PDF::loadHTML($html);
+
+    //         // $pdf = Pdf::loadView('pdf.pdf_view', $data);
+    //         return $pdf->download('export_order.pdf');
+    //     } catch (\Exception $e) {
+    //         dd($e);
+    //     }
+
+    // }
+
 }

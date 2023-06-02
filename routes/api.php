@@ -226,6 +226,9 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
 
     Route::post('export-order', [ExportOrderController::class, 'exportOrder']);
 
+    // xuất file pdf đơn hàng
+    Route::get('export-order-pdf/{id}',[ExportOrderController::class, 'exportPdf']);
+    // Route::get('user/{id}/pdf', 'UserController@exportPdf');
 
     //Transport
     Route::get('/transport', [TransportController::class, 'index']);
@@ -287,6 +290,8 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
     Route::post('/store_information', [Store_informationController::class, 'store']);
     Route::put('/store_information/{id}', [Store_informationController::class, 'update']);
     Route::delete('/store_information/{id}', [Store_informationController::class, 'destroy']);
+
+
 });
 
 

@@ -163,12 +163,13 @@ class Front_end_Controller extends Controller
     public function show($id)
     {
         $product = Product::with([
+            'brand',
             'category',
             'images' => function ($query) {
                 $query->select('image', 'product_id')->orderBy('product_id')->distinct();
             },
         ])
-            ->select(['id', 'name', 'quantity', 'default_price', 'category_id', 'description', 'tech_specs'])
+            ->select(['id', 'name', 'quantity', 'default_price', 'category_id', 'description', 'tech_specs','brand_id'])
             // ->where()
             ->orderBy('id', 'desc')
             ->findOrFail($id);
@@ -208,6 +209,7 @@ class Front_end_Controller extends Controller
     {
         try {
             $query = Product::with([
+                'brand',
                 'category',
                 'images' => function ($query) {
                     $query->select('image', 'product_id')->orderBy('product_id')->distinct();
