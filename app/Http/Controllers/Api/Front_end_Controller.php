@@ -45,6 +45,7 @@ class Front_end_Controller extends Controller
             'brand'=>Brands::select('id','name')->get(),
             // danh mục sản phẩm
             'category' => Category_product::select('id', 'name')->where('status', 1)->get(),
+            'type_post'=>Type_Posts::select('id','name')->get(),
             // giới hạn danh mục hiển thị
             'category_limit' => Category_product::select('id', 'name')->where('status', 1)->limit(4)->get(),
             // 'product_by_cate'=> $product->limit(10)->get(),
@@ -214,8 +215,7 @@ class Front_end_Controller extends Controller
                 'images' => function ($query) {
                     $query->select('image', 'product_id')->orderBy('product_id')->distinct();
                 },
-            ])->where('status',1);
-
+            ])->where('status',1) ->orderBy('id', 'desc');
             if ($request->has('category_id')) {
                 $query->where('category_id', $request->category_id);
             }

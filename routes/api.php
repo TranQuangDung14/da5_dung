@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AddressController;
 use App\Http\Controllers\Api\BannerController;
 use App\Http\Controllers\Api\BrandsController;
 use App\Http\Controllers\Api\CartController;
@@ -227,7 +228,7 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
     Route::post('export-order', [ExportOrderController::class, 'exportOrder']);
 
     // xuất file pdf đơn hàng
-    Route::get('export-order-pdf/{id}',[ExportOrderController::class, 'exportPdf']);
+    Route::get('export-order-pdf/{id}', [ExportOrderController::class, 'exportPdf']);
     // Route::get('user/{id}/pdf', 'UserController@exportPdf');
 
     //Transport
@@ -290,8 +291,6 @@ Route::group(['middleware' => ['auth:sanctum', 'admin']], function () {
     Route::post('/store_information', [Store_informationController::class, 'store']);
     Route::put('/store_information/{id}', [Store_informationController::class, 'update']);
     Route::delete('/store_information/{id}', [Store_informationController::class, 'destroy']);
-
-
 });
 
 
@@ -310,8 +309,12 @@ Route::group(['namespace' => 'App\Http\Controllers\Api'], function () {
 // Route::put('/testdb/{id}', [testdbController::class, 'update']);
 // Route::delete('/testdb/{id}', [testdbController::class, 'destroy']);
 
+// Route::get('/index2', [AddressController::class, 'index']);
 
-
+    // địa chỉ
+    Route::get('/provinces', [AddressController::class, 'getProvinces']);
+    Route::get('/districts/{provinceId}', [AddressController::class, 'getDistricts']);
+    Route::get('/wards/{districtId}', [AddressController::class, 'getWards']);
 
 
 // Front end
