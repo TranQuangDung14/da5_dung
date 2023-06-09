@@ -109,12 +109,22 @@ class BannerController extends Controller
         $banner_2 = Banner::where('ordinal',2)->orderBy('id','desc')->first();// slide quảng cáo  trái
         $banner_3 = Banner::where('ordinal',3)->orderBy('id','desc')->first();// slide quảng cáo phải
         $banner_4 = Banner::where('ordinal',4)->orderBy('id','desc')->first();// slide logo
+        $banner_5 = Banner::where('ordinal',5)->orderBy('id','desc')->first();//
+        $banner_6 = Banner::where('ordinal',6)->orderBy('id','desc')->first();//
+        $banner_7 = Banner::where('ordinal',7)->orderBy('id','desc')->first();//
+        $banner_8 = Banner::where('ordinal',8)->orderBy('id','desc')->first();//
+        $banner_9 = Banner::where('ordinal',9)->orderBy('id','desc')->first();//
         // $banner->delete();
         return response()->json([
             'banner_1' => $banner_1,
             'banner_2' => $banner_2,
             'banner_3' => $banner_3,
             'banner_4' => $banner_4,
+            'banner_5' => $banner_5,
+            'banner_6' => $banner_6,
+            'banner_7' => $banner_7,
+            'banner_8' => $banner_8,
+            'banner_9' => $banner_9,
         ], 200);
     }
 }
