@@ -56,6 +56,7 @@ use PhpParser\Node\Stmt\Return_;
 //     });
 
 
+
 Route::post('/send-email', [MailController::class, 'sendEmail']);
 // Route::group(['middleware'=>'auth:sanctum'],function(){
 // đăng nhập
@@ -348,7 +349,6 @@ Route::get('/store_information_customer', [Store_informationController::class, '
 
 
 Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
-
     Route::get('/testdata', [CartController::class, 'Test']);
     // giỏ hàng
     Route::get('/cart', [CartController::class, 'getCart']);
@@ -366,6 +366,7 @@ Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
 
     // cập nhật trạng thái đơn hàng
     Route::put('/update_status_order_customer/{id}', [OrderController::class, 'updateStatus']);
+    Route::post('/change-password', [AuthController::class, 'changePassword']);
 });
 
 

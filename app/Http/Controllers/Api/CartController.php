@@ -94,6 +94,7 @@ class CartController extends Controller
                 'message' => 'Đã thêm sản phẩm vào giỏ hàng'
             ]);
         } catch (\Exception $e) {
+            dd($e);
             return response()->json([
                 'message' => 'Thêm lỗi'
             ]);

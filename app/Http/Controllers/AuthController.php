@@ -77,7 +77,7 @@ class AuthController extends Controller
             $customer = Customer::create([
                 'user_id' => $user->id,
                 'name' => $request->input('name'),
-                'date_of_birth'=>$request->input('date_of_birth'),
+                'date_of_birth' => $request->input('date_of_birth'),
                 'sex' => $request->input('sex'),
                 'number_phone' => $request->input('number_phone'),
                 'address' => $request->input('address'),
@@ -168,6 +168,34 @@ class AuthController extends Controller
             return response()->json([
                 'message' => $e->getMessage()
             ], 500);
+        }
+    }
+
+    public function changePassword(Request $request)
+    {
+        try {
+            $user = Auth::user();
+            // $test= $request->user()->id;
+            // dd($user);
+            if (!$user) {
+                return response()->json(['error' => 'Không tìm thấy người dùng được xác thực nào'], 403);
+            }
+            $validatedData = $request->validate([
+                'old_password' => 'required',
+                'new_password' => 'required|min:3',
+                'new_confirm_password' => 'same:new_password',
+            ]);
+            // $user = Auth::user();
+            if (!Hash::check($request->old_password, $user->password)) {
+                return response()->json(['error' => 'Mật khẩu hiện tại không khớp'], 403);
+            }
+
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+
+            return response()->json(['message' => 'Mật khẩu đã được thay đổi thành công'], 200);
+        } catch (\Exception $e) {
+            dd($e);
         }
     }
 }
