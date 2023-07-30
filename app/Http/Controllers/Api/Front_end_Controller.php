@@ -42,10 +42,10 @@ class Front_end_Controller extends Controller
             'all_product' => $product->get(),
             'product' => $product->limit(5)->get(),
             'featured_products' => $product->limit(4)->get(),
-            'brand'=>Brands::select('id','name')->get(),
+            'brand' => Brands::select('id', 'name')->get(),
             // danh mục sản phẩm
             'category' => Category_product::select('id', 'name')->where('status', 1)->get(),
-            'type_post'=>Type_Posts::select('id','name')->get(),
+            'type_post' => Type_Posts::select('id', 'name')->get(),
             // giới hạn danh mục hiển thị
             'category_limit' => Category_product::select('id', 'name')->where('status', 1)->limit(4)->get(),
             // 'product_by_cate'=> $product->limit(10)->get(),
@@ -170,7 +170,7 @@ class Front_end_Controller extends Controller
                 $query->select('image', 'product_id')->orderBy('product_id')->distinct();
             },
         ])
-            ->select(['id', 'name', 'quantity', 'default_price', 'category_id', 'description', 'tech_specs','brand_id'])
+            ->select(['id', 'name', 'quantity', 'default_price', 'category_id', 'description', 'tech_specs', 'brand_id'])
             // ->where()
             ->orderBy('id', 'desc')
             ->findOrFail($id);
@@ -238,5 +238,58 @@ class Front_end_Controller extends Controller
             dd($e);
         }
 
+    }
+    public function filterAndSearch(Request $request)
+    {
+        try {
+            $query = Product::with([
+                'brand',
+                'category',
+                'images' => function ($query) {
+                    $query->select('image', 'product_id')->orderBy('product_id')->distinct();
+                },
+            ])->where('status', 1)->orderBy('id', 'desc');
+            if ($request->has('category_id')) {
+                $query->where('category_id', $request->category_id);
+            }
+            if ($request->has('brand_id')) {
+                $query->where('brand_id', $request->brand_id);
+            }
+            if ($request->has('min_price')) {
+                $query->where('default_price', '>=', $request->min_price);
+            }
+
+            if ($request->has('max_price')) {
+                $query->where('default_price', '<=', $request->max_price);
+            }
+            // Tìm kiếm hiển thị ngay
+            if ($request->has('search')) {
+                $search = $request->get('search');
+                $query->where(function ($query) use ($search) {
+                    $query->where('name', 'LIKE', "%{$search}%")
+                        ->orWhere('code', 'LIKE', "%{$search}%");
+                });
+            }
+
+            $products = $query->get();
+
+            return response()->json($products);
+        } catch (\Exception $e) {
+            // Bạn nên gửi lại thông báo lỗi, thay vì chỉ dừng chương trình
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    // tìm kiếm hiển thị ngay
+    public function search(Request $request)
+    {
+        $search = $request->get('search');
+
+        $products = Product::query()
+            ->where('name', 'LIKE', "%{$search}%")
+            ->orWhere('code', 'LIKE', "%{$search}%")
+            ->get();
+
+        return response()->json($products);
     }
 }
