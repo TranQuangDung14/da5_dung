@@ -83,7 +83,6 @@ class OrderController extends Controller
         } catch (\Exception $e) {
             dd($e);
         }
-
         // return Order::all();
     }
 

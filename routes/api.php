@@ -329,6 +329,7 @@ Route::get('product_by_category/{id}', [Front_end_Controller::class, 'showProduc
 
 
 Route::get('/filter_products',  [Front_end_Controller::class, 'filterProducts']);
+Route::get('/filter_search',  [Front_end_Controller::class, 'filterAndSearch']);
 
 // // hiển thị sản phẩm theo danh mục
 // Route::get('/get_product_by_category', [Front_end_Controller::class, 'show_product_by_category']);
@@ -345,7 +346,7 @@ Route::post('upload', [UploadController::class, 'upload']);
 
 Route::get('/banner-slide', [BannerController::class, 'slides']);
 Route::get('/store_information_customer', [Store_informationController::class, 'index']);
-
+Route::get('/search', [Front_end_Controller::class, 'search']);
 
 
 Route::group(['middleware' => ['auth:sanctum', 'user']], function () {
